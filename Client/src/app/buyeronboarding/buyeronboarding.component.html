@@ -1,0 +1,51 @@
+
+<div class="container">
+  <h3>Enter Buyer details</h3>
+<form (submit)="onSubmit(); addBuyer()">
+  <div class="form-group">
+    <label>First Name</label>
+    <input type="text" [(ngModel)] = "firstName" name= "firstName" class = "form-control" required>
+  </div>
+  <div class="form-group">
+    <label>Last Name</label>
+    <input type="text" [(ngModel)] = "lastName" name= "lastName" class = "form-control" required>
+  </div>
+  <div class="form-group">
+    <label>Country of residency</label>
+    <input type="text" [(ngModel)] = "countryOfResidency" name= "countryOfResidency" class = "form-control">
+  </div>
+  <div class="form-group">
+    <label>Address line 1</label>
+    <input type="text" [(ngModel)] = "addline1" name= "addline1" class = "form-control">
+  </div>
+  <div class="form-group">
+    <label>Address line 2</label>
+    <input type="text" [(ngModel)] = "addline2" name= "addline2" class = "form-control">
+  </div>
+  <div class="form-group">
+    <label>Address line 3</label>
+    <input type="text" [(ngModel)] = "addline3" name= "addline3" class = "form-control">
+  </div>
+  <div class="form-group">
+    <label>Address line 4</label>
+    <input type="text" [(ngModel)] = "addline4" name= "addline4" class = "form-control">
+  </div>
+  <div class="form-group">
+    <label>Postal Code</label>
+    <input type="text" [(ngModel)] = "postalCode" name= "postalCode" class = "form-control" required>
+  </div>
+  <div class="form-group">
+    <label>Building Number</label>
+    <input type="text" [(ngModel)] = "buildingNumber" name= "buildingNumber" class = "form-control">
+  </div>
+  <div class="form-group">
+    <label>Phone Number</label>
+    <input type="text" [(ngModel)] = "phoneNumber" name= "phoneNumber" class = "form-control" required>
+  </div>
+  <div class="form-group">
+    <label>Email Address</label>
+    <input type="text" [(ngModel)] = "emailAddress" name= "emailAddress" class = "form-control" required>
+  </div>
+  <input type="submit" class="btn btn btn-success" value = "Register Buyer">
+</form>
+</div>
