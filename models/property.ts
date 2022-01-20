@@ -11,8 +11,8 @@ const PropertySchema = mongoose.Schema({
     postalCode: "string",
     marketValue: "number",
     contactDetails: "string",
-    status: "boolean",
-    greenBelt: "boolean"
+    status: "string",
+    greenBelt: "string"
 });
 
 var Property = module.exports = mongoose.model('Property', PropertySchema);

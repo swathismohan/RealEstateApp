@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Buyer } from '../models/buyer';
 import { map } from 'rxjs/operators';
-import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -12,11 +11,14 @@ export class BuyeronboardingServiceService {
   constructor(private httpClient: HttpClient ) { }
 
   getBuyer(){
-    return this.httpClient.get<any>('https://localhost:3000/buyers')
-    .pipe(map((res:any) => res.json()));
+    return this.httpClient.get<any>('https://localhost:3000/buyers');
   }
 
-  addBuyer(newBuyer: Buyer): Observable<any>{
+  getBuyerById(buyerId: string){
+    return this.httpClient.get<any>("http://localhost:3000/buyer/"+ buyerId);
+  }
+
+  addBuyer(newBuyer: Buyer){
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type':  'application/json'

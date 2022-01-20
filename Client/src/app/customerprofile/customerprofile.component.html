@@ -1,8 +1,8 @@
-<h3>Welcome {{postalCode}}</h3>
+<h3>Welcome customer, {{customer.firstName}}</h3>
 
 <div class="container">
 
-  <form>
+  <form (submit)="addProperty(); getPropertyByCustomerId()">
     <div class="form-group">
       <label>Property Number</label>
       <input type="text" [(ngModel)] = "propertyNumber" name= "propertyNumber" class = "form-control">
@@ -40,5 +40,16 @@
       <input type="text" [(ngModel)] = "greenBelt" name= "greenBelt" class = "form-control">
     </div>
     <input type="submit" class="btn btn btn-success" value = "Add property">
+    <input type="reset" class="btn btn btn-reset" value="Clear">
   </form>
+  </div>
+
+  <div *ngFor="let prop of properties">
+    <div class = "col-md-3">
+      {{prop.propertyNumber}}
+    </div>
+    <div class = "col-md-3">
+      {{prop.marketValue}}
+    </div>
+    <br>
   </div>

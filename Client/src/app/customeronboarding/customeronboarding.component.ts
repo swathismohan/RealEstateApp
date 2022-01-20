@@ -32,7 +32,6 @@ export class CustomeronboardingComponent implements OnInit {
   constructor(private customeronboardingService : CustomeronboardingServiceService, private router: Router) { }
 
   addCustomer(){
-
     this.id = uuid();
     const newCustomer = {
       customerId: this.id,
@@ -59,11 +58,15 @@ export class CustomeronboardingComponent implements OnInit {
     this.router.navigateByUrl(url);
   }
 
-  ngOnInit() {
+  getCustomer(){
     this.customeronboardingService.getCustomer()
-      .subscribe( customers =>{
+      .subscribe( (customers: Customer[]) =>{
         this.customers = customers;
-      });
+    });
+  }
+
+  ngOnInit() {
+
   }
 
 }

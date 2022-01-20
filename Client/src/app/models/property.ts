@@ -9,6 +9,6 @@ export interface Property {
   postalCode: string;
   marketValue: number;
   contactDetails: string;
-  status: boolean;
-  greenBelt: boolean;
+  status: string;
+  greenBelt: string;
 }

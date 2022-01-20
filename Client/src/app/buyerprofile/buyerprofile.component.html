@@ -1,1 +1,13 @@
-<p>buyerprofile works!</p>
+<h3>Welcome buyer, {{buyer.firstName}}</h3>
+
+<p>Available properties list</p>
+
+<div *ngFor="let prop of properties">
+  <div class = "col-md-3">
+    {{prop.propertyNumber}}
+  </div>
+  <div class = "col-md-3">
+    {{prop.marketValue}}
+  </div>
+  <br>
+</div>

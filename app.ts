@@ -99,6 +99,17 @@ app.delete('/customer/:customerId', (req:any, res:any, next:any) => {
     })
 });
 
+app.delete('/customers/', (req:any, res:any, next:any) => {
+    Customer.deleteMany( function(err:any, result:any){
+        if(err){
+            res.json(err);
+        }
+        else{
+            res.json(result);
+        }
+    })
+});
+
 app.get('/buyers', (req:any, res:any, next:any) => {
     Buyer.find(function(err:any, buyers: any){
         res.json(buyers);
@@ -159,10 +170,16 @@ app.get('/properties', (req:any, res:any, next:any) => {
     })
 });
 
+app.get('/properties/available', (req:any, res:any, next:any) => {
+    Property.find({status: "AVAILABLE"}, function(err:any, properties: any){
+        res.json(properties);
+    })
+});
+
 app.post('/property', (req:any, res:any, next:any) => {
     let newProperty = new Property({
         customerId: req.body.customerId,
-        propertyId: req.body._id,
+        propertyId: req.body.propertyId,
         propertyNumber: req.body.propertyNumber,
         addline1: req.body.addline1,
         addline2: req.body.addline2,
@@ -187,6 +204,17 @@ app.post('/property', (req:any, res:any, next:any) => {
 
 app.get('/property/:id', (req:any, res:any, next:any) => {
     Property.findOne({_id: req.params.id}, function(err:any, property:any){
+        if(err){
+            res.json(err);
+        }
+        else{
+            res.json(property);
+        }
+    })
+});
+
+app.get('/properties/:customerId', (req:any, res:any, next:any) => {
+    Property.find({customerId: req.params.customerId}, function(err:any, property:any){
         if(err){
             res.json(err);
         }

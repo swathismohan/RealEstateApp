@@ -1,7 +1,7 @@
 
 <div class="container">
   <h3>Enter Seller details</h3>
-<form (submit)=" addCustomer(); onSubmit()">
+<form (submit)=" addCustomer(); onSubmit() ">
   <div class="form-group">
     <label>First Name</label>
     <input type="text" [(ngModel)] = "firstName" name= "firstName" class = "form-control" required>
@@ -47,12 +47,12 @@
     <input type="text" [(ngModel)] = "emailAddress" name= "emailAddress" class = "form-control" required>
   </div>
   <input type="submit" class="btn btn btn-success" value = "Register Seller">
+  <input type="reset" class="btn btn btn-reset" value="Clear">
 </form>
 </div>
 
-<div *ngFor="let cust in customers">
+<!-- <div *ngFor="let cust of customers">
   <div class = "col-md-3">
     {{cust.firstName}}
   </div>
-
-</div>
+</div> -->

@@ -10,13 +10,11 @@ export class CustomeronboardingServiceService {
   constructor(private httpClient: HttpClient) { }
 
   getCustomer(){
-    return this.httpClient.get<any>("http://localhost:3000/customers")
-    .pipe(map((res:any) => res.json()));
+    return this.httpClient.get<any>("http://localhost:3000/customers");
   }
 
   getCustomerById(customerId: string){
-    return this.httpClient.get<any>("http://localhost:3000/customer/"+ customerId)
-    .pipe(map((res:any) => res.json()));
+    return this.httpClient.get<any>("http://localhost:3000/customer/"+ customerId);
   }
 
   addCustomer(newCustomer: Customer){
