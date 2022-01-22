@@ -1,4 +1,6 @@
 export interface Buyer {
+  userName: string;
+  password: string;
   buyerId: string;
   firstName: string;
   lastName: string;

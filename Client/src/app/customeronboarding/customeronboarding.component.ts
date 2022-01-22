@@ -15,6 +15,8 @@ export class CustomeronboardingComponent implements OnInit {
   dbuser!: any;
   customers: Customer[] = [];
   customer!: Customer;
+  userName!: string;
+  password!: string;
   customerId!: string;
   firstName!: string;
   lastName!: string;
@@ -34,6 +36,8 @@ export class CustomeronboardingComponent implements OnInit {
   addCustomer(){
     this.id = uuid();
     const newCustomer = {
+      userName: this.userName,
+      password: this.password,
       customerId: this.id,
       firstName: this.firstName,
       lastName: this.lastName,

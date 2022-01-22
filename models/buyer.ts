@@ -1,6 +1,8 @@
 var mongoose = require('mongoose');
 
 const BuyerSchema = mongoose.Schema({
+    userName: "string",
+    password: "string",
     buyerId: "string",
     firstName: "string",
     lastName: "string",

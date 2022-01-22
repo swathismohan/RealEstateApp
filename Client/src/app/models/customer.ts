@@ -1,4 +1,6 @@
 export interface Customer {
+  userName: string;
+  password: string;
   customerId: string;
   firstName: string;
   lastName: string;

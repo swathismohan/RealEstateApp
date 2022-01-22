@@ -24,7 +24,6 @@ mongoose.connection.on('error', (err:any) =>{
 var Customer = require('./models/customer');
 var Buyer = require('./models/buyer');
 var Property = require('./models/property');
-var Bid = require('./models/bid');
 
 
 //port no
@@ -36,6 +35,9 @@ app.use(cors());
 //bpdy parser
 app.use(bodyparser.json());
 
+//static files
+//app.use(express.static(path.join(__dirname, 'public')));
+
 //testing server
 app.get('/', (req:any, res:any) => {
     res.send('Start Page');
@@ -43,19 +45,19 @@ app.get('/', (req:any, res:any) => {
 
 //DB routes
 
-//get all customers
 app.get('/customers', (req:any, res:any, next:any) => {
     Customer.find(function(err:any, customers:any){
         res.json(customers);
     })
 });
 
-//post a new customer
 app.post('/customer', (req:any, res:any, next:any) => {
     let newCustomer = new Customer({
-        userName: req.body.userName,
-        password: req.body.password,
+<<<<<<< HEAD
         customerId: req.body.customerId,
+=======
+        customerId: req.body._id,
+>>>>>>> bb5ff3885d6b9284a1b2ce64ef8254b83cae99d3
         firstName: req.body.firstName,
         lastName: req.body.lastName,
         countryOfResidency: req.body.countryOfResidency,
@@ -69,19 +71,32 @@ app.post('/customer', (req:any, res:any, next:any) => {
         emailAddress: req.body.emailAddress
     });
 
+<<<<<<< HEAD
     newCustomer.save((err:any, result:any) => {
         if(err){
             res.json(err);
         }
         else{
             res.json(result);
+=======
+    newCustomer.save((err:any) => {
+        if(err){
+            res.json({msg: 'Failed to add customer'});
+        }
+        else{
+            res.json({msg: 'Customer added succesfully'});
+>>>>>>> bb5ff3885d6b9284a1b2ce64ef8254b83cae99d3
         }
     });
 });
 
-//get a customer using customerId
+<<<<<<< HEAD
 app.get('/customer/:customerId', (req:any, res:any, next:any) => {
     Customer.findOne({customerId: req.params.customerId}, function(err:any, customer:any){
+=======
+app.get('/customer/:id', (req:any, res:any, next:any) => {
+    Customer.findOne({_id: req.params.id}, function(err:any, customer:any){
+>>>>>>> bb5ff3885d6b9284a1b2ce64ef8254b83cae99d3
         if(err){
             res.json(err);
         }
@@ -91,21 +106,13 @@ app.get('/customer/:customerId', (req:any, res:any, next:any) => {
     })
 });
 
-//get a customer using customerId
-app.get('/customer/user/:userName/password/:password', (req:any, res:any, next:any) => {
-    Customer.findOne({userName: req.params.userName, password: req.params.password}, function(err:any, customer:any){
-        if(err){
-            res.json(err);
-        }
-        else{
-            res.json(customer);
-        }
-    })
-});
-
-//delete a customer using customerId
+<<<<<<< HEAD
 app.delete('/customer/:customerId', (req:any, res:any, next:any) => {
     Customer.deleteOne({customerId: req.params.customerId}, function(err:any, result:any){
+=======
+app.delete('/customer/:id', (req:any, res:any, next:any) => {
+    Customer.deleteOne({_id: req.params.id}, function(err:any, result:any){
+>>>>>>> bb5ff3885d6b9284a1b2ce64ef8254b83cae99d3
         if(err){
             res.json(err);
         }
@@ -115,31 +122,19 @@ app.delete('/customer/:customerId', (req:any, res:any, next:any) => {
     })
 });
 
-//delete all customers
-app.delete('/customers/', (req:any, res:any, next:any) => {
-    Customer.deleteMany( function(err:any, result:any){
-        if(err){
-            res.json(err);
-        }
-        else{
-            res.json(result);
-        }
-    })
-});
-
-//get all buyers
 app.get('/buyers', (req:any, res:any, next:any) => {
     Buyer.find(function(err:any, buyers: any){
         res.json(buyers);
     })
 });
 
-//post a new buyer
 app.post('/buyer', (req:any, res:any, next:any) => {
     let newBuyer = new Buyer({
-        userName: req.body.userName,
-        password: req.body.password,
+<<<<<<< HEAD
         buyerId: req.body.buyerId,
+=======
+        buyerId: req.body._id,
+>>>>>>> bb5ff3885d6b9284a1b2ce64ef8254b83cae99d3
         firstName: req.body.firstName,
         lastName: req.body.lastName,
         countryOfResidency: req.body.countryOfResidency,
@@ -153,19 +148,32 @@ app.post('/buyer', (req:any, res:any, next:any) => {
         emailAddress: req.body.emailAddress
     });
 
+<<<<<<< HEAD
     newBuyer.save((err:any, result:any) => {
         if(err){
             res.json(err);
         }
         else{
             res.json(result);
+=======
+    newBuyer.save((err:any) => {
+        if(err){
+            res.json({msg: 'Failed to add buyer'});
+        }
+        else{
+            res.json({msg: 'Buyer added succesfully'});
+>>>>>>> bb5ff3885d6b9284a1b2ce64ef8254b83cae99d3
         }
     });
 });
- 
-// get a buyer using buyerId
+
+<<<<<<< HEAD
 app.get('/buyer/:buyerId', (req:any, res:any, next:any) => {
     Buyer.findOne({buyerId: req.params.buyerId}, function(err:any, buyer:any){
+=======
+app.get('/buyer/:id', (req:any, res:any, next:any) => {
+    Buyer.findOne({_id: req.params.id}, function(err:any, buyer:any){
+>>>>>>> bb5ff3885d6b9284a1b2ce64ef8254b83cae99d3
         if(err){
             res.json(err);
         }
@@ -175,33 +183,13 @@ app.get('/buyer/:buyerId', (req:any, res:any, next:any) => {
     })
 });
 
-//get a buyer using username and password
-app.get('/buyer/user/:userName/password/:password', (req:any, res:any, next:any) => {
-    Buyer.findOne({userName: req.params.userName, password: req.params.password}, function(err:any, buyer:any){
-        if(err){
-            res.json(err);
-        }
-        else{
-            res.json(buyer);
-        }
-    })
-});
-
-// delete a buyer using buyerId
+<<<<<<< HEAD
 app.delete('/buyer/:buyerId', (req:any, res:any, next:any) => {
     Buyer.deleteOne({buyerId: req.params.buyerId}, function(err:any, result:any){
-        if(err){
-            res.json(err);
-        }
-        else{
-            res.json(result);
-        }
-    })
-});
-
-//delete all buyers
-app.delete('/buyers/', (req:any, res:any, next:any) => {
-    Buyer.deleteMany( function(err:any, result:any){
+=======
+app.delete('/buyer/:id', (req:any, res:any, next:any) => {
+    Buyer.deleteOne({_id: req.params.id}, function(err:any, result:any){
+>>>>>>> bb5ff3885d6b9284a1b2ce64ef8254b83cae99d3
         if(err){
             res.json(err);
         }
@@ -217,16 +205,10 @@ app.get('/properties', (req:any, res:any, next:any) => {
     })
 });
 
-app.get('/properties/available', (req:any, res:any, next:any) => {
-    Property.find({status: "AVAILABLE"}, function(err:any, properties: any){
-        res.json(properties);
-    })
-});
-
 app.post('/property', (req:any, res:any, next:any) => {
     let newProperty = new Property({
         customerId: req.body.customerId,
-        propertyId: req.body.propertyId,
+        propertyId: req.body._id,
         propertyNumber: req.body.propertyNumber,
         addline1: req.body.addline1,
         addline2: req.body.addline2,
@@ -260,17 +242,6 @@ app.get('/property/:id', (req:any, res:any, next:any) => {
     })
 });
 
-app.get('/properties/:customerId', (req:any, res:any, next:any) => {
-    Property.find({customerId: req.params.customerId}, function(err:any, property:any){
-        if(err){
-            res.json(err);
-        }
-        else{
-            res.json(property);
-        }
-    })
-});
-
 app.delete('/property/:id', (req:any, res:any, next:any) => {
     Property.deleteOne({_id: req.params.id}, function(err:any, result:any){
         if(err){
@@ -280,45 +251,6 @@ app.delete('/property/:id', (req:any, res:any, next:any) => {
             res.json(result);
         }
     })
-});
-
-app.delete('/properties/', (req:any, res:any, next:any) => {
-    Property.deleteMany( function(err:any, result:any){
-        if(err){
-            res.json(err);
-        }
-        else{
-            res.json(result);
-        }
-    })
-});
-
-//get all bids
-app.get('/bids', (req:any, res:any, next:any) => {
-    Bid.find(function(err:any, bids: any){
-        res.json(bids);
-    })
-});
-
-//create new bid
-app.post('/bid', (req:any, res:any, next:any) => {
-    let newBid = new Bid({
-        customerId: req.body.customerId,
-        propertyId: req.body.propertyId,
-        bidId: req.body.bidId,
-        buyerId: req.body.buyerId,
-        proposedAmount: req.body.proposedAmount,
-        status: req.body.status
-    });
-
-    newBid.save((err:any, result:any) => {
-        if(err){
-            res.json(err);
-        }
-        else{
-            res.json(result);
-        }
-    });
 });
 
 app.listen(port, () => {

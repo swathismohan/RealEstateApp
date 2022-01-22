@@ -1,55 +1,78 @@
 <h3>Welcome customer, {{customer.firstName}}</h3>
 
-<div class="container">
+<mat-tab-group mat-align-tabs="start">
 
-  <form (submit)="addProperty(); getPropertyByCustomerId()">
-    <div class="form-group">
-      <label>Property Number</label>
-      <input type="text" [(ngModel)] = "propertyNumber" name= "propertyNumber" class = "form-control">
-    </div>
-    <div class="form-group">
-      <label>Address line 1</label>
-      <input type="text" [(ngModel)] = "addline1" name= "addline1" class = "form-control">
-    </div>
-    <div class="form-group">
-      <label>Address line 2</label>
-      <input type="text" [(ngModel)] = "addline2" name= "addline2" class = "form-control">
-    </div>
-    <div class="form-group">
-      <label>Address line 3</label>
-      <input type="text" [(ngModel)] = "addline3" name= "addline3" class = "form-control">
-    </div>
-    <div class="form-group">
-      <label>Address line 4</label>
-      <input type="text" [(ngModel)] = "addline4" name= "addline4" class = "form-control">
-    </div>
-    <div class="form-group">
-      <label>Postal Code</label>
-      <input type="text" [(ngModel)] = "postalCode" name= "postalCode" class = "form-control">
-    </div>
-    <div class="form-group">
-      <label>Market Value</label>
-      <input type="text" [(ngModel)] = "marketValue" name= "marketValue" class = "form-control">
-    </div>
-    <div class="form-group">
-      <label>Contact Details</label>
-      <input type="text" [(ngModel)] = "contactDetails" name= "contactDetails" class = "form-control">
-    </div>
-    <div class="form-group">
-      <label>Green Belt</label>
-      <input type="text" [(ngModel)] = "greenBelt" name= "greenBelt" class = "form-control">
-    </div>
-    <input type="submit" class="btn btn btn-success" value = "Add property">
-    <input type="reset" class="btn btn btn-reset" value="Clear">
-  </form>
-  </div>
+  <mat-tab label="Profile">
+    <ul>
+      <li>First Name : {{customer.firstName}}</li>
+      <li>Last Name : {{customer.lastName}}</li>
+      <li>Country of Residency : {{customer.countryOfResidency}}</li>
+      <li>Address : {{customer.addline1}} {{customer.addline2}} {{customer.addline3}} {{customer.addline4}}</li>
+      <li>Postal Code : {{customer.postalCode}}</li>
+      <li>Building Number : {{customer.buildingNumber}}</li>
+      <li>Phone Number : {{customer.phoneNumber}}</li>
+      <li>Email ID : {{customer.emailAddress}}</li>
+    </ul>
+  </mat-tab>
+  <mat-tab label="Add property">
+    <div class="container">
 
-  <div *ngFor="let prop of properties">
-    <div class = "col-md-3">
-      {{prop.propertyNumber}}
-    </div>
-    <div class = "col-md-3">
-      {{prop.marketValue}}
-    </div>
+      <form id="myForm" (submit)="addProperty();">
+        <div class="form-group">
+          <label>Property Number : </label>
+          <input type="text" [(ngModel)] = "propertyNumber" name= "propertyNumber" class = "form-control">
+        </div>
+        <div class="form-group">
+          <label>Address line 1 : </label>
+          <input type="text" [(ngModel)] = "addline1" name= "addline1" class = "form-control">
+        </div>
+        <div class="form-group">
+          <label>Address line 2 : </label>
+          <input type="text" [(ngModel)] = "addline2" name= "addline2" class = "form-control">
+        </div>
+        <div class="form-group">
+          <label>Address line 3 : </label>
+          <input type="text" [(ngModel)] = "addline3" name= "addline3" class = "form-control">
+        </div>
+        <div class="form-group">
+          <label>Address line 4 : </label>
+          <input type="text" [(ngModel)] = "addline4" name= "addline4" class = "form-control">
+        </div>
+        <div class="form-group">
+          <label>Postal Code : </label>
+          <input type="text" [(ngModel)] = "postalCode" name= "postalCode" class = "form-control">
+        </div>
+        <div class="form-group">
+          <label>Market Value : </label>
+          <input type="text" [(ngModel)] = "marketValue" name= "marketValue" class = "form-control">
+        </div>
+        <div class="form-group">
+          <label>Contact Details : </label>
+          <input type="text" [(ngModel)] = "contactDetails" name= "contactDetails" class = "form-control">
+        </div>
+        <div class="form-group">
+          <label>Green Belt : </label>
+          <input type="text" [(ngModel)] = "greenBelt" name= "greenBelt" class = "form-control">
+        </div>
+        <input type="submit" class="btn btn btn-success" value = "Add property">&nbsp;
+        <input type="reset" class="btn btn btn-reset" value="Clear">
+      </form>
+      </div>
+  </mat-tab>
+
+  <mat-tab label="Property details">
     <br>
-  </div>
+      <mat-expansion-panel *ngFor="let prop of properties">
+        <mat-expansion-panel-header>
+          <b>{{prop.propertyNumber}}</b>
+        </mat-expansion-panel-header>
+        <ul>
+          <li>Address: {{prop.addline1}} {{prop.addline2}} {{prop.addline3}} {{prop.addline4}}</li>
+          <li>Postal Code: {{prop.postalCode}}</li>
+          <li>Market Value: {{prop.marketValue}}</li>
+          <li>Contact Details: {{prop.contactDetails}}</li>
+          <li>GreenBelt: {{prop.greenBelt}}</li>
+        </ul>
+      </mat-expansion-panel>
+  </mat-tab>
+</mat-tab-group>

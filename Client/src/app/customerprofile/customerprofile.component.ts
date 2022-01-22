@@ -68,5 +68,6 @@ export class CustomerprofileComponent implements OnInit {
       .subscribe((response: Customer) =>{
         this.customer = response;
       });
+    this.getPropertyByCustomerId();
   }
 }

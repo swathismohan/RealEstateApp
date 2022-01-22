@@ -6,6 +6,8 @@ import { MatCardModule} from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { HttpClientModule } from '@angular/common/http';
+import { MatTabsModule } from '@angular/material/tabs';
+import {MatExpansionModule} from '@angular/material/expansion';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -16,6 +18,7 @@ import { BuyeronboardingComponent } from './buyeronboarding/buyeronboarding.comp
 import { CustomerprofileComponent } from './customerprofile/customerprofile.component';
 import { BuyerprofileComponent } from './buyerprofile/buyerprofile.component';
 import { PropertyComponent } from './property/property.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 @NgModule({
@@ -37,7 +40,10 @@ import { PropertyComponent } from './property/property.component';
     MatButtonModule,
     MatInputModule,
     MatToolbarModule,
-    HttpClientModule
+    HttpClientModule,
+    MatTabsModule,
+    BrowserAnimationsModule,
+    MatExpansionModule
   ],
   providers: [],
   bootstrap: [AppComponent]

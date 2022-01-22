@@ -17,6 +17,11 @@ export class CustomeronboardingServiceService {
     return this.httpClient.get<any>("http://localhost:3000/customer/"+ customerId);
   }
 
+  getCustomerByUserName(userName: string, password: string){
+    const url = "http://localhost:3000/customer/user/"+ userName+ "/password/" + password;
+    return this.httpClient.get<any>(url);
+  }
+
   addCustomer(newCustomer: Customer){
     const httpOptions = {
       headers: new HttpHeaders({

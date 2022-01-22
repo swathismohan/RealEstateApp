@@ -14,6 +14,8 @@ export class BuyeronboardingComponent implements OnInit {
 
   buyers: Buyer[] = [];
   buyer!: Buyer;
+  userName!: string;
+  password!: string;
   buyerId!: string;
   firstName!: string;
   lastName!: string;
@@ -33,6 +35,8 @@ export class BuyeronboardingComponent implements OnInit {
   addBuyer(){
     this.id = uuid();
     const newBuyer = {
+      userName: this.userName,
+      password: this.password,
       buyerId: this.id,
       firstName: this.firstName,
       lastName: this.lastName,

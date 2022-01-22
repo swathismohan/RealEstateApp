@@ -1,24 +1,43 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Buyer } from '../models/buyer';
+import { Customer } from '../models/customer';
+import { BuyeronboardingServiceService } from '../services/buyeronboarding-service.service';
+import { CustomeronboardingServiceService } from '../services/customeronboarding-service.service';
 
 @Component({
   selector: 'app-start',
   templateUrl: './start.component.html',
-  styleUrls: ['./start.component.scss']
+  styleUrls: ['./start.component.scss'],
+  providers: [BuyeronboardingServiceService, CustomeronboardingServiceService],
 })
 export class StartComponent implements OnInit {
 
-  constructor(private router: Router) { }
+  customer!: Customer;
+  buyer!: Buyer;
+  userName!: string;
+  password!: string;
+
+  constructor(private router: Router, private buyerOnboardingService: BuyeronboardingServiceService, private customerOnboardingService: CustomeronboardingServiceService) { }
+
+  getCustomerByUserName(){
+    this.customerOnboardingService.getCustomerByUserName(this.userName, this.password)
+      .subscribe((response: Customer) =>{
+        this.customer = response;
+      });
+  }
 
   ngOnInit() {
   }
 
-  goToCustomerPage() {
-    this.router.navigateByUrl('/customeronboarding');
+  gotoCustomerProfile() {
+    const url = "/customer/" + this.customer.customerId;
+    this.router.navigateByUrl(url);
   }
 
-  goToBuyerPage() {
-    this.router.navigateByUrl('/buyeronboarding');
+  goToBuyerProfile() {
+    const url = "/buyer/" + this.buyer.buyerId;
+    this.router.navigateByUrl(url);;
   }
 
 }
