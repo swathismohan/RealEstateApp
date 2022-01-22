@@ -5,6 +5,7 @@ import { CustomeronboardingComponent } from './customeronboarding/customeronboar
 import { StartComponent } from './start/start.component';
 import { CustomerprofileComponent } from './customerprofile/customerprofile.component';
 import { BuyerprofileComponent } from './buyerprofile/buyerprofile.component';
+import { PropertyComponent } from './property/property.component';
 
 
 const routes: Routes = [
@@ -12,7 +13,8 @@ const routes: Routes = [
 { path: 'customeronboarding', component: CustomeronboardingComponent },
 { path: 'buyeronboarding', component: BuyeronboardingComponent },
 { path: 'customer/:customerId', component: CustomerprofileComponent },
-{ path: 'buyer/:buyerId', component: BuyerprofileComponent}
+{ path: 'buyer/:buyerId', component: BuyerprofileComponent},
+{ path: 'property/:propertyId/bids', component: PropertyComponent }
 ];
 
 @NgModule({

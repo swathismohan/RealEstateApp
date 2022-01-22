@@ -14,6 +14,10 @@ export class BidServiceService {
     return this.httpClient.get<any>("http://localhost:3000/bids/"+ buyerId);
   }
 
+  getBidsByPropertyId(propertyId: string){
+    return this.httpClient.get<any>("http://localhost:3000/bids/property/"+ propertyId);
+  }
+
   addBid(newBid: Bid){
     const httpOptions = {
       headers: new HttpHeaders({

@@ -32,7 +32,7 @@
         <form (submit)="createBid(prop.propertyId, prop.customerId)">
           <label>Proposed Amount : </label>
           <input type="text" [(ngModel)] = "proposedAmount" name= "proposedAmount">&nbsp;
-          <input type="submit" class="btn btn btn-success" value = "Submit bid">
+          <button mat-raised-button class="btn btn btn-success" (click)="createBid(prop.propertyId, prop.customerId)" type="submit" color="primary">Submit bid</button>
         </form>
       </mat-expansion-panel>
   </mat-tab>

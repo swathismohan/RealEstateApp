@@ -1,1 +1,16 @@
-<p>property works!</p>
+<h3>Welcome {{propertyId}}</h3>
+
+<mat-expansion-panel *ngFor="let bi of bids">
+  <mat-expansion-panel-header>
+    <b>{{bi.propertyId}}</b>
+  </mat-expansion-panel-header>
+  <ul>
+    <!-- <li>Address: {{prop.addline1}} {{prop.addline2}} {{prop.addline3}} {{prop.addline4}}</li>
+    <li>Postal Code: {{prop.postalCode}}</li>
+    <li>Market Value: {{prop.marketValue}}</li>
+    <li>Contact Details: {{prop.contactDetails}}</li>
+    <li>GreenBelt: {{prop.greenBelt}}</li> -->
+    <li>{{bi.proposedAmount}}</li>
+    <li></li>
+  </ul>
+</mat-expansion-panel>

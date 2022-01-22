@@ -17,7 +17,7 @@
   <mat-tab label="Add property">
     <div class="container">
 
-      <form id="myForm" (submit)="addProperty();">
+      <form>
         <div class="form-group">
           <label>Property Number : </label>
           <input type="text" [(ngModel)] = "propertyNumber" name= "propertyNumber" class = "form-control">
@@ -53,9 +53,9 @@
         <div class="form-group">
           <label>Green Belt : </label>
           <input type="text" [(ngModel)] = "greenBelt" name= "greenBelt" class = "form-control">
-        </div>
-        <input type="submit" class="btn btn btn-success" value = "Add property">&nbsp;
-        <input type="reset" class="btn btn btn-reset" value="Clear">
+        </div><br>
+        <button mat-raised-button class="btn btn btn-success" (click)="addProperty()" type="submit" color="primary">Post property</button>&nbsp;
+        <button mat-raised-button type="reset" color="primary">Clear</button>
       </form>
       </div>
   </mat-tab>
@@ -73,6 +73,8 @@
           <li>Contact Details: {{prop.contactDetails}}</li>
           <li>GreenBelt: {{prop.greenBelt}}</li>
         </ul>
+        <button mat-raised-button (click)="gotoPropertyBids(prop.propertyId)" color="primary">View bids</button>
+
       </mat-expansion-panel>
   </mat-tab>
 </mat-tab-group>

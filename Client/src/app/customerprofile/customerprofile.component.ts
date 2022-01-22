@@ -62,6 +62,10 @@ export class CustomerprofileComponent implements OnInit {
       });
   }
 
+  gotoPropertyBids(propertyId: string){
+    this.router.navigateByUrl('/property/' + propertyId +'/bids');
+  }
+
   ngOnInit() {
     this.customerId = this.activatedroute.snapshot.params['customerId'];
     this.customeronboardingService.getCustomerById(this.customerId)

@@ -1,7 +1,7 @@
 
 <div class="container">
   <h3>Enter Seller details</h3>
-<form (submit)=" addCustomer(); onSubmit() ">
+<form>
   <div class="form-group">
     <label>First Name</label>
     <input type="text" [(ngModel)] = "firstName" name= "firstName" class = "form-control" required>
@@ -56,8 +56,8 @@
     <label>Password</label>
     <input type="password" [(ngModel)] = "password" name= "password" class = "form-control" required>
   </div><br>
-  <input type="submit" class="btn btn btn-success" value = "Register Seller">&nbsp;
-  <input type="reset" class="btn btn btn-reset" value="Clear">
+  <button mat-raised-button class="btn btn btn-success" (click)="[addCustomer(), onSubmit()]" type="submit" color="primary">Register Seller</button>&nbsp;
+  <button mat-raised-button type="reset" color="primary">Clear</button>
 </form>
 </div>
 

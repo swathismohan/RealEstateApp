@@ -335,7 +335,7 @@ app.get('/bids/:buyerId', (req:any, res:any, next:any) => {
 
 
 //bids on each property
-app.get('/bids/:propertyId', (req:any, res:any, next:any) => {
+app.get('/bids/property/:propertyId', (req:any, res:any, next:any) => {
     Bid.find({propertyId: req.params.propertyId}, function(err:any, bid:any){
         if(err){
             res.json(err);
