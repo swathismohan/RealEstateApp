@@ -27,6 +27,13 @@ export class StartComponent implements OnInit {
       });
   }
 
+  getBuyerByUserName(){
+    this.buyerOnboardingService.getBuyerByUserName(this.userName, this.password)
+      .subscribe((response: Buyer) =>{
+        this.buyer = response;
+      });
+  }
+
   ngOnInit() {
   }
 
@@ -35,7 +42,7 @@ export class StartComponent implements OnInit {
     this.router.navigateByUrl(url);
   }
 
-  goToBuyerProfile() {
+  gotoBuyerProfile() {
     const url = "/buyer/" + this.buyer.buyerId;
     this.router.navigateByUrl(url);;
   }

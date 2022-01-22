@@ -321,6 +321,56 @@ app.post('/bid', (req:any, res:any, next:any) => {
     });
 });
 
+//bids using buyerID
+app.get('/bids/:buyerId', (req:any, res:any, next:any) => {
+    Bid.find({buyerId: req.params.buyerId}, function(err:any, bid:any){
+        if(err){
+            res.json(err);
+        }
+        else{
+            res.json(bid);
+        }
+    })
+});
+
+
+//bids on each property
+app.get('/bids/:propertyId', (req:any, res:any, next:any) => {
+    Bid.find({propertyId: req.params.propertyId}, function(err:any, bid:any){
+        if(err){
+            res.json(err);
+        }
+        else{
+            res.json(bid);
+        }
+    })
+});
+
+//delete bid using bidID
+app.delete('/bid/:bidId', (req:any, res:any, next:any) => {
+    Bid.deleteOne({bidId: req.params.bidId}, function(err:any, result:any){
+        if(err){
+            res.json(err);
+        }
+        else{
+            res.json(result);
+        }
+    })
+});
+
+//delete all bids
+app.delete('/bids/', (req:any, res:any, next:any) => {
+    Bid.deleteMany( function(err:any, result:any){
+        if(err){
+            res.json(err);
+        }
+        else{
+            res.json(result);
+        }
+    })
+});
+
+
 app.listen(port, () => {
     console.log("Server started at port: "+ port);
 });

@@ -18,6 +18,12 @@ export class BuyeronboardingServiceService {
     return this.httpClient.get<any>("http://localhost:3000/buyer/"+ buyerId);
   }
 
+  getBuyerByUserName(userName: string, password: string){
+    const url = "http://localhost:3000/buyer/user/"+ userName+ "/password/" + password;
+    return this.httpClient.get<any>(url);
+  }
+
+
   addBuyer(newBuyer: Buyer){
     const httpOptions = {
       headers: new HttpHeaders({

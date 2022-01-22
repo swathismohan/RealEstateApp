@@ -2,7 +2,7 @@
   <div class="container">
 
     <h4>Login User</h4>
-    <form (submit)="getCustomerByUserName(); gotoCustomerProfile()">
+    <form>
       <div class="form-group">
         <label>User Name</label>&nbsp;
         <input type="text" [(ngModel)] = "userName" name= "userName" class = "form-control">
@@ -11,10 +11,9 @@
         <label>Password</label>&nbsp;
         <input type="password" [(ngModel)] = "password" name= "password" class = "form-control">
       </div><br>
-      <input type="submit" class="btn btn btn-success" value = "Login seller">
-      <!-- <button mat-raised-button class="btn btn btn-success" type="submit" color="primary">Login as Seller</button>
-      &nbsp; -->
-      <!-- <button mat-raised-button class="btn btn btn-success" ng-click="getCustomerByUserName(); gotoBuyerProfile()" type="submit" color="primary">Login as Buyer</button> -->
+      <button mat-raised-button class="btn btn btn-success" (click)="[getCustomerByUserName(), gotoCustomerProfile()]" type="submit" color="primary">Login as Seller</button>
+      &nbsp;
+      <button mat-raised-button class="btn btn btn-success" (click)="[getBuyerByUserName(), gotoBuyerProfile()]" type="submit" color="primary">Login as Buyer</button>
     </form>
     <br>
     Not already registered? &nbsp;
@@ -22,6 +21,4 @@
     <a [routerLink]="['/buyeronboarding']"> Register as Buyer</a>
     </div>
 
-
 </mat-card>
-<p>{{customer.firstName}}</p>
