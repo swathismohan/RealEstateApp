@@ -308,7 +308,7 @@ app.post('/bid', (req:any, res:any, next:any) => {
         bidId: req.body.bidId,
         buyerId: req.body.buyerId,
         proposedAmount: req.body.proposedAmount,
-        status: req.body.status
+        status: "Under process"
     });
 
     newBid.save((err:any, result:any) => {
@@ -333,6 +333,17 @@ app.get('/bids/:buyerId', (req:any, res:any, next:any) => {
     })
 });
 
+app.get('/bid/:bidId', (req:any, res:any, next:any) => {
+    Bid.find({bidId: req.params.bidId}, function(err:any, bid:any){
+        if(err){
+            res.json(err);
+        }
+        else{
+            res.json(bid);
+        }
+    })
+});
+
 
 //bids on each property
 app.get('/bids/property/:propertyId', (req:any, res:any, next:any) => {
@@ -345,6 +356,19 @@ app.get('/bids/property/:propertyId', (req:any, res:any, next:any) => {
         }
     })
 });
+
+//update bid
+app.put('/bid/:bidId/status/:status', (req:any, res:any, next:any) => {
+    Bid.findOneAndUpdate({bidId: req.params.bidId}, {status: req.params.status}, null , function(err:any, bid:any){
+        if(err){
+            res.json(err);
+        }
+        else{
+            res.json(bid);
+        }
+    })
+});
+
 
 //delete bid using bidID
 app.delete('/bid/:bidId', (req:any, res:any, next:any) => {

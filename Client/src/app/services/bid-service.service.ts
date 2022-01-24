@@ -31,4 +31,13 @@ export class BidServiceService {
     ).pipe(map((res:any) => res.json()));
   }
 
+  updateBid(bidId: string, status: string){
+    const url = "http://localhost:3000/bid/" + bidId + "/status/" + status;
+    return this.httpClient.put(
+      url,
+      null
+   ).pipe(map((res:any) => res.json()));
+
+  }
+
 }

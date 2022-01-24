@@ -14,8 +14,16 @@ import { BidServiceService } from '../services/bid-service.service';
 export class PropertyComponent implements OnInit {
   propertyId!: string;
   bids: Bid[] = [];
+  bid!: Bid;
 
   constructor(private bidService: BidServiceService, private router: Router, private activatedRoute: ActivatedRoute) { }
+
+  updateBid(bidId: string, status: string){
+    this.bidService.updateBid(bidId, status)
+    .subscribe((response: Bid) =>{
+      this.bid = response;
+    });
+  }
 
   ngOnInit() {
     this.propertyId = this.activatedRoute.snapshot.params['propertyId'];
