@@ -13,4 +13,5 @@ export interface Buyer {
   buildingNumber: string;
   phoneNumber: string;
   emailAddress: string;
+  legalSubscription: boolean;
 }

@@ -13,4 +13,5 @@ export interface Customer {
   buildingNumber: string;
   phoneNumber: string;
   emailAddress: string;
+  legalSubscription: boolean;
 }

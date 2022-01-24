@@ -66,7 +66,8 @@ app.post('/customer', (req:any, res:any, next:any) => {
         postalCode: req.body.postalCode,
         buildingNumber: req.body.buildingNumber,
         phoneNumber: req.body.phoneNumber,
-        emailAddress: req.body.emailAddress
+        emailAddress: req.body.emailAddress,
+        legalSubscription: req.body.legalSubscription
     });
 
     newCustomer.save((err:any, result:any) => {
@@ -150,7 +151,8 @@ app.post('/buyer', (req:any, res:any, next:any) => {
         postalCode: req.body.postalCode,
         buildingNumber: req.body.buildingNumber,
         phoneNumber: req.body.phoneNumber,
-        emailAddress: req.body.emailAddress
+        emailAddress: req.body.emailAddress,
+        legalSubscription: req.body.legalSubscription
     });
 
     newBuyer.save((err:any, result:any) => {
@@ -226,6 +228,7 @@ app.get('/properties/available', (req:any, res:any, next:any) => {
 app.post('/property', (req:any, res:any, next:any) => {
     let newProperty = new Property({
         customerId: req.body.customerId,
+        propertyName: req.body.propertyName,
         propertyId: req.body.propertyId,
         propertyNumber: req.body.propertyNumber,
         addline1: req.body.addline1,

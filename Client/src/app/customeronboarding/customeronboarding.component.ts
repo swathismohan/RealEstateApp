@@ -29,6 +29,7 @@ export class CustomeronboardingComponent implements OnInit {
   buildingNumber!: string;
   phoneNumber!: string;
   emailAddress!: string;
+  legalSubscription!: boolean;
   id!: string;
 
   constructor(private customeronboardingService : CustomeronboardingServiceService, private router: Router) { }
@@ -49,7 +50,8 @@ export class CustomeronboardingComponent implements OnInit {
       postalCode: this.postalCode,
       buildingNumber: this.buildingNumber,
       phoneNumber: this.phoneNumber,
-      emailAddress: this.emailAddress
+      emailAddress: this.emailAddress,
+      legalSubscription: false
     }
     this.customeronboardingService.addCustomer(newCustomer)
       .subscribe((customer: any) =>{

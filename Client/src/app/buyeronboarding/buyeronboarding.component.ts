@@ -28,6 +28,7 @@ export class BuyeronboardingComponent implements OnInit {
   buildingNumber!: string;
   phoneNumber!: string;
   emailAddress!: string;
+  legalSubscription!: boolean;
   id!: string;
 
   constructor(private buyeronboardingService: BuyeronboardingServiceService, private router: Router) {  }
@@ -48,7 +49,8 @@ export class BuyeronboardingComponent implements OnInit {
       postalCode: this.postalCode,
       buildingNumber: this.buildingNumber,
       phoneNumber: this.phoneNumber,
-      emailAddress: this.emailAddress
+      emailAddress: this.emailAddress,
+      legalSubscription: false
     }
     this.buyeronboardingService.addBuyer(newBuyer)
       .subscribe((buyer: any) =>{

@@ -39,6 +39,9 @@
       </mat-card-header>
       <form class="full-width form-container">
         <mat-form-field class="field">
+          <input type="text" matInput placeholder="Property Name" [(ngModel)] = "propertyName" name= "propertyName"/>
+        </mat-form-field>
+        <mat-form-field class="field">
           <input type="text" matInput placeholder="Property Number" [(ngModel)] = "propertyNumber" name= "propertyNumber"/>
         </mat-form-field>
         <mat-form-field class="field">
@@ -76,7 +79,7 @@
     <div *ngIf=properties.length>
     <mat-expansion-panel class="panel" *ngFor="let prop of properties">
       <mat-expansion-panel-header>
-        <b>{{ prop.propertyNumber }}</b>
+        <b>{{ prop.propertyName }}</b>
       </mat-expansion-panel-header>
       <mat-card>
       <mat-card-content class="card-contents">
@@ -88,7 +91,7 @@
           <h4>GreenBelt:</h4>
         </div>
         <div class="property-contents">
-          <p>{{prop.addline1}} {{prop.addline2}}</p>
+          <p>{{prop.addline1}}</p>
           <p>{{prop.postalCode}}</p>
           <p>{{prop.marketValue}}</p>
           <p>{{prop.contactDetails}}</p>

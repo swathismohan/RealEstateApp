@@ -1,6 +1,7 @@
 export interface Property {
   customerId: string;
   propertyId: string;
+  propertyName: string;
   propertyNumber: string;
   addline1: string;
   addline2: string;

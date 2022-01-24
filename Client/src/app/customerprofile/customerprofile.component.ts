@@ -18,6 +18,7 @@ export class CustomerprofileComponent implements OnInit {
   property!: Property;
   customerId!: string;
   propertyId!: string;
+  propertyName!: string;
   propertyNumber!: string;
   addline1!: string;
   addline2!: string;
@@ -39,6 +40,7 @@ export class CustomerprofileComponent implements OnInit {
     const newProperty = {
       propertyId: this.id,
       customerId: this.customerId,
+      propertyName: this.propertyName,
       propertyNumber: this.propertyNumber,
       addline1: this.addline1,
       addline2: this.addline2,

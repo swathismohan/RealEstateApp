@@ -14,7 +14,8 @@ const BuyerSchema = mongoose.Schema({
     postalCode: "string",
     buildingNumber: "string",
     phoneNumber: "string",
-    emailAddress: "string"
+    emailAddress: "string",
+    legalSubscription: "boolean"
   });
   
   var Buyer = module.exports = mongoose.model('Buyer', BuyerSchema);

@@ -2,6 +2,7 @@ var mongoose = require('mongoose');
 
 const PropertySchema = mongoose.Schema({
     customerId: "string",
+    propertyName: "string",
     propertyId: "string",
     propertyNumber: "string",
     addline1: "string",
