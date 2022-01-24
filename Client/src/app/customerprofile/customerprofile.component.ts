@@ -29,6 +29,7 @@ export class CustomerprofileComponent implements OnInit {
   status!: string;
   greenBelt!: string;
   id!: string;
+  propertyAdded!: boolean;
 
   public customer!: Customer;
   constructor(private customeronboardingService : CustomeronboardingServiceService, private router: Router, private activatedroute: ActivatedRoute, private propertyService: PropertyServiceService) { }
@@ -53,6 +54,7 @@ export class CustomerprofileComponent implements OnInit {
       .subscribe((property: any) =>{
         this.properties.push(property);
       });
+    this.propertyAdded = true;
   }
 
   getPropertyByCustomerId(){
@@ -60,6 +62,7 @@ export class CustomerprofileComponent implements OnInit {
       .subscribe((response: Property[]) =>{
         this.properties = response;
       });
+    console.log('property', this.properties);
   }
 
   gotoPropertyBids(propertyId: string){
@@ -73,5 +76,6 @@ export class CustomerprofileComponent implements OnInit {
         this.customer = response;
       });
     this.getPropertyByCustomerId();
+    this.propertyAdded = false;
   }
 }

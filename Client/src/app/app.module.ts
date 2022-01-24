@@ -8,7 +8,8 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { HttpClientModule } from '@angular/common/http';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatExpansionModule } from '@angular/material/expansion';
-import {MatIconModule} from '@angular/material/icon';
+import { MatIconModule } from '@angular/material/icon';
+import { MatFormFieldModule, MatFormFieldControl } from '@angular/material/form-field';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -40,12 +41,13 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     FormsModule,
     MatButtonModule,
     MatInputModule,
+    MatIconModule,
+    MatFormFieldModule,
     MatToolbarModule,
     HttpClientModule,
     MatTabsModule,
     BrowserAnimationsModule,
-    MatExpansionModule,
-    MatIconModule
+    MatExpansionModule
   ],
   providers: [],
   bootstrap: [AppComponent]
