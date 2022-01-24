@@ -8,6 +8,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { HttpClientModule } from '@angular/common/http';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatExpansionModule } from '@angular/material/expansion';
+import {MatIconModule} from '@angular/material/icon';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -43,7 +44,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     HttpClientModule,
     MatTabsModule,
     BrowserAnimationsModule,
-    MatExpansionModule
+    MatExpansionModule,
+    MatIconModule
   ],
   providers: [],
   bootstrap: [AppComponent]
