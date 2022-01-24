@@ -5,4 +5,6 @@ export interface Bid{
     buyerId: string;
     proposedAmount: number;
     status: string;
+    buyerName: string;
+    buyerEmail: string;
     }

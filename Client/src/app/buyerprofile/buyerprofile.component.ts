@@ -37,7 +37,9 @@ export class BuyerprofileComponent implements OnInit {
       bidId: this.bidId,
       buyerId: this.buyerId,
       proposedAmount: this.proposedAmount,
-      status: this.status
+      status: this.status,
+      buyerName: this.buyer.firstName,
+      buyerEmail: this.buyer.emailAddress
     }
     this.bidService.addBid(newBid)
       .subscribe((bid: any) =>{

@@ -311,7 +311,9 @@ app.post('/bid', (req:any, res:any, next:any) => {
         bidId: req.body.bidId,
         buyerId: req.body.buyerId,
         proposedAmount: req.body.proposedAmount,
-        status: "Under process"
+        status: "Under process",
+        buyerName: req.body.buyerName,
+        buyerEmail: req.body.buyerEmail
     });
 
     newBid.save((err:any, result:any) => {

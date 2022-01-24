@@ -6,7 +6,9 @@ const BidSchema = mongoose.Schema({
     customerId: "string",
     buyerId: "string",
     proposedAmount: "number",
-    status: "string"
+    status: "string",
+    buyerName: "string",
+    buyerEmail: "string"
   });
   
   var Bid = module.exports = mongoose.model('Bid', BidSchema);
