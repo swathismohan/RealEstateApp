@@ -7,7 +7,7 @@
   <ul>
     <li>{{bi.proposedAmount}}</li>
   </ul>
-  <button mat-raised-button (click)="updateBid(bi.bidId, 'ACCEPTED')" color="primary">Accept</button>
+  <button mat-raised-button (click)="[updateBid(bi.bidId, 'ACCEPTED'), updateProperty(bi.propertyId,'NOT AVAILABLE')]" color="primary">Accept</button>
   &nbsp;
   <button mat-raised-button (click)="updateBid(bi.bidId, 'DECLINED')" color="primary">Decline</button>
 </mat-expansion-panel>

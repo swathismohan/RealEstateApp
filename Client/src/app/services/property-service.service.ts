@@ -40,4 +40,13 @@ export class PropertyServiceService {
     ).pipe(map((res:any) => res.json()));
   }
 
+  updateProperty(propertyId: string, status: string){
+    const url = "http://localhost:3000/property/" + propertyId + "/status/" + status;
+    return this.httpClient.put(
+      url,
+      null
+   ).pipe(map((res:any) => res.json()));
+
+  }
+
 }

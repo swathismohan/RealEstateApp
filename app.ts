@@ -263,6 +263,18 @@ app.get('/property/:id', (req:any, res:any, next:any) => {
     })
 });
 
+//update property
+app.put('/property/:propertyId/status/:status', (req:any, res:any, next:any) => {
+    Property.findOneAndUpdate({propertyId: req.params.propertyId}, {status: req.params.status}, null , function(err:any, property:any){
+        if(err){
+            res.json(err);
+        }
+        else{
+            res.json(property);
+        }
+    })
+});
+
 app.get('/properties/:customerId', (req:any, res:any, next:any) => {
     Property.find({customerId: req.params.customerId}, function(err:any, property:any){
         if(err){
