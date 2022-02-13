@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
-import { Customer } from '../models/customer';
+import { DBCustomer ,Customer } from '../models/customer';
 import { map } from 'rxjs/operators';
 
 @Injectable()

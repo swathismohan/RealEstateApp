@@ -9,18 +9,33 @@
     <mat-form-field class="field">
       <input type="text" matInput placeholder="Last Name" [(ngModel)] = "lastName" name= "lastName"/>
     </mat-form-field>
+    <mat-form-field class="field">
+      <input type="text" matInput placeholder="Gender" [(ngModel)] = "gender" name= "gender"/>
+    </mat-form-field>
     <mat-card-header>
       <mat-card-subtitle class="top-margin" style="margin-bottom:0"><b>Address Details:</b></mat-card-subtitle>
     </mat-card-header>
     <address>
     <mat-form-field class="field">
-      <input type="text" matInput placeholder="Address" [(ngModel)] = "addline1" name= "addline1"/>
+      <input type="text" matInput placeholder="Address Line1" [(ngModel)] = "addline1" name= "addline1"/>
     </mat-form-field>
     <mat-form-field class="field">
-      <input type="text" matInput placeholder="State/Province" [(ngModel)] = "addline2" name= "addline2"/>
+      <input type="text" matInput placeholder="Address Line2" [(ngModel)] = "addline2" name= "addline2"/>
+    </mat-form-field>
+    <mat-form-field class="field">
+      <input type="text" matInput placeholder="Address Line3" [(ngModel)] = "addline3" name= "addline3"/>
+    </mat-form-field>
+    <mat-form-field class="field">
+      <input type="text" matInput placeholder="Address Line4" [(ngModel)] = "addline4" name= "addline4"/>
+    </mat-form-field>
+    <mat-form-field class="field">
+      <input type="text" matInput placeholder="Address Line5" [(ngModel)] = "addline5" name= "addline5"/>
     </mat-form-field>
     <mat-form-field class="field">
       <input type="text" matInput placeholder="Country" [(ngModel)] = "countryOfResidency" name= "countryOfResidency"/>
+    </mat-form-field>
+    <mat-form-field class="field">
+      <input type="text" matInput placeholder="Building" [(ngModel)] = "buildingNumber" name= "buildingNumber"/>
     </mat-form-field>
     <mat-form-field class="field">
       <input type="number" matInput placeholder="Postal Code" [(ngModel)] = "postalCode" name= "postalCode"/>

@@ -14,20 +14,17 @@
         <div class="contents">
           <h4>Name:</h4>
           <h4>Address:</h4>
-          <h4>State/Province:</h4>
+          <br>
           <h4>Country:</h4>
-          <h4>Postal code:</h4>
           <h4>E-mail:</h4>
           <h4>Phone number:</h4>
         </div>
         <div class="contents">
           <p>{{customer.firstName}} {{customer.lastName}}</p>
-          <p>{{customer.addline1}}</p>
-          <p>{{customer.addline2}}</p>
+          <p>{{customer.addresses[0].line1}}</p>
           <p>{{customer.countryOfResidency}}</p>
-          <p>{{customer.postalCode}}</p>
-          <p>{{customer.emailAddress}}</p>
-          <p>{{customer.phoneNumber}}</p>
+          <p>{{customer.emailAddresses[0].address}}</p>
+          <p>{{customer.phoneNumbers[0].number}}</p>
         </div>
       </mat-card-content>
     </mat-card>

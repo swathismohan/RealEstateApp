@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Buyer } from '../models/buyer';
+import { DBBuyer, Buyer } from '../models/buyer';
 import { map } from 'rxjs/operators';
 
 @Injectable({

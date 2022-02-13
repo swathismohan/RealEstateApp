@@ -53,20 +53,18 @@ app.get('/customers', (req:any, res:any, next:any) => {
 //post a new customer
 app.post('/customer', (req:any, res:any, next:any) => {
     let newCustomer = new Customer({
+        title: req.body.title,
+        firstName: req.body.firstName,
+        lastName: req.body.lastName,
+        gender: req.body.gender,
+        countryOfResidency : req.body.countryOfResidency,
+        identification: req.body.identification,
+        addresses: req.body.addresses,
+        phoneNumbers: req.body.phoneNumbers,
+        emailAddresses: req.body.emailAddresses,
         userName: req.body.userName,
         password: req.body.password,
         customerId: req.body.customerId,
-        firstName: req.body.firstName,
-        lastName: req.body.lastName,
-        countryOfResidency: req.body.countryOfResidency,
-        addline1: req.body.addline1,
-        addline2: req.body.addline2,
-        addline3: req.body.addline3,
-        addline4: req.body.addline4,
-        postalCode: req.body.postalCode,
-        buildingNumber: req.body.buildingNumber,
-        phoneNumber: req.body.phoneNumber,
-        emailAddress: req.body.emailAddress,
         legalSubscription: req.body.legalSubscription
     });
 
@@ -138,20 +136,18 @@ app.get('/buyers', (req:any, res:any, next:any) => {
 //post a new buyer
 app.post('/buyer', (req:any, res:any, next:any) => {
     let newBuyer = new Buyer({
+        title: req.body.title,
+        firstName: req.body.firstName,
+        lastName: req.body.lastName,
+        gender: req.body.gender,
+        countryOfResidency : req.body.countryOfResidency,
+        identification: req.body.identification,
+        addresses: req.body.addresses,
+        phoneNumbers: req.body.phoneNumbers,
+        emailAddresses: req.body.emailAddresses,
         userName: req.body.userName,
         password: req.body.password,
         buyerId: req.body.buyerId,
-        firstName: req.body.firstName,
-        lastName: req.body.lastName,
-        countryOfResidency: req.body.countryOfResidency,
-        addline1: req.body.addline1,
-        addline2: req.body.addline2,
-        addline3: req.body.addline3,
-        addline4: req.body.addline4,
-        postalCode: req.body.postalCode,
-        buildingNumber: req.body.buildingNumber,
-        phoneNumber: req.body.phoneNumber,
-        emailAddress: req.body.emailAddress,
         legalSubscription: req.body.legalSubscription
     });
 

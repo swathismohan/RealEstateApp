@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { BuyeronboardingServiceService } from '../services/buyeronboarding-service.service';
-import { Buyer } from '../models/buyer';
+import { DBBuyer ,Buyer, Address, PhoneNumber, EmailAddress } from '../models/buyer';
 import { Router } from '@angular/router';
 import { v4 as uuid } from 'uuid';
 
@@ -19,15 +19,21 @@ export class BuyeronboardingComponent implements OnInit {
   buyerId!: string;
   firstName!: string;
   lastName!: string;
+  gender!: string;
   countryOfResidency!: string;
   addline1!: string;
   addline2!: string;
   addline3!: string;
   addline4!: string;
+  addline5!: string;
   postalCode!: string;
   buildingNumber!: string;
+  idNumber!: string;
+  addresses: Address[] = [];
+  phoneNumbers: PhoneNumber[] = [];
   phoneNumber!: string;
   emailAddress!: string;
+  emailAddresses: EmailAddress[] = [];
   legalSubscription!: boolean;
   id!: string;
 
@@ -35,23 +41,46 @@ export class BuyeronboardingComponent implements OnInit {
 
   addBuyer(){
     this.id = uuid();
+
+    this.phoneNumbers.push({
+      type: "MOBILE",
+      number: this.phoneNumber
+    });
+
+    this.emailAddresses.push({
+      type: "OTHER",
+      address: this.emailAddress
+    });
+
+    this.addresses.push({
+      addressType: "RESIDENTIAL",
+      country: "US",
+      line1: this.addline1,
+      line2: this.addline2,
+      line3: this.addline3,
+      line4: this.addline4,
+      line5: this.addline5,
+      postalCode: this.postalCode,
+      buildingNumber: this.buildingNumber
+    });
     const newBuyer = {
-      userName: this.userName,
-      password: this.password,
       buyerId: this.id,
       firstName: this.firstName,
       lastName: this.lastName,
-      countryOfResidency: this.countryOfResidency,
-      addline1: this.addline1,
-      addline2: this.addline2,
-      addline3: this.addline3,
-      addline4: this.addline4,
-      postalCode: this.postalCode,
-      buildingNumber: this.buildingNumber,
-      phoneNumber: this.phoneNumber,
-      emailAddress: this.emailAddress,
-      legalSubscription: false
+      gender: this.gender,
+      countryOfResidency : this.countryOfResidency,
+      identification: {
+        type: 'SOSE',
+        id: this.idNumber
+      },
+      addresses: this.addresses,
+      phoneNumbers: this.phoneNumbers,
+      emailAddresses: this.emailAddresses
     }
+    userName: this.userName;
+    password: this.password;
+    legalSubscription: false;
+
     this.buyeronboardingService.addBuyer(newBuyer)
       .subscribe((buyer: any) =>{
         this.buyers.push(buyer);
