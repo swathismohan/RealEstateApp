@@ -22,7 +22,7 @@ export class CustomeronboardingServiceService {
     return this.httpClient.get<any>(url);
   }
 
-  addCustomer(newCustomer: Customer){
+  addCustomer(newCustomer: DBCustomer){
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type':  'application/json'

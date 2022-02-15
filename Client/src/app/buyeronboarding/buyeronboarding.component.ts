@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { BuyeronboardingServiceService } from '../services/buyeronboarding-service.service';
+import { ApiServiceService } from '../services/api-service.service';
 import { DBBuyer ,Buyer, Address, PhoneNumber, EmailAddress } from '../models/buyer';
 import { Router } from '@angular/router';
 import { v4 as uuid } from 'uuid';
@@ -8,7 +9,7 @@ import { v4 as uuid } from 'uuid';
   selector: 'app-buyeronboarding',
   templateUrl: './buyeronboarding.component.html',
   styleUrls: ['./buyeronboarding.component.scss'],
-  providers: [BuyeronboardingServiceService]
+  providers: [BuyeronboardingServiceService, ApiServiceService]
 })
 export class BuyeronboardingComponent implements OnInit {
 
@@ -37,11 +38,9 @@ export class BuyeronboardingComponent implements OnInit {
   legalSubscription!: boolean;
   id!: string;
 
-  constructor(private buyeronboardingService: BuyeronboardingServiceService, private router: Router) {  }
+  constructor(private buyeronboardingService: BuyeronboardingServiceService, private apiService : ApiServiceService, private router: Router) {  }
 
   addBuyer(){
-    this.id = uuid();
-
     this.phoneNumbers.push({
       type: "MOBILE",
       number: this.phoneNumber
@@ -63,32 +62,53 @@ export class BuyeronboardingComponent implements OnInit {
       postalCode: this.postalCode,
       buildingNumber: this.buildingNumber
     });
-    const newBuyer = {
-      buyerId: this.id,
+
+    const newapiBuyer = {
       firstName: this.firstName,
       lastName: this.lastName,
       gender: this.gender,
       countryOfResidency : this.countryOfResidency,
       identification: {
-        type: 'SOSE',
+        type: "SOSE",
         id: this.idNumber
       },
       addresses: this.addresses,
       phoneNumbers: this.phoneNumbers,
-      emailAddresses: this.emailAddresses
+      emailAddresses: this.emailAddresses,
+      fatcaDetails: {
+        isUSResident: true,
+        isUSTaxResident: false
     }
-    userName: this.userName;
-    password: this.password;
-    legalSubscription: false;
+    }
 
-    this.buyeronboardingService.addBuyer(newBuyer)
-      .subscribe((buyer: any) =>{
-        this.buyers.push(buyer);
-      });
+    this.apiService.postBuyer(newapiBuyer).subscribe((buyerid: any) =>{
+      this.buyerId=buyerid;
+      const newBuyer = {
+        buyerId: this.buyerId,
+        firstName: this.firstName,
+        lastName: this.lastName,
+        gender: this.gender,
+        countryOfResidency : this.countryOfResidency,
+        identification: {
+          type: "SOSE",
+          id: this.idNumber
+        },
+        addresses: this.addresses,
+        phoneNumbers: this.phoneNumbers,
+        emailAddresses: this.emailAddresses,
+        userName: this.userName,
+        password: this.password,
+        legalSubscription: false
+      }
+      this.buyeronboardingService.addBuyer(newBuyer)
+        .subscribe((buyer: any) =>{
+          this.buyers.push(buyer);
+        });
+    });
   }
 
   onSubmit() {
-    const url = "/buyer/" + this.id;
+    const url = "/buyer/" + this.buyerId;
     this.router.navigateByUrl(url);
   }
 

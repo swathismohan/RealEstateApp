@@ -33,13 +33,16 @@ export interface Customer {
   addresses: Address[];
   phoneNumbers: PhoneNumber[];
   emailAddresses: EmailAddress[];
-  customerId: string;
+  fatcaDetails: {
+    isUSResident: boolean,
+    isUSTaxResident: boolean,
+    tin: string
+}
 }
 
 export interface DBCustomer {
   firstName: string;
   lastName: string;
-  dateOfBirth: string;
   gender: string;
   countryOfResidency : string;
   identification: {

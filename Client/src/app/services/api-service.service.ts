@@ -28,4 +28,13 @@ export class ApiServiceService {
       .pipe(map((response) => response));
 }
 
+postBuyer(buyer:Buyer): Observable<any> {
+  const url="http://localhost:3000/buyer/api";
+return this.httpClient.post<any>(url, buyer, {
+    headers: {
+      'Content-Type': 'application/json' }
+  })
+  .pipe(map((response) => response));
+}
+
 }

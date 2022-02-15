@@ -22,7 +22,8 @@ var EmailAddressSchema = mongoose.Schema({
   address: "string"
 });
 
-const BuyerSchema = mongoose.Schema({
+const DBCustomerSchema = mongoose.Schema({
+  title: "string",
   firstName: "string",
   lastName: "string",
   gender: "string",
@@ -34,10 +35,10 @@ const BuyerSchema = mongoose.Schema({
   addresses: [AddressSchema],
   phoneNumbers: [PhoneNumberSchema],
   emailAddresses: [EmailAddressSchema],
-  fatcaDetails: {
-    isUSResident: "boolean",
-    isUSTaxResident: "boolean"
-}
+  userName: "string",
+  password: "string",
+  customerId: "string",
+  legalSubscription: "boolean"
 });
-  
-  var Buyer = module.exports = mongoose.model('Buyer', BuyerSchema);
+
+var DBCustomer = module.exports = mongoose.model('DBCustomer', DBCustomerSchema);

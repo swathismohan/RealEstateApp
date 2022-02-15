@@ -33,13 +33,15 @@ export interface Buyer {
   addresses: Address[];
   phoneNumbers: PhoneNumber[];
   emailAddresses: EmailAddress[];
-  buyerId: string;
+  fatcaDetails: {
+    isUSResident: boolean,
+    isUSTaxResident: boolean,
+}
 }
 
 export interface DBBuyer {
   firstName: string;
   lastName: string;
-  dateOfBirth: string;
   gender: string;
   countryOfResidency : string;
   identification: {

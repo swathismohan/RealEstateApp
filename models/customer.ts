@@ -23,7 +23,9 @@ var EmailAddressSchema = mongoose.Schema({
 });
 
 const CustomerSchema = mongoose.Schema({
+  branchCode: "string",
   title: "string",
+  dateOfBirth: "string",
   firstName: "string",
   lastName: "string",
   gender: "string",
@@ -35,25 +37,11 @@ const CustomerSchema = mongoose.Schema({
   addresses: [AddressSchema],
   phoneNumbers: [PhoneNumberSchema],
   emailAddresses: [EmailAddressSchema],
+  fatcaDetails: {
+    isUSResident: "boolean",
+    isUSTaxResident: "boolean",
+    tin: "string"
+}
 });
 
-const DBCustomerSchema = mongoose.Schema({
-  title: "string",
-  firstName: "string",
-  lastName: "string",
-  gender: "string",
-  countryOfResidency : "string",
-  identification: {
-    type: {type: "string"},
-    id: "string"
-  },
-  addresses: [AddressSchema],
-  phoneNumbers: [PhoneNumberSchema],
-  emailAddresses: [EmailAddressSchema],
-  userName: "string",
-  password: "string",
-  customerId: "string",
-  legalSubscription: "boolean"
-});
-
-var Customer = module.exports = mongoose.model('Customer', DBCustomerSchema);
+var Customer = module.exports = mongoose.model('Customer', CustomerSchema);

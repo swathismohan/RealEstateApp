@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CustomeronboardingServiceService } from '../services/customeronboarding-service.service';
 import { DBCustomer ,Customer, Address, PhoneNumber, EmailAddress } from '../models/customer';
+import { ApiServiceService } from '../services/api-service.service';
 import { Router } from '@angular/router';
 import { v4 as uuid } from 'uuid';
 
@@ -8,7 +9,7 @@ import { v4 as uuid } from 'uuid';
   selector: 'app-customeronboarding',
   templateUrl: './customeronboarding.component.html',
   styleUrls: ['./customeronboarding.component.scss'],
-  providers: [CustomeronboardingServiceService],
+  providers: [CustomeronboardingServiceService, ApiServiceService],
 })
 export class CustomeronboardingComponent implements OnInit {
 
@@ -37,11 +38,11 @@ export class CustomeronboardingComponent implements OnInit {
   emailAddresses: EmailAddress[] = [];
   legalSubscription!: boolean;
   id!: string;
+  customerAdded!: boolean;
 
-  constructor(private customeronboardingService : CustomeronboardingServiceService, private router: Router) { }
+  constructor(private customeronboardingService : CustomeronboardingServiceService, private apiService : ApiServiceService, private router: Router) { }
 
   addCustomer(){
-    this.id = uuid();
 
     this.phoneNumbers.push({
       type: "MOBILE",
@@ -65,8 +66,7 @@ export class CustomeronboardingComponent implements OnInit {
       buildingNumber: this.buildingNumber
     });
 
-    const newCustomer = {
-      customerId: this.id,
+    const newapiCustomer = {
       firstName: this.firstName,
       lastName: this.lastName,
       gender: this.gender,
@@ -77,19 +77,43 @@ export class CustomeronboardingComponent implements OnInit {
       },
       addresses: this.addresses,
       phoneNumbers: this.phoneNumbers,
-      emailAddresses: this.emailAddresses
+      emailAddresses: this.emailAddresses,
+      fatcaDetails: {
+        isUSResident: true,
+        isUSTaxResident: true,
+        tin: "22233444"
     }
-    userName: this.userName;
-    password: this.password;
-    legalSubscription: false;
-    this.customeronboardingService.addCustomer(newCustomer)
-      .subscribe((customer: any) =>{
-        this.customers.push(customer);
-      });
+    }
+
+    this.apiService.postCustomer(newapiCustomer).subscribe((customerid: any) =>{
+      this.customerId=customerid;
+      const newCustomer = {
+        customerId: this.customerId,
+        firstName: this.firstName,
+        lastName: this.lastName,
+        gender: this.gender,
+        countryOfResidency : this.countryOfResidency,
+        identification: {
+          type: "SOSE",
+          id: this.idNumber
+        },
+        addresses: this.addresses,
+        phoneNumbers: this.phoneNumbers,
+        emailAddresses: this.emailAddresses,
+        userName: this.userName,
+        password: this.password,
+        legalSubscription: false
+      }
+      this.customeronboardingService.addCustomer(newCustomer)
+        .subscribe((customer: any) =>{
+          this.customers.push(customer);
+        });
+    });
+    this.customerAdded=true;
   }
 
-  onSubmit() {
-    const url = "/customer/" + this.id;
+  onCompletion() {
+    const url = "/customer/" + this.customerId;
     this.router.navigateByUrl(url);
   }
 
@@ -101,7 +125,7 @@ export class CustomeronboardingComponent implements OnInit {
   }
 
   ngOnInit() {
-
+    this.customerAdded=false;
   }
 
 }

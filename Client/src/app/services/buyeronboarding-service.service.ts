@@ -24,7 +24,7 @@ export class BuyeronboardingServiceService {
   }
 
 
-  addBuyer(newBuyer: Buyer){
+  addBuyer(newBuyer: DBBuyer){
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type':  'application/json'

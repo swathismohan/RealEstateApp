@@ -12,6 +12,9 @@
     <mat-form-field class="field">
       <input type="text" matInput placeholder="Gender" [(ngModel)] = "gender" name= "gender"/>
     </mat-form-field>
+    <mat-form-field class="field">
+      <input type="text" matInput placeholder="SOSE Number" [(ngModel)] = "idNumber" name= "id"/>
+    </mat-form-field>
     <mat-card-header>
       <mat-card-subtitle class="top-margin" style="margin-bottom:0"><b>Address Details:</b></mat-card-subtitle>
     </mat-card-header>
@@ -60,6 +63,8 @@
     <input type="password" matInput placeholder="Password" [(ngModel)] = "password" name= "password"/>
   </mat-form-field>
   <br>
-  <button mat-raised-button color="primary" class="top-margin left-margin" (click)="[addCustomer(), onSubmit()]" type="submit">Register Seller</button>
+  <button mat-raised-button [disabled]="customerAdded" color="primary" class="top-margin left-margin" (click)="addCustomer()" type="submit">Register Seller</button>
+  <button mat-raised-button [disabled]="!customerAdded" color="primary" class="left-margin" (click)="onCompletion()" type="submit">Go to Profile</button>
+
   </form>
 </mat-card>

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Buyer } from '../models/buyer';
-import { Customer } from '../models/customer';
+import { DBBuyer } from '../models/buyer';
+import { DBCustomer } from '../models/customer';
 import { BuyeronboardingServiceService } from '../services/buyeronboarding-service.service';
 import { CustomeronboardingServiceService } from '../services/customeronboarding-service.service';
 
@@ -13,8 +13,8 @@ import { CustomeronboardingServiceService } from '../services/customeronboarding
 })
 export class StartComponent implements OnInit {
 
-  customer!: Customer;
-  buyer!: Buyer;
+  customer!: DBCustomer;
+  buyer!: DBBuyer;
   userName!: string;
   password!: string;
 
@@ -22,14 +22,14 @@ export class StartComponent implements OnInit {
 
   getCustomerByUserName(){
     this.customerOnboardingService.getCustomerByUserName(this.userName, this.password)
-      .subscribe((response: Customer) =>{
+      .subscribe((response: DBCustomer) =>{
         this.customer = response;
       });
   }
 
   getBuyerByUserName(){
     this.buyerOnboardingService.getBuyerByUserName(this.userName, this.password)
-      .subscribe((response: Buyer) =>{
+      .subscribe((response: DBBuyer) =>{
         this.buyer = response;
       });
   }
