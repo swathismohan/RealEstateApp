@@ -17,6 +17,7 @@ export class PropertyComponent implements OnInit {
   bids: Bid[] = [];
   bid!: Bid;
   property!: Property;
+  bidResponded!: boolean;
 
   constructor(private bidService: BidServiceService, private router: Router, private activatedRoute: ActivatedRoute, private PropertyService: PropertyServiceService) { }
 
@@ -25,6 +26,7 @@ export class PropertyComponent implements OnInit {
     .subscribe((response: Bid) =>{
       this.bid = response;
     });
+    this.bidResponded = true;
   }
 
   updateProperty(propertyId: string, status: string){
@@ -40,6 +42,8 @@ export class PropertyComponent implements OnInit {
       .subscribe((response: Bid[]) =>{
         this.bids = response;
       });
+
+    this.bidResponded = false;
   }
 
 }
