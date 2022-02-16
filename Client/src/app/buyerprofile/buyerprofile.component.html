@@ -3,14 +3,28 @@
 <mat-tab-group mat-align-tabs="start">
 
   <mat-tab label="Your profile">
-    <ul>
-      <li>First Name : {{buyer.firstName}}</li>
-      <li>Last Name : {{buyer.lastName}}</li>
-      <li>Country of Residency : {{buyer.countryOfResidency}}</li>
-      <li>Address : {{buyer.addresses}}</li>
-      <li>Phone Number : {{buyer.phoneNumbers}}</li>
-      <li>Email ID : {{buyer.emailAddresses}}</li>
-    </ul>
+    <mat-card class="profile-card-container">
+      <mat-card-header class="card-header">
+        <mat-card-title class="bottom-margin">Your Profile</mat-card-title>
+      </mat-card-header>
+      <mat-card-content class="card-contents">
+        <div class="contents">
+          <h4>Name:</h4>
+          <h4>Address:</h4>
+          <br>
+          <h4>Country:</h4>
+          <h4>E-mail:</h4>
+          <h4>Phone number:</h4>
+        </div>
+        <div class="contents">
+          <p>{{buyer.firstName}} {{buyer.lastName}}</p>
+          <p>{{buyer.addresses[0].line1}}</p>
+          <p>{{buyer.countryOfResidency}}</p>
+          <p>{{buyer.emailAddresses[0].address}}</p>
+          <p>{{buyer.phoneNumbers[0].number}}</p>
+        </div>
+      </mat-card-content>
+    </mat-card>
   </mat-tab>
 
 

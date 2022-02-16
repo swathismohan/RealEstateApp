@@ -37,6 +37,8 @@ export class BuyeronboardingComponent implements OnInit {
   emailAddresses: EmailAddress[] = [];
   legalSubscription!: boolean;
   id!: string;
+  buyerAdded!: boolean;
+  tin!: string;
 
   constructor(private buyeronboardingService: BuyeronboardingServiceService, private apiService : ApiServiceService, private router: Router) {  }
 
@@ -77,7 +79,8 @@ export class BuyeronboardingComponent implements OnInit {
       emailAddresses: this.emailAddresses,
       fatcaDetails: {
         isUSResident: true,
-        isUSTaxResident: false
+        isUSTaxResident: false,
+        tin: this.tin
     }
     }
 
@@ -105,9 +108,10 @@ export class BuyeronboardingComponent implements OnInit {
           this.buyers.push(buyer);
         });
     });
+    this.buyerAdded = true;
   }
 
-  onSubmit() {
+  onCompletion() {
     const url = "/buyer/" + this.buyerId;
     this.router.navigateByUrl(url);
   }
@@ -116,6 +120,8 @@ export class BuyeronboardingComponent implements OnInit {
     this.buyeronboardingService.getBuyer()
       .subscribe( buyers =>
         this.buyers = buyers);
+
+        this.buyerAdded = false;
   }
 
 }

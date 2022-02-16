@@ -39,6 +39,7 @@ export class CustomeronboardingComponent implements OnInit {
   legalSubscription!: boolean;
   id!: string;
   customerAdded!: boolean;
+  tin!: string;
 
   constructor(private customeronboardingService : CustomeronboardingServiceService, private apiService : ApiServiceService, private router: Router) { }
 
@@ -80,8 +81,8 @@ export class CustomeronboardingComponent implements OnInit {
       emailAddresses: this.emailAddresses,
       fatcaDetails: {
         isUSResident: true,
-        isUSTaxResident: true,
-        tin: "22233444"
+        isUSTaxResident: false,
+        tin: this.tin
     }
     }
 

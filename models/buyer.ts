@@ -23,6 +23,9 @@ var EmailAddressSchema = mongoose.Schema({
 });
 
 const BuyerSchema = mongoose.Schema({
+  branchCode: "string",
+  title: "string",
+  dateOfBirth: "string",
   firstName: "string",
   lastName: "string",
   gender: "string",
@@ -36,7 +39,8 @@ const BuyerSchema = mongoose.Schema({
   emailAddresses: [EmailAddressSchema],
   fatcaDetails: {
     isUSResident: "boolean",
-    isUSTaxResident: "boolean"
+    isUSTaxResident: "boolean",
+    tin: "string"
 }
 });
   

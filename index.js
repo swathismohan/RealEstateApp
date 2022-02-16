@@ -161,6 +161,9 @@ app.post('/buyer/api', async (req, res) => {
       }
 
       let apibuyer = new Buyer({
+        branchCode: "00000001",
+        title: "Doctor",
+        dateOfBirth: "1997-11-20",
         firstName: req.body.firstName,
         lastName: req.body.lastName,
         gender: req.body.gender,

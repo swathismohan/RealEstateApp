@@ -23,7 +23,6 @@ var EmailAddressSchema = mongoose.Schema({
 });
 
 const DBCustomerSchema = mongoose.Schema({
-  title: "string",
   firstName: "string",
   lastName: "string",
   gender: "string",
