@@ -384,6 +384,12 @@ app.get('/properties/available', (req, res, next) => {
   })
 });
 
+app.get('/properties/requested', (req, res, next) => {
+  Property.find({verification: "REQUESTED"}, function(err, properties){
+      res.json(properties);
+  })
+});
+
 app.post('/property', (req, res, next) => {
   let newProperty = new Property({
       customerId: req.body.customerId,

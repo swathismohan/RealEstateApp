@@ -76,8 +76,17 @@
     <div *ngIf=properties.length>
     <mat-expansion-panel class="panel" *ngFor="let prop of properties">
       <mat-expansion-panel-header>
-        <b>{{ prop.propertyName }}</b>
+        <mat-panel-title>
+          <b>{{ prop.propertyName }}</b>
+        </mat-panel-title>
+
+        <mat-panel-description *ngIf="prop.verification === 'VERIFIED'">
+          VERIFIED
+        </mat-panel-description>
+
+
       </mat-expansion-panel-header>
+
       <mat-card>
       <mat-card-content class="card-contents">
         <div class="property-contents">

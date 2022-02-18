@@ -27,6 +27,10 @@ export class PropertyServiceService {
     return this.httpClient.get<any>("http://localhost:3000/properties/available");
   }
 
+  getVerifyRequestedProperty(){
+    return this.httpClient.get<any>("http://localhost:3000/properties/requested");
+  }
+
   addProperty(newProperty: Property){
     const httpOptions = {
       headers: new HttpHeaders({
