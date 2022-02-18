@@ -50,7 +50,8 @@ export class CustomerprofileComponent implements OnInit {
       marketValue: this.marketValue,
       contactDetails: this.contactDetails,
       status: "AVAILABLE",
-      greenBelt: this.greenBelt
+      greenBelt: this.greenBelt,
+      verification: "NOT REQUESTED"
     }
     this.propertyService.addProperty(newProperty)
       .subscribe((property: any) =>{
@@ -69,6 +70,13 @@ export class CustomerprofileComponent implements OnInit {
 
   gotoPropertyBids(propertyId: string){
     this.router.navigateByUrl('/property/' + propertyId +'/bids');
+  }
+
+  requestVerification(propertyId: string, verification: string){
+      this.propertyService.propertyVerify(propertyId, verification)
+      .subscribe((response: Property) =>{
+        this.property = response;
+      });
   }
 
   ngOnInit() {

@@ -13,7 +13,8 @@ const PropertySchema = mongoose.Schema({
     marketValue: "number",
     contactDetails: "string",
     status: "string",
-    greenBelt: "string"
+    greenBelt: "string",
+    verification: "string"
 });
 
 var Property = module.exports = mongoose.model('Property', PropertySchema);

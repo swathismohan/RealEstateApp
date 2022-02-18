@@ -398,7 +398,8 @@ app.post('/property', (req, res, next) => {
       marketValue: req.body.marketValue,
       contactDetails: req.body.contactDetails,
       status: req.body.status,
-      greenBelt: req.body.greenBelt
+      greenBelt: req.body.greenBelt,
+      verification: req.body.verification
   });
 
   newProperty.save((err) => {
@@ -425,6 +426,18 @@ app.get('/property/:id', (req, res, next) => {
 //update property
 app.put('/property/:propertyId/status/:status', (req, res, next) => {
   Property.findOneAndUpdate({propertyId: req.params.propertyId}, {status: req.params.status}, null , function(err, property){
+      if(err){
+          res.json(err);
+      }
+      else{
+          res.json(property);
+      }
+  })
+});
+
+//request property verification
+app.put('/property/:propertyId/verification/:verification', (req, res, next) => {
+  Property.findOneAndUpdate({propertyId: req.params.propertyId}, {verification: req.params.verification}, null , function(err, property){
       if(err){
           res.json(err);
       }

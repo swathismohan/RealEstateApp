@@ -12,4 +12,5 @@ export interface Property {
   contactDetails: string;
   status: string;
   greenBelt: string;
+  verification: string;
 }

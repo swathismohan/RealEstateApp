@@ -48,5 +48,13 @@ export class PropertyServiceService {
    ).pipe(map((res:any) => res.json()));
 
   }
+  propertyVerify(propertyId: string, verification: string){
+    const url = "http://localhost:3000/property/" + propertyId + "/verification/" + verification;
+    return this.httpClient.put(
+      url,
+      null
+   ).pipe(map((res:any) => res.json()));
+
+  }
 
 }

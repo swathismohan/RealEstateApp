@@ -21,6 +21,8 @@ import { CustomerprofileComponent } from './customerprofile/customerprofile.comp
 import { BuyerprofileComponent } from './buyerprofile/buyerprofile.component';
 import { PropertyComponent } from './property/property.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AdminComponent } from './admin/admin.component';
+import { AdminPageComponent } from './admin-page/admin-page.component';
 
 
 @NgModule({
@@ -32,7 +34,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     BuyeronboardingComponent,
     CustomerprofileComponent,
     BuyerprofileComponent,
-    PropertyComponent
+    PropertyComponent,
+    AdminComponent,
+    AdminPageComponent
   ],
   imports: [
     BrowserModule,
