@@ -405,7 +405,8 @@ app.post('/property', (req, res, next) => {
       contactDetails: req.body.contactDetails,
       status: req.body.status,
       greenBelt: req.body.greenBelt,
-      verification: req.body.verification
+      verification: req.body.verification,
+      comment: req.body.comment
   });
 
   newProperty.save((err) => {
@@ -444,6 +445,18 @@ app.put('/property/:propertyId/status/:status', (req, res, next) => {
 //request property verification
 app.put('/property/:propertyId/verification/:verification', (req, res, next) => {
   Property.findOneAndUpdate({propertyId: req.params.propertyId}, {verification: req.params.verification}, null , function(err, property){
+      if(err){
+          res.json(err);
+      }
+      else{
+          res.json(property);
+      }
+  })
+});
+
+//request property verification
+app.put('/property/:propertyId/verified', (req, res, next) => {
+  Property.findOneAndUpdate({propertyId: req.params.propertyId}, {verification: req.body.verification, comment: req.body.comment}, null , function(err, property){
       if(err){
           res.json(err);
       }

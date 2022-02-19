@@ -14,7 +14,8 @@ const PropertySchema = mongoose.Schema({
     contactDetails: "string",
     status: "string",
     greenBelt: "string",
-    verification: "string"
+    verification: "string",
+    comment: "string"
 });
 
 var Property = module.exports = mongoose.model('Property', PropertySchema);
