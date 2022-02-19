@@ -14,6 +14,18 @@ const jwt = require('jsonwebtoken')
 const config = require('./config.js')
 const uuidv1 = require('uuid/v1')
 
+var nodemailer = require('nodemailer');
+
+var transporter = nodemailer.createTransport({
+  service: 'gmail',
+  secure: false,
+  auth: {
+    user: 'superswathim@gmail.com',
+    pass: 'SuperSwathi'
+  }
+});
+
+
 const app = express()
 global.Headers = fetch.Headers
 
@@ -465,6 +477,25 @@ app.put('/property/:propertyId/verified', (req, res, next) => {
       }
   })
 });
+
+// define a sendmail endpoint, which will send emails and response with the corresponding status
+app.post("/sendmail", (req, res) => {
+  var mailOptions = {
+    from: 'superswathim@gmail.com',
+    to: req.body.email,
+    subject: 'Sending Email using Node.js',
+    text: 'That was not easy!'
+  };
+  
+  transporter.sendMail(mailOptions, function(error, info){
+    if (error) {
+      console.log(error);
+    } else {
+      console.log('Email sent: ' + info.response);
+    }
+  });
+});
+
 
 app.get('/properties/:customerId', (req, res, next) => {
   Property.find({customerId: req.params.customerId}, function(err, property){
