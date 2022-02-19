@@ -10,7 +10,7 @@ import { v4 as uuid } from 'uuid';
   selector: 'app-customerprofile',
   templateUrl: './customerprofile.component.html',
   styleUrls: ['./customerprofile.component.scss'],
-  providers: [CustomeronboardingServiceService, PropertyServiceService ],
+  providers: [CustomeronboardingServiceService, PropertyServiceService],
 })
 export class CustomerprofileComponent implements OnInit {
 

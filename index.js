@@ -547,7 +547,8 @@ app.post('/bid', (req, res, next) => {
       proposedAmount: req.body.proposedAmount,
       status: "Under process",
       buyerName: req.body.buyerName,
-      buyerEmail: req.body.buyerEmail
+      buyerEmail: req.body.buyerEmail,
+      propertyName: req.body.propertyName
   });
 
   newBid.save((err, result) => {

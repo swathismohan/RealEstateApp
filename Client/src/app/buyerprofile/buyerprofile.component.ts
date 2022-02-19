@@ -29,7 +29,7 @@ export class BuyerprofileComponent implements OnInit {
 
   constructor(private buyerOnboardingService:BuyeronboardingServiceService, private router: Router, private activatedroute: ActivatedRoute, private propertyService: PropertyServiceService, private bidService: BidServiceService ) { }
 
-  createBid(propertyId: any, customerId: any){
+  createBid(propertyId: any, customerId: any, propertyName: string){
     this.bidId = uuid();
     const newBid = {
       propertyId: propertyId,
@@ -39,7 +39,8 @@ export class BuyerprofileComponent implements OnInit {
       proposedAmount: this.proposedAmount,
       status: this.status,
       buyerName: this.buyer.firstName,
-      buyerEmail: this.buyer.emailAddresses[0].address
+      buyerEmail: this.buyer.emailAddresses[0].address,
+      propertyName: propertyName
     }
     this.bidService.addBid(newBid)
       .subscribe((bid: any) =>{

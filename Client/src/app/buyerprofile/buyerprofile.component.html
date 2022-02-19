@@ -56,7 +56,7 @@
         <form>
           <label>Proposed Amount : </label>
           <input type="text" [(ngModel)] = "proposedAmount" name= "proposedAmount">&nbsp;
-          <button mat-raised-button class="btn btn btn-success" (click)="createBid(prop.propertyId, prop.customerId)" type="submit" color="primary">Submit bid</button>
+          <button mat-raised-button class="btn btn btn-success" (click)="createBid(prop.propertyId, prop.customerId, prop.propertyName)" type="submit" color="primary">Submit bid</button>
         </form>
       </mat-expansion-panel>
   </mat-tab>
@@ -65,7 +65,7 @@
     <br>
       <mat-expansion-panel *ngFor="let bi of bids">
         <mat-expansion-panel-header>
-          <b>{{bi.propertyId}}</b>
+          <b>Bid for {{bi.propertyName}}</b>
         </mat-expansion-panel-header>
         <ul>
           <!-- <li>Address: {{prop.addline1}} {{prop.addline2}} {{prop.addline3}} {{prop.addline4}}</li>

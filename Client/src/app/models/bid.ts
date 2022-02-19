@@ -7,4 +7,5 @@ export interface Bid{
     status: string;
     buyerName: string;
     buyerEmail: string;
+    propertyName: string;
     }
