@@ -21,7 +21,14 @@
           <li>GreenBelt: {{prop.greenBelt}}</li>
         </ul>
         <form>
-          <button mat-raised-button class="btn btn btn-success" (click)="requestVerification(prop.propertyId,'VERIFIED')" type="submit" color="primary">Verify Property</button>
+          <mat-form-field appearance="fill">
+            <mat-label>Add a comment</mat-label>
+            <textarea matInput [(ngModel)] = "comment" name= "comment"></textarea>
+          </mat-form-field>
+          &nbsp;
+          <button mat-raised-button class="btn btn btn-success" (click)="propertyVerified(prop.propertyId,'VERIFIED')" type="submit" color="primary">Verify Property</button>
+          &nbsp;
+          <button mat-raised-button class="btn btn btn-success" (click)="propertyVerified(prop.propertyId,'REJECTED')" type="submit" color="primary">Reject Verification</button>
         </form>
       </mat-expansion-panel>
   </mat-tab>

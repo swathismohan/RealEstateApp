@@ -13,4 +13,5 @@ export interface Property {
   status: string;
   greenBelt: string;
   verification: string;
+  comment: string;
 }

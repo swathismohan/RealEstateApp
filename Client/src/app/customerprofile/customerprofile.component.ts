@@ -51,7 +51,8 @@ export class CustomerprofileComponent implements OnInit {
       contactDetails: this.contactDetails,
       status: "AVAILABLE",
       greenBelt: this.greenBelt,
-      verification: "NOT REQUESTED"
+      verification: "NOT REQUESTED",
+      comment: ""
     }
     this.propertyService.addProperty(newProperty)
       .subscribe((property: any) =>{

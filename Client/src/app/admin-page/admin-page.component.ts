@@ -12,11 +12,12 @@ export class AdminPageComponent implements OnInit {
 
   property!: Property;
   properties: Property[] = [];
+  comment!: string;
 
   constructor( private propertyService:PropertyServiceService ) { }
 
-  requestVerification(propertyId: string, verification: string){
-    this.propertyService.propertyVerify(propertyId, verification)
+  propertyVerified(propertyId: string, verification: string){
+    this.propertyService.propertyVerified(propertyId, verification,this.comment)
     .subscribe((response: Property) =>{
       this.property = response;
     });

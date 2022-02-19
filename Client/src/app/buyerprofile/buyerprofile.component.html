@@ -36,7 +36,13 @@
     <br>
       <mat-expansion-panel *ngFor="let prop of properties">
         <mat-expansion-panel-header>
-          <b>{{prop.propertyName}}</b>
+          <mat-panel-title>
+            <b>{{ prop.propertyName }}</b>
+          </mat-panel-title>
+
+          <mat-panel-description *ngIf="prop.verification === 'VERIFIED'">
+            VERIFIED
+          </mat-panel-description>
         </mat-expansion-panel-header>
         <ul>
           <li>Property Number: {{prop.propertyNumber}}</li>
@@ -45,6 +51,7 @@
           <li>Market Value: {{prop.marketValue}}</li>
           <li>Contact Details: {{prop.contactDetails}}</li>
           <li>GreenBelt: {{prop.greenBelt}}</li>
+          <li *ngIf="prop.verification === 'VERIFIED'">comment: {{prop.comment}} </li>
         </ul>
         <form>
           <label>Proposed Amount : </label>

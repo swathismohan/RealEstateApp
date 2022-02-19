@@ -61,4 +61,15 @@ export class PropertyServiceService {
 
   }
 
+  propertyVerified(propertyId: string, verification: string, comment: string){
+    const url = "http://localhost:3000/property/" + propertyId + "/verified";
+    let body = {"verification": verification,
+                "comment": comment};
+    return this.httpClient.put(
+      url,
+      body
+   ).pipe(map((res:any) => res.json()));
+
+  }
+
 }
