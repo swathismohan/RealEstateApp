@@ -482,9 +482,9 @@ app.put('/property/:propertyId/verified', (req, res, next) => {
 app.post("/sendmail", (req, res) => {
   var mailOptions = {
     from: 'superswathim@gmail.com',
-    to: req.body.email,
-    subject: 'Sending Email using Node.js',
-    text: 'That was not easy!'
+    to: req.body.to,
+    subject: req.body.subject,
+    text: req.body.text
   };
   
   transporter.sendMail(mailOptions, function(error, info){
