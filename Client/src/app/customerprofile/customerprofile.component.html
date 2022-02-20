@@ -65,6 +65,14 @@
       <mat-form-field class="field">
         <input type="text" matInput placeholder="Green Belt" [(ngModel)] = "greenBelt" name= "greenBelt"/>
       </mat-form-field>
+      <mat-form-field class="field">
+        <mat-label>Property Type</mat-label>
+        <mat-select [(ngModel)] = "propertyType" name="propertyType">
+          <mat-option *ngFor="let t of type" [value]= "t">
+            {{t}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
       <br>
       <button mat-raised-button [disabled]="propertyAdded" color="primary" class="left-margin" (click)="addProperty()" type="submit">Add Property <mat-icon *ngIf="propertyAdded">check_box</mat-icon></button>
       </form>

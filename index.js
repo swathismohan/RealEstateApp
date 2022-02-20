@@ -78,22 +78,22 @@ issuer.then(issuer => {
 })
 
 // Login and get token
-app.get('/', async (req, res, next) => {
+// app.get('/', async (req, res, next) => {
 
-  const grant = {
-    grant_type: 'client_credentials',
-    scope: config.scope
-  }
+//   const grant = {
+//     grant_type: 'client_credentials',
+//     scope: config.scope
+//   }
 
-  // Get token
-  try {
-    const token = await client.grant(grant)
-    access_token = token.access_token
-    console.log(access_token);
-  } catch (e) {
-    res.send('Error', e)
-  }
-})
+//   // Get token
+//   try {
+//     const token = await client.grant(grant)
+//     access_token = token.access_token
+//     console.log(access_token);
+//   } catch (e) {
+//     res.send('Error', e)
+//   }
+// })
 
 app.post('/customer/api', async (req, res) => {
 
@@ -126,8 +126,6 @@ app.post('/customer/api', async (req, res) => {
         fatcaDetails: req.body.fatcaDetails
     });
 
-console.log(apicustomer);
-
 try {
     const response = await fetch("https://api.preprod.fusionfabric.cloud/retail-banking/customers/v1/personal-customers", {
       method: 'POST',
@@ -140,13 +138,11 @@ try {
     });
 
     if (!response.ok) {
-        console.log("Inside Response Not OK");
         console.log(response);
       return res.send(response.statusText)
     }
 
     console.log(access_token);
-
 
     const results = await response.json();
     console.log(results.customerId);
@@ -187,8 +183,6 @@ app.post('/buyer/api', async (req, res) => {
         fatcaDetails: req.body.fatcaDetails
     });
 
-console.log(apibuyer);
-
 try {
     const response = await fetch("https://api.preprod.fusionfabric.cloud/retail-banking/customers/v1/personal-customers", {
       method: 'POST',
@@ -201,13 +195,11 @@ try {
     });
 
     if (!response.ok) {
-        console.log("Inside Response Not OK");
         console.log(response);
       return res.send(response.statusText)
     }
 
     console.log(access_token);
-
 
     const results = await response.json();
     console.log(results.customerId);
@@ -418,7 +410,8 @@ app.post('/property', (req, res, next) => {
       status: req.body.status,
       greenBelt: req.body.greenBelt,
       verification: req.body.verification,
-      comment: req.body.comment
+      comment: req.body.comment,
+      propertyType: req.body.propertyType
   });
 
   newProperty.save((err) => {

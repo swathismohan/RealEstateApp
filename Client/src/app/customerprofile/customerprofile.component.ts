@@ -31,6 +31,8 @@ export class CustomerprofileComponent implements OnInit {
   greenBelt!: string;
   id!: string;
   propertyAdded!: boolean;
+  type: string[] = [];
+  propertyType!: string;
 
   public customer!: Customer;
   constructor(private customeronboardingService : CustomeronboardingServiceService, private router: Router, private activatedroute: ActivatedRoute, private propertyService: PropertyServiceService) { }
@@ -52,12 +54,14 @@ export class CustomerprofileComponent implements OnInit {
       status: "AVAILABLE",
       greenBelt: this.greenBelt,
       verification: "NOT REQUESTED",
-      comment: ""
+      comment: "",
+      propertyType: this.propertyType
     }
     this.propertyService.addProperty(newProperty)
       .subscribe((property: any) =>{
         this.properties.push(property);
       });
+    window.location.reload();
     this.propertyAdded = true;
   }
 
@@ -88,5 +92,7 @@ export class CustomerprofileComponent implements OnInit {
       });
     this.getPropertyByCustomerId();
     this.propertyAdded = false;
+
+    this.type = ["Coastal areas", "Inland areas", "Valley regions", "Hilly regions", "Plains"];
   }
 }

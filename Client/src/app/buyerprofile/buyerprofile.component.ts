@@ -46,6 +46,7 @@ export class BuyerprofileComponent implements OnInit {
       .subscribe((bid: any) =>{
         this.bids.push(bid);
       });
+      window.location.reload();
   }
 
   getAllBidsByBuyer(){
