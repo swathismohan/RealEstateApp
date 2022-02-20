@@ -49,7 +49,7 @@ const DBCustomer = require('./models/dbcustomer.ts');
 const DBBuyer = require('./models/dbbuyer.ts');
 var Property = require('./models/property.ts');
 var Bid = require('./models/bid.ts');
-const QuestionAnswer = require('./models/qna.ts');
+const QuestionAnswer = require('./models/qa.ts');
 
 //port no
 const port = 3000;
