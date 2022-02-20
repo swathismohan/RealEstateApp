@@ -23,6 +23,14 @@ export class BuyeronboardingServiceService {
     return this.httpClient.get<any>(url);
   }
 
+  getLegalSubscription(buyerId: string){
+    const url = "http://localhost:3000/buyer/" + buyerId + "/getlegalsubscription";
+    return this.httpClient.put(
+      url,
+      null
+   ).pipe(map((res:any) => res.json()));
+  }
+
 
   addBuyer(newBuyer: DBBuyer){
     const httpOptions = {

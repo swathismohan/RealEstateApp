@@ -22,6 +22,14 @@ export class CustomeronboardingServiceService {
     return this.httpClient.get<any>(url);
   }
 
+  getLegalSubscription(customerId: string){
+    const url = "http://localhost:3000/customer/" + customerId + "/getlegalsubscription";
+    return this.httpClient.put(
+      url,
+      null
+   ).pipe(map((res:any) => res.json()));
+  }
+
   addCustomer(newCustomer: DBCustomer){
     const httpOptions = {
       headers: new HttpHeaders({

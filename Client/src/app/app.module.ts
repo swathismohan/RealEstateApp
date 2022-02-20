@@ -9,8 +9,10 @@ import { HttpClientModule } from '@angular/common/http';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatIconModule } from '@angular/material/icon';
-import { MatFormFieldModule, MatFormFieldControl } from '@angular/material/form-field';
+import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -18,8 +20,8 @@ import { HeaderComponent } from './header/header.component';
 import { StartComponent } from './start/start.component';
 import { CustomeronboardingComponent } from './customeronboarding/customeronboarding.component';
 import { BuyeronboardingComponent } from './buyeronboarding/buyeronboarding.component';
-import { CustomerprofileComponent } from './customerprofile/customerprofile.component';
-import { BuyerprofileComponent } from './buyerprofile/buyerprofile.component';
+import { CustomerprofileComponent, DialogLegalCustomer } from './customerprofile/customerprofile.component';
+import { BuyerprofileComponent, DialogLegalBuyer } from './buyerprofile/buyerprofile.component';
 import { PropertyComponent } from './property/property.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AdminComponent } from './admin/admin.component';
@@ -37,7 +39,9 @@ import { AdminPageComponent } from './admin-page/admin-page.component';
     BuyerprofileComponent,
     PropertyComponent,
     AdminComponent,
-    AdminPageComponent
+    AdminPageComponent,
+    DialogLegalCustomer,
+    DialogLegalBuyer
   ],
   imports: [
     BrowserModule,
@@ -53,7 +57,9 @@ import { AdminPageComponent } from './admin-page/admin-page.component';
     MatTabsModule,
     BrowserAnimationsModule,
     MatExpansionModule,
-    MatSelectModule
+    MatSelectModule,
+    MatDialogModule,
+    MatCheckboxModule
   ],
   providers: [],
   bootstrap: [AppComponent]

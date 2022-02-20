@@ -1,6 +1,8 @@
 <header>
   <h1>
     <i>Welcome {{ customer.firstName }},</i>
+
+    <button *ngIf = "!customer.legalSubscription" mat-raised-button class="legal" (click)="openDialog()">Get Legal Subscription</button>
   </h1>
 </header>
 
@@ -135,4 +137,8 @@
   </div>
     <h3 *ngElse>No properties added</h3>
   </mat-tab>
+
+  <mat-tab *ngIf = "customer.legalSubscription" label="Legal Advisory">
+  </mat-tab>
+
 </mat-tab-group>

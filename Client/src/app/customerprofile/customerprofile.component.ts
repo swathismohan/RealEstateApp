@@ -1,10 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { Property } from '../models/property';
 import { CustomeronboardingServiceService } from '../services/customeronboarding-service.service';
 import { PropertyServiceService } from '../services/property-service.service';
-import { Customer } from '../models/customer';
+import { DBCustomer } from '../models/customer';
 import { Router, ActivatedRoute } from '@angular/router';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { v4 as uuid } from 'uuid';
+import { DialogData } from '../buyerprofile/buyerprofile.component';
 
 @Component({
   selector: 'app-customerprofile',
@@ -13,6 +15,8 @@ import { v4 as uuid } from 'uuid';
   providers: [CustomeronboardingServiceService, PropertyServiceService],
 })
 export class CustomerprofileComponent implements OnInit {
+
+  subscription!: boolean;
 
   properties: Property[] = [];
   property!: Property;
@@ -34,8 +38,25 @@ export class CustomerprofileComponent implements OnInit {
   type: string[] = [];
   propertyType!: string;
 
-  public customer!: Customer;
-  constructor(private customeronboardingService : CustomeronboardingServiceService, private router: Router, private activatedroute: ActivatedRoute, private propertyService: PropertyServiceService) { }
+  public customer!: DBCustomer;
+  constructor(private customeronboardingService : CustomeronboardingServiceService, private router: Router, private activatedroute: ActivatedRoute,
+     private propertyService: PropertyServiceService, public dialog: MatDialog) { }
+
+     openDialog(): void {
+      const dialogRef = this.dialog.open(DialogLegalCustomer, {
+        width: '500px',
+        data: { subscription: this.customer.legalSubscription},
+      });
+
+      dialogRef.afterClosed().subscribe(result => {
+        this.customer.legalSubscription = result;
+        if(this.customer.legalSubscription){
+          this.customeronboardingService.getLegalSubscription(this.customerId)
+          .subscribe((response: DBCustomer) =>{
+          });
+        }
+      });
+    }
 
   addProperty(){
     this.id = uuid();
@@ -87,12 +108,27 @@ export class CustomerprofileComponent implements OnInit {
   ngOnInit() {
     this.customerId = this.activatedroute.snapshot.params['customerId'];
     this.customeronboardingService.getCustomerById(this.customerId)
-      .subscribe((response: Customer) =>{
+      .subscribe((response: DBCustomer) =>{
         this.customer = response;
       });
     this.getPropertyByCustomerId();
     this.propertyAdded = false;
 
     this.type = ["Coastal areas", "Inland areas", "Valley regions", "Hilly regions", "Plains"];
+  }
+}
+
+@Component({
+  selector: 'dialog-legal-customer',
+  templateUrl: './dialog-legal-customer.html',
+})
+export class DialogLegalCustomer {
+  constructor(
+    public dialogRef: MatDialogRef<DialogLegalCustomer>,
+    @Inject(MAT_DIALOG_DATA) public data: DialogData,
+  ) {}
+
+  onNoClick(): void {
+    this.dialogRef.close();
   }
 }

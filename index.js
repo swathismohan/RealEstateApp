@@ -49,6 +49,7 @@ const DBCustomer = require('./models/dbcustomer.ts');
 const DBBuyer = require('./models/dbbuyer.ts');
 var Property = require('./models/property.ts');
 var Bid = require('./models/bid.ts');
+const QuestionAnswer = require('./models/qna.ts');
 
 //port no
 const port = 3000;
@@ -257,6 +258,18 @@ app.get('/customer/:customerId', (req, res, next) => {
   })
 });
 
+//change legal subscription status
+app.put('/customer/:customerId/getlegalsubscription', (req, res, next) => {
+  DBCustomer.findOneAndUpdate({customerId: req.params.customerId}, {legalSubscription: true}, null , function(err, customer){
+      if(err){
+          res.json(err);
+      }
+      else{
+          res.json(customer);
+      }
+  })
+});
+
 //get a customer using customerId
 app.get('/customer/user/:userName/password/:password', (req, res, next) => {
     DBCustomer.findOne({userName: req.params.userName, password: req.params.password}, function(err, customer){
@@ -326,6 +339,18 @@ app.post('/buyer', (req, res, next) => {
           res.json(result);
       }
   });
+});
+
+//change legal subscription status
+app.put('/buyer/:buyerId/getlegalsubscription', (req, res, next) => {
+  DBBuyer.findOneAndUpdate({buyerId: req.params.buyerId}, {legalSubscription: true}, null , function(err, buyer){
+      if(err){
+          res.json(err);
+      }
+      else{
+          res.json(buyer);
+      }
+  })
 });
 
 // get a buyer using buyerId

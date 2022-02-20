@@ -1,0 +1,10 @@
+<div mat-dialog-content>
+  <p>Legal Advisory is a paid service. Do you want to continue?</p>
+    <mat-checkbox color="primary" [(ngModel)]="data.subscription">
+      Yes, I confirm.
+    </mat-checkbox>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">No Thanks</button>
+  <button mat-button [mat-dialog-close]="data.subscription" cdkFocusInitial>Get Subscription</button>
+</div>

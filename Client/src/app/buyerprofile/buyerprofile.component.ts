@@ -1,12 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { Property } from '../models/property';
 import { PropertyServiceService } from '../services/property-service.service';
-import { Buyer } from '../models/buyer';
+import { DBBuyer } from '../models/buyer';
 import { Bid } from '../models/bid';
 import { Router, ActivatedRoute } from '@angular/router';
 import { v4 as uuid } from 'uuid';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { BuyeronboardingServiceService } from '../services/buyeronboarding-service.service';
 import { BidServiceService } from '../services/bid-service.service';
+
+export interface DialogData {
+  subscription: boolean;
+}
 
 @Component({
   selector: 'app-buyerprofile',
@@ -16,8 +21,10 @@ import { BidServiceService } from '../services/bid-service.service';
 })
 export class BuyerprofileComponent implements OnInit {
 
+  subscription!: boolean;
+
   buyerId!: string;
-  public buyer!: Buyer;
+  public buyer!: DBBuyer;
   properties: Property[] = [];
   proposedAmount!: number;
   bid!: Bid;
@@ -27,7 +34,24 @@ export class BuyerprofileComponent implements OnInit {
   status!: string;
   bids: Bid[] = [];
 
-  constructor(private buyerOnboardingService:BuyeronboardingServiceService, private router: Router, private activatedroute: ActivatedRoute, private propertyService: PropertyServiceService, private bidService: BidServiceService ) { }
+  constructor(private buyerOnboardingService:BuyeronboardingServiceService, private router: Router, private activatedroute: ActivatedRoute, private propertyService: PropertyServiceService,
+    private bidService: BidServiceService, public dialog: MatDialog ) { }
+
+    openDialog(): void {
+      const dialogRef = this.dialog.open(DialogLegalBuyer, {
+        width: '500px',
+        data: { subscription: this.buyer.legalSubscription},
+      });
+
+      dialogRef.afterClosed().subscribe(result => {
+        this.buyer.legalSubscription = result;
+        if(this.buyer.legalSubscription){
+          this.buyerOnboardingService.getLegalSubscription(this.buyerId)
+          .subscribe((response: DBBuyer) =>{
+          });
+        }
+      });
+    }
 
   createBid(propertyId: any, customerId: any, propertyName: string){
     this.bidId = uuid();
@@ -59,7 +83,7 @@ export class BuyerprofileComponent implements OnInit {
   ngOnInit(): void {
     this.buyerId = this.activatedroute.snapshot.params['buyerId'];
     this.buyerOnboardingService.getBuyerById(this.buyerId)
-      .subscribe((response: Buyer) =>{
+      .subscribe((response: DBBuyer) =>{
         this.buyer = response;
     });
 
@@ -72,4 +96,20 @@ export class BuyerprofileComponent implements OnInit {
 
   }
 
+}
+
+@Component({
+  selector: 'dialog-legal-buyer',
+  templateUrl: './dialog-legal-buyer.html',
+})
+
+export class DialogLegalBuyer {
+  constructor(
+    public dialogRef: MatDialogRef<DialogLegalBuyer>,
+    @Inject(MAT_DIALOG_DATA) public data: DialogData,
+  ) {}
+
+  onNoClick(): void {
+    this.dialogRef.close();
+  }
 }
