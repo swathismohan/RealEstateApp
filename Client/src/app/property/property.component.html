@@ -1,13 +1,61 @@
-<h3>Welcome {{propertyId}}</h3>
+<header>
+  <h1>
+    <i>Bids for {{propertyName}},</i>
+  </h1>
+</header>
 
-<mat-expansion-panel *ngFor="let bi of bids">
-  <mat-expansion-panel-header>
-    <b>Bid from {{bi.buyerName}}</b>
-  </mat-expansion-panel-header>
-  <ul>
-    <li>{{bi.proposedAmount}}</li>
-  </ul>
-  <button mat-raised-button [disabled]="bidResponded" (click)="[updateBid(bi, 'ACCEPTED'), updateProperty(bi.propertyId,'NOT AVAILABLE')]" color="primary">Accept</button>
-  &nbsp;
-  <button mat-raised-button [disabled]="bidResponded" (click)="updateBid(bi, 'DECLINED')" color="primary">Decline</button>
-</mat-expansion-panel>
+<mat-tab-group mat-align-tabs="start">
+  <mat-tab label="Incoming Bids">
+    <mat-card class="profile-card-container">
+      <mat-card-header class="card-header">
+      </mat-card-header>
+      <mat-card-content class="card-contents">
+        <mat-expansion-panel *ngFor="let bi of bids">
+          <mat-expansion-panel-header>
+            <b>Bid from {{bi.buyerName}}</b>
+          </mat-expansion-panel-header>
+          <ul>
+            <li>{{bi.proposedAmount}}</li>
+          </ul>
+          <button mat-raised-button [disabled]="bidResponded" (click)="[updateBid(bi, 'ACCEPTED'), updateProperty(bi.propertyId,'NOT AVAILABLE')]" color="primary">Accept</button>
+          &nbsp;
+          <button mat-raised-button [disabled]="bidResponded" (click)="updateBid(bi, 'DECLINED')" color="primary">Decline</button>
+        </mat-expansion-panel>
+      </mat-card-content>
+    </mat-card>
+  </mat-tab>
+  <mat-tab label="Accepted Bids">
+    <mat-card class="card-container">
+      <mat-card-header class="card-header">
+      </mat-card-header>
+      <mat-card-content class="card-contents"></mat-card-content>
+      <mat-expansion-panel *ngFor="let bi of acceptedBids">
+        <mat-expansion-panel-header>
+          <b>Bid from {{bi.buyerName}}</b>
+        </mat-expansion-panel-header>
+        <ul>
+          <li>{{bi.proposedAmount}}</li>
+        </ul>
+        <button mat-raised-button [disabled]="bidResponded" (click)="[updateBid(bi, 'DECLINED'), updateProperty(bi.propertyId,'AVAILABLE')]" color="primary">Decline</button>
+      </mat-expansion-panel>
+    </mat-card>
+  </mat-tab>
+
+  <mat-tab label="Declined Bids">
+    <mat-card class="card-container">
+      <mat-card-header class="card-header">
+      </mat-card-header>
+      <mat-card-content class="card-contents"></mat-card-content>
+      <mat-expansion-panel *ngFor="let bi of declinedBids">
+        <mat-expansion-panel-header>
+          <b>Bid from {{bi.buyerName}}</b>
+        </mat-expansion-panel-header>
+        <ul>
+          <li>{{bi.proposedAmount}}</li>
+        </ul>
+        <button mat-raised-button [disabled]="bidResponded" (click)="[updateBid(bi, 'ACCEPTED'), updateProperty(bi.propertyId,'NOT AVAILABLE')]" color="primary">Accept</button>
+        </mat-expansion-panel>
+    </mat-card>
+  </mat-tab>
+</mat-tab-group>
+

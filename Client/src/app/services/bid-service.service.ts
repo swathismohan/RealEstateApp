@@ -18,6 +18,14 @@ export class BidServiceService {
     return this.httpClient.get<any>("http://localhost:3000/bids/property/"+ propertyId);
   }
 
+  getAcceptedBids(propertyId: string){
+    return this.httpClient.get<any>("http://localhost:3000/bids/accepted/"+ propertyId);
+  }
+
+  getDeclinedBids(propertyId: string){
+    return this.httpClient.get<any>("http://localhost:3000/bids/declined/"+ propertyId);
+  }
+
   addBid(newBid: Bid){
     const httpOptions = {
       headers: new HttpHeaders({

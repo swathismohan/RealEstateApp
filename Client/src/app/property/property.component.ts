@@ -18,10 +18,13 @@ import { Buyer } from '../models/buyer';
 export class PropertyComponent implements OnInit {
   propertyId!: string;
   bids: Bid[] = [];
+  acceptedBids: Bid[] = [];
+  declinedBids: Bid[] = [];
   bid!: Bid;
   property!: Property;
   bidResponded!: boolean;
   email!: string;
+  propertyName!: string;
 
   constructor(private bidService: BidServiceService, private router: Router, private activatedRoute: ActivatedRoute, private PropertyService: PropertyServiceService,
     private notificationService: NotificationService, private buyeronboardingService: BuyeronboardingServiceService) { }
@@ -39,6 +42,7 @@ export class PropertyComponent implements OnInit {
         .subscribe((res: any) =>{
       });
     });
+    window.location.reload();
   }
 
   updateProperty(propertyId: string, status: string){
@@ -50,9 +54,21 @@ export class PropertyComponent implements OnInit {
 
   ngOnInit() {
     this.propertyId = this.activatedRoute.snapshot.params['propertyId'];
+    this.PropertyService.getPropertyById(this.propertyId)
+      .subscribe((resp: Property) =>{
+        this.propertyName = resp.propertyName;
+      });
     this.bidService.getBidsByPropertyId(this.propertyId)
       .subscribe((response: Bid[]) =>{
         this.bids = response;
+      });
+      this.bidService.getAcceptedBids(this.propertyId)
+      .subscribe((response: Bid[]) =>{
+        this.acceptedBids = response;
+      });
+      this.bidService.getDeclinedBids(this.propertyId)
+      .subscribe((response: Bid[]) =>{
+        this.declinedBids = response;
       });
 
     this.bidResponded = false;
