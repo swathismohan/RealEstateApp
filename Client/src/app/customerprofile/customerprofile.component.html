@@ -142,6 +142,30 @@
   </mat-tab>
 
   <mat-tab *ngIf = "customer.legalSubscription" label="Legal Advisory">
+    <form>
+      <mat-form-field appearance="fill">
+        <mat-label>Post a question</mat-label>
+        <textarea matInput [(ngModel)] = "question" name= "question"></textarea>
+      </mat-form-field>
+      &nbsp;
+      <button mat-raised-button class="btn btn btn-success" (click)="postQuestion()" type="submit" color="primary">Post</button>
+     </form>
+
+     <div *ngIf=questions.length>
+      <mat-expansion-panel class="panel" *ngFor="let ques of questions">
+        <mat-expansion-panel-header>
+            <b>{{ ques.question }}</b>
+        </mat-expansion-panel-header>
+
+        <mat-card>
+        <mat-card-content class="card-contents">
+          {{ques.answer}}
+        </mat-card-content>
+      </mat-card>
+      </mat-expansion-panel>
+    </div>
+      <h3 *ngElse>No properties added</h3>
+
   </mat-tab>
 
 </mat-tab-group>

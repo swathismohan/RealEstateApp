@@ -1,6 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { Property } from '../models/property';
 import { PropertyServiceService } from '../services/property-service.service';
+import { QaService } from '../services/qa.service';
 import { DBBuyer } from '../models/buyer';
 import { Bid } from '../models/bid';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -17,7 +18,7 @@ export interface DialogData {
   selector: 'app-buyerprofile',
   templateUrl: './buyerprofile.component.html',
   styleUrls: ['./buyerprofile.component.scss'],
-  providers: [BuyeronboardingServiceService, PropertyServiceService ],
+  providers: [BuyeronboardingServiceService, PropertyServiceService, QaService ],
 })
 export class BuyerprofileComponent implements OnInit {
 
@@ -33,9 +34,11 @@ export class BuyerprofileComponent implements OnInit {
   bidId!: string;
   status!: string;
   bids: Bid[] = [];
+  qaId!: string;
+  question!: string;
 
   constructor(private buyerOnboardingService:BuyeronboardingServiceService, private router: Router, private activatedroute: ActivatedRoute, private propertyService: PropertyServiceService,
-    private bidService: BidServiceService, public dialog: MatDialog ) { }
+    private bidService: BidServiceService, public dialog: MatDialog, private qaService: QaService ) { }
 
     openDialog(): void {
       const dialogRef = this.dialog.open(DialogLegalBuyer, {
@@ -79,6 +82,20 @@ export class BuyerprofileComponent implements OnInit {
         this.bids = response;
       });
     }
+  }
+
+  postQuestion(){
+    this.qaId = uuid();
+    const newQuestion = {
+      QAId: this.qaId,
+      userId: this.buyerId,
+      question: this.question,
+      answer: null,
+      QAstatus: "UNANSWERED"
+    }
+    this.qaService.postQuestion(newQuestion)
+    .subscribe((question: any) =>{
+    });
   }
 
   ngOnInit(): void {

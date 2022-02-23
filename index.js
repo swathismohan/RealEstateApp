@@ -676,3 +676,74 @@ app.delete('/bids/', (req, res, next) => {
       }
   })
 });
+
+//post a new question
+app.post('/question', (req, res, next) => {
+  let newQuestion = new QuestionAnswer({
+      userId: req.body.userId,
+      QAId: req.body.QAId,
+      question: req.body.question,
+      answer: req.body.answer,
+      QAstatus : req.body.QAstatus
+  });
+
+  newQuestion.save((err, result) => {
+      if(err){
+          res.json(err);
+      }
+      else{
+          res.json(result);
+      }
+  });
+});
+
+//get all Q&A
+app.get('/questions', (req, res, next) => {
+  QuestionAnswer.find(function(err, questions){
+      res.json(questions);
+  })
+});
+
+//get all questions by user
+app.get('/questions/:userId', (req, res, next) => {
+  QuestionAnswer.find({userId: req.params.userId}, function(err, questions){
+      if(err){
+          res.json(err);
+      }
+      else{
+          res.json(questions);
+      }
+  })
+});
+
+//get all unanswered questions
+app.get('/questions/unanswered', (req, res, next) => {
+  QuestionAnswer.find({QAstatus: "UNANSWERED"}, function(err, questions){
+      res.json(questions);
+  })
+});
+
+//add answer to the posted question
+app.put('/question/answer', (req, res, next) => {
+  QuestionAnswer.findOneAndUpdate({QAId: req.body.QAId}, {answer: req.body.answer, QAstatus: "ANSWERED"}, null , function(err, bid){
+      if(err){
+          res.json(err);
+      }
+      else{
+          res.json(bid);
+      }
+  })
+});
+
+
+//delete all questions
+app.delete('/questions/', (req, res, next) => {
+  QuestionAnswer.deleteMany( function(err, result){
+      if(err){
+          res.json(err);
+      }
+      else{
+          res.json(result);
+      }
+  })
+});

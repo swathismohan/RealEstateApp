@@ -1,22 +1,27 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { Property } from '../models/property';
 import { CustomeronboardingServiceService } from '../services/customeronboarding-service.service';
+import { QaService } from '../services/qa.service';
 import { PropertyServiceService } from '../services/property-service.service';
 import { DBCustomer } from '../models/customer';
 import { Router, ActivatedRoute } from '@angular/router';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { v4 as uuid } from 'uuid';
 import { DialogData } from '../buyerprofile/buyerprofile.component';
+import { AppRoutingModule } from '../app-routing.module';
+import { QuestionAnswer } from '../models/qa';
 
 @Component({
   selector: 'app-customerprofile',
   templateUrl: './customerprofile.component.html',
   styleUrls: ['./customerprofile.component.scss'],
-  providers: [CustomeronboardingServiceService, PropertyServiceService],
+  providers: [CustomeronboardingServiceService, PropertyServiceService, QaService],
 })
 export class CustomerprofileComponent implements OnInit {
 
   subscription!: boolean;
+
+  questions: QuestionAnswer[] = [];
 
   properties: Property[] = [];
   property!: Property;
@@ -37,10 +42,12 @@ export class CustomerprofileComponent implements OnInit {
   propertyAdded!: boolean;
   type: string[] = [];
   propertyType!: string;
+  qaId!: string;
+  question!: string;
 
   public customer!: DBCustomer;
   constructor(private customeronboardingService : CustomeronboardingServiceService, private router: Router, private activatedroute: ActivatedRoute,
-     private propertyService: PropertyServiceService, public dialog: MatDialog) { }
+     private propertyService: PropertyServiceService, public dialog: MatDialog, private qaService: QaService) { }
 
      openDialog(): void {
       const dialogRef = this.dialog.open(DialogLegalCustomer, {
@@ -105,6 +112,22 @@ export class CustomerprofileComponent implements OnInit {
       });
   }
 
+  postQuestion(){
+    this.qaId = uuid();
+    const newQuestion = {
+      QAId: this.qaId,
+      userId: this.customerId,
+      question: this.question,
+      answer: "Not answered",
+      QAstatus: "UNANSWERED"
+    }
+    this.qaService.postQuestion(newQuestion)
+    .subscribe((question: any) =>{
+    });
+    window.location.reload();
+  }
+
+
   ngOnInit() {
     this.customerId = this.activatedroute.snapshot.params['customerId'];
     this.customeronboardingService.getCustomerById(this.customerId)
@@ -115,6 +138,11 @@ export class CustomerprofileComponent implements OnInit {
     this.propertyAdded = false;
 
     this.type = ["Coastal areas", "Inland areas", "Valley regions", "Hilly regions", "Plains"];
+
+    this.qaService.getQuestionsByUserId(this.customerId)
+    .subscribe((resp: QuestionAnswer[]) =>{
+      this.questions = resp;
+    });
   }
 }
 
