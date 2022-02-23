@@ -70,14 +70,15 @@ export class BuyerprofileComponent implements OnInit {
       .subscribe((bid: any) =>{
         this.bids.push(bid);
       });
-      window.location.reload();
   }
 
-  getAllBidsByBuyer(){
-    this.bidService.getBidByBuyer(this.buyerId)
+  getAllBidsByBuyer(e=null) {
+    if (e && e.index === 2) {
+      this.bidService.getBidByBuyer(this.buyerId)
       .subscribe((response:Bid[]) => {
         this.bids = response;
       });
+    }
   }
 
   ngOnInit(): void {

@@ -6,7 +6,7 @@
   </h1>
 </header>
 
-<mat-tab-group mat-align-tabs="start">
+<mat-tab-group mat-align-tabs="start" (selectedTabChange)="getPropertyByCustomerId($event)">
   <mat-tab label="Your profile">
     <mat-card class="profile-card-container">
       <mat-card-header class="card-header">
@@ -16,7 +16,6 @@
         <div class="contents">
           <h4>Name:</h4>
           <h4>Address:</h4>
-          <br>
           <h4>Country:</h4>
           <h4>E-mail:</h4>
           <h4>Phone number:</h4>
@@ -59,13 +58,17 @@
           <input type="number" matInput placeholder="Postal Code" [(ngModel)] = "postalCode" name= "postalCode"/>
         </mat-form-field>
       <mat-form-field class="field">
-        <input type="text" matInput placeholder="Market Value" [(ngModel)] = "marketValue" name= "marketValue"/>
+        <input type="number" matInput placeholder="Market Value" [(ngModel)] = "marketValue" name= "marketValue"/>
       </mat-form-field>
       <mat-form-field class="field">
         <input type="number" matInput placeholder="Contact Details" [(ngModel)] = "contactDetails" name= "contactDetails"/>
       </mat-form-field>
       <mat-form-field class="field">
-        <input type="text" matInput placeholder="Green Belt" [(ngModel)] = "greenBelt" name= "greenBelt"/>
+        <mat-label>Green Belt</mat-label>
+      <mat-select [(ngModel)]="greenBelt" name="greenBelt">
+        <mat-option value="YES">YES</mat-option>
+        <mat-option value="NO">NO</mat-option>
+      </mat-select>
       </mat-form-field>
       <mat-form-field class="field">
         <mat-label>Property Type</mat-label>

@@ -10,10 +10,15 @@
       <input type="text" matInput placeholder="Last Name" [(ngModel)] = "lastName" name= "lastName"/>
     </mat-form-field>
     <mat-form-field class="field">
-      <input type="text" matInput placeholder="Gender" [(ngModel)] = "gender" name= "gender"/>
+      <mat-label>Gender</mat-label>
+      <mat-select [(ngModel)]="gender" name="gender">
+        <mat-option value="MALE">MALE</mat-option>
+        <mat-option value="FEMALE">FEMALE</mat-option>
+        <mat-option value="OTHER">OTHER</mat-option>
+      </mat-select>
     </mat-form-field>
     <mat-form-field class="field">
-      <input type="text" matInput placeholder="SOSE Number" [(ngModel)] = "idNumber" name= "idNumber"/>
+      <input type="number" matInput placeholder="SOSE Number" [(ngModel)] = "idNumber" name= "idNumber"/>
     </mat-form-field>
     <mat-card-header>
       <mat-card-subtitle class="top-margin" style="margin-bottom:0"><b>Address Details:</b></mat-card-subtitle>

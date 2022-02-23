@@ -82,16 +82,16 @@ export class CustomerprofileComponent implements OnInit {
       .subscribe((property: any) =>{
         this.properties.push(property);
       });
-    window.location.reload();
     this.propertyAdded = true;
   }
 
-  getPropertyByCustomerId(){
-    this.propertyService.getPropertyByCustomerId(this.customerId)
+  getPropertyByCustomerId(e=null) {
+    if (e && e.index === 2) {
+      this.propertyService.getPropertyByCustomerId(this.customerId)
       .subscribe((response: Property[]) =>{
         this.properties = response;
       });
-    console.log('property', this.properties);
+    }
   }
 
   gotoPropertyBids(propertyId: string){

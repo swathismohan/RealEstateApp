@@ -13,6 +13,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -52,6 +53,8 @@ import { AdminPageComponent } from './admin-page/admin-page.component';
     MatInputModule,
     MatIconModule,
     MatFormFieldModule,
+    MatSelectModule,
+    MatProgressSpinnerModule,
     MatToolbarModule,
     HttpClientModule,
     MatTabsModule,
