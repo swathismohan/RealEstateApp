@@ -9,6 +9,7 @@ import { v4 as uuid } from 'uuid';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { BuyeronboardingServiceService } from '../services/buyeronboarding-service.service';
 import { BidServiceService } from '../services/bid-service.service';
+import { QuestionAnswer } from '../models/qa';
 
 export interface DialogData {
   subscription: boolean;
@@ -36,6 +37,7 @@ export class BuyerprofileComponent implements OnInit {
   bids: Bid[] = [];
   qaId!: string;
   question!: string;
+  questions: QuestionAnswer[] = [];
 
   constructor(private buyerOnboardingService:BuyeronboardingServiceService, private router: Router, private activatedroute: ActivatedRoute, private propertyService: PropertyServiceService,
     private bidService: BidServiceService, public dialog: MatDialog, private qaService: QaService ) { }
@@ -96,6 +98,7 @@ export class BuyerprofileComponent implements OnInit {
     this.qaService.postQuestion(newQuestion)
     .subscribe((question: any) =>{
     });
+    window.location.reload();
   }
 
   ngOnInit(): void {
@@ -111,6 +114,11 @@ export class BuyerprofileComponent implements OnInit {
     });
 
     this.getAllBidsByBuyer();
+
+    this.qaService.getQuestionsByUserId(this.buyerId)
+    .subscribe((resp: QuestionAnswer[]) =>{
+      this.questions = resp;
+    });
 
   }
 
