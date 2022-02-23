@@ -717,20 +717,20 @@ app.get('/questions/:userId', (req, res, next) => {
 });
 
 //get all unanswered questions
-app.get('/questions/unanswered', (req, res, next) => {
+app.get('/questions/status/unanswered', (req, res, next) => {
   QuestionAnswer.find({QAstatus: "UNANSWERED"}, function(err, questions){
       res.json(questions);
   })
 });
 
 //add answer to the posted question
-app.put('/question/answer', (req, res, next) => {
-  QuestionAnswer.findOneAndUpdate({QAId: req.body.QAId}, {answer: req.body.answer, QAstatus: "ANSWERED"}, null , function(err, bid){
+app.put('/abc/answered', (req, res, next) => {
+  QuestionAnswer.findOneAndUpdate({QAId: req.body.QAId}, {answer: req.body.answer, QAstatus: "ANSWERED"}, null , function(err, question){
       if(err){
           res.json(err);
       }
       else{
-          res.json(bid);
+          res.json(question);
       }
   })
 });

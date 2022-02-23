@@ -24,8 +24,9 @@ export class QaService {
   }
 
   addAnswer(QAId: string, answer: string){
-    const url = "http://localhost:3000/question/answer";
-    let body = {"answer": answer};
+    const url = "http://localhost:3000/abc/answered";
+    let body = {"QAId" : QAId,
+    "answer": answer};
     return this.httpClient.put(
       url,
       body
@@ -38,7 +39,7 @@ export class QaService {
   }
 
   getUnansweredQuestions(){
-    return this.httpClient.get<any>("http://localhost:3000/questions/unanswered");
+    return this.httpClient.get<any>("http://localhost:3000/questions/status/unanswered");
   }
 
 }

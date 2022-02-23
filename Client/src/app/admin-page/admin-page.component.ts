@@ -4,12 +4,14 @@ import { PropertyServiceService } from '../services/property-service.service';
 import { NotificationService } from '../services/notification.service';
 import { CustomeronboardingServiceService } from '../services/customeronboarding-service.service';
 import { Customer } from '../models/customer';
+import { QaService } from '../services/qa.service';
+import { QuestionAnswer } from '../models/qa';
 
 @Component({
   selector: 'app-admin-page',
   templateUrl: './admin-page.component.html',
   styleUrls: ['./admin-page.component.scss'],
-  providers: [ PropertyServiceService, NotificationService, CustomeronboardingServiceService ],
+  providers: [ PropertyServiceService, NotificationService, CustomeronboardingServiceService, QaService ],
 })
 export class AdminPageComponent implements OnInit {
 
@@ -17,8 +19,11 @@ export class AdminPageComponent implements OnInit {
   properties: Property[] = [];
   comment!: string;
   email!: string;
+  questions: QuestionAnswer[] = [];
+  answer!: string;
 
-  constructor( private propertyService:PropertyServiceService, private notificationService: NotificationService, private customeronboardingService: CustomeronboardingServiceService) { }
+  constructor( private propertyService:PropertyServiceService, private notificationService: NotificationService,
+    private customeronboardingService: CustomeronboardingServiceService, private qaService: QaService) { }
 
   propertyVerified(property: Property, verification: string){
     this.propertyService.propertyVerified(property.propertyId, verification,this.comment)
@@ -34,11 +39,21 @@ export class AdminPageComponent implements OnInit {
     });
   }
 
+  questionAnswered(qaid : string){
+    this.qaService.addAnswer(qaid,this.answer)
+    .subscribe((response: QuestionAnswer) =>{
+    });
+  }
+
   ngOnInit(): void {
     this.propertyService.getVerifyRequestedProperty()
       .subscribe((response:Property[]) => {
         this.properties = response;
     });
+    this.qaService.getUnansweredQuestions()
+    .subscribe((response:QuestionAnswer[]) => {
+      this.questions = response;
+  });
   }
 
 }
