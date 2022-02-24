@@ -78,24 +78,6 @@ issuer.then(issuer => {
   app.listen(config.port, () => console.log(`Sample app listening on port ${config.port}!`))
 })
 
-// Login and get token
-// app.get('/', async (req, res, next) => {
-
-//   const grant = {
-//     grant_type: 'client_credentials',
-//     scope: config.scope
-//   }
-
-//   // Get token
-//   try {
-//     const token = await client.grant(grant)
-//     access_token = token.access_token
-//     console.log(access_token);
-//   } catch (e) {
-//     res.send('Error', e)
-//   }
-// })
-
 app.post('/customer/api', async (req, res) => {
 
     const grant = {
@@ -143,10 +125,8 @@ try {
       return res.send(response.statusText)
     }
 
-    console.log(access_token);
-
     const results = await response.json();
-    console.log(results.customerId);
+    console.log("Posted Customer to FFDC API with customerId: "+ results.customerId);
     return res.json(results.customerId)
   } catch (err) {
     res.send(err)
@@ -200,10 +180,8 @@ try {
       return res.send(response.statusText)
     }
 
-    console.log(access_token);
-
     const results = await response.json();
-    console.log(results.customerId);
+    console.log("Posted Buyer to FFDC API with customerId: "+ results.customerId);
     return res.json(results.customerId)
   } catch (err) {
     res.send(err)

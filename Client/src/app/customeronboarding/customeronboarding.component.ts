@@ -114,7 +114,7 @@ export class CustomeronboardingComponent implements OnInit {
   }
 
   onCompletion() {
-    const url = "/customer/" + this.customerId;
+    const url = "/";
     this.router.navigateByUrl(url);
   }
 

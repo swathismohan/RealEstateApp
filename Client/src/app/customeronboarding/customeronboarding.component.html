@@ -68,8 +68,7 @@
     <input type="password" matInput placeholder="Password" [(ngModel)] = "password" name= "password"/>
   </mat-form-field>
   <br>
-  <button mat-raised-button [disabled]="customerAdded" color="primary" class="top-margin left-margin" (click)="addCustomer()" type="submit">Register Seller</button>
-  <button mat-raised-button [disabled]="!customerAdded" color="primary" class="left-margin" (click)="onCompletion()" type="submit">Go to Profile</button>
+  <button mat-raised-button [disabled]="customerAdded" color="primary" class="top-margin left-margin" (click)="[addCustomer(), onCompletion()]" type="submit">Register Seller</button>
 
   </form>
 </mat-card>

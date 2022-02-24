@@ -112,7 +112,7 @@ export class BuyeronboardingComponent implements OnInit {
   }
 
   onCompletion() {
-    const url = "/buyer/" + this.buyerId;
+    const url = "/";
     this.router.navigateByUrl(url);
   }
 
