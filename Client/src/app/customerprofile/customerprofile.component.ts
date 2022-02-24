@@ -127,6 +127,11 @@ export class CustomerprofileComponent implements OnInit {
     window.location.reload();
   }
 
+  onCompletion() {
+    const url = "/";
+    this.router.navigateByUrl(url);
+  }
+
 
   ngOnInit() {
     this.customerId = this.activatedroute.snapshot.params['customerId'];

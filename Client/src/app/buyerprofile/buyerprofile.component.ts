@@ -101,6 +101,11 @@ export class BuyerprofileComponent implements OnInit {
     window.location.reload();
   }
 
+  onCompletion() {
+    const url = "/";
+    this.router.navigateByUrl(url);
+  }
+
   ngOnInit(): void {
     this.buyerId = this.activatedroute.snapshot.params['buyerId'];
     this.buyerOnboardingService.getBuyerById(this.buyerId)

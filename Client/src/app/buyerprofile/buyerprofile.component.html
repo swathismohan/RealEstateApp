@@ -1,6 +1,7 @@
 <header>
   <h1>
     <i>Welcome {{ buyer.firstName }},</i>
+    <button mat-raised-button class="legal" (click)="onCompletion()">Logout</button>
     <button *ngIf = "!buyer.legalSubscription" mat-raised-button class="legal" (click)="openDialog()">Get Legal Subscription</button>
   </h1>
 
