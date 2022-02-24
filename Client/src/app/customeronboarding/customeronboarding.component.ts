@@ -114,8 +114,11 @@ export class CustomeronboardingComponent implements OnInit {
   }
 
   onCompletion() {
-    const url = "/";
-    this.router.navigateByUrl(url);
+    setTimeout(() =>
+    {
+      const url = "/";
+      this.router.navigateByUrl(url);
+    },2000);
   }
 
   getCustomer(){

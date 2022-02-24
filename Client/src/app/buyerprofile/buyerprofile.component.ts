@@ -102,8 +102,11 @@ export class BuyerprofileComponent implements OnInit {
   }
 
   onCompletion() {
-    const url = "/";
-    this.router.navigateByUrl(url);
+    setTimeout(() =>
+    {
+      const url = "/";
+      this.router.navigateByUrl(url);
+    },2000);
   }
 
   ngOnInit(): void {
