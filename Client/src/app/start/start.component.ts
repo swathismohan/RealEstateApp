@@ -24,6 +24,8 @@ export class StartComponent implements OnInit {
     this.customerOnboardingService.getCustomerByUserName(this.userName, this.password)
       .subscribe((response: DBCustomer) =>{
         this.customer = response;
+        const url = "/customer/" + response.customerId;
+        this.router.navigateByUrl(url);
       });
   }
 
@@ -31,20 +33,12 @@ export class StartComponent implements OnInit {
     this.buyerOnboardingService.getBuyerByUserName(this.userName, this.password)
       .subscribe((response: DBBuyer) =>{
         this.buyer = response;
+        const url = "/buyer/" + response.buyerId;
+        this.router.navigateByUrl(url);;
       });
   }
 
   ngOnInit() {
-  }
-
-  gotoCustomerProfile() {
-    const url = "/customer/" + this.customer.customerId;
-    this.router.navigateByUrl(url);
-  }
-
-  gotoBuyerProfile() {
-    const url = "/buyer/" + this.buyer.buyerId;
-    this.router.navigateByUrl(url);;
   }
 
 }
