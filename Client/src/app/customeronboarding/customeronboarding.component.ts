@@ -57,7 +57,7 @@ export class CustomeronboardingComponent implements OnInit {
 
     this.addresses.push({
       addressType: "RESIDENTIAL",
-      country: "US",
+      country: this.countryOfResidency,
       line1: this.addline1,
       line2: this.addline2,
       line3: this.addline3,

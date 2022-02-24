@@ -1,6 +1,6 @@
 export interface Address {
   addressType: 'RESIDENTIAL';
-  country: 'US';
+  country: string;
   line1: string;
   line2: string;
   line3: string;
