@@ -40,7 +40,7 @@
           <input type="text" matInput placeholder="Property Name" [(ngModel)] = "propertyName" name= "propertyName"/>
         </mat-form-field>
         <mat-form-field class="field">
-          <input type="text" matInput placeholder="Property Number" [(ngModel)] = "propertyNumber" name= "propertyNumber"/>
+          <input type="text" matInput placeholder="Property Number" [(ngModel)] = "propertyNumber" name= "propertyNumber" required/>
         </mat-form-field>
         <mat-form-field class="field">
           <input type="text" matInput placeholder="Address Line 1" [(ngModel)] = "addline1" name= "addline1"/>
@@ -55,24 +55,24 @@
           <input type="text" matInput placeholder="Address Line 4" [(ngModel)] = "addline4" name= "addline4"/>
         </mat-form-field>
         <mat-form-field class="field">
-          <input type="number" matInput placeholder="Postal Code" [(ngModel)] = "postalCode" name= "postalCode"/>
+          <input type="number" matInput placeholder="Postal Code" [(ngModel)] = "postalCode" name= "postalCode" required/>
         </mat-form-field>
       <mat-form-field class="field">
-        <input type="number" matInput placeholder="Market Value" [(ngModel)] = "marketValue" name= "marketValue"/>
+        <input type="number" matInput placeholder="Market Value" [(ngModel)] = "marketValue" name= "marketValue" required/>
       </mat-form-field>
       <mat-form-field class="field">
         <input type="number" matInput placeholder="Contact Details" [(ngModel)] = "contactDetails" name= "contactDetails"/>
       </mat-form-field>
       <mat-form-field class="field">
         <mat-label>Green Belt</mat-label>
-      <mat-select [(ngModel)]="greenBelt" name="greenBelt">
+      <mat-select [(ngModel)]="greenBelt" name="greenBelt" required>
         <mat-option value="YES">YES</mat-option>
         <mat-option value="NO">NO</mat-option>
       </mat-select>
       </mat-form-field>
       <mat-form-field class="field">
         <mat-label>Property Type</mat-label>
-        <mat-select [(ngModel)] = "propertyType" name="propertyType">
+        <mat-select [(ngModel)] = "propertyType" name="propertyType" required>
           <mat-option *ngFor="let t of type" [value]= "t">
             {{t}}
           </mat-option>

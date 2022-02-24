@@ -4,7 +4,7 @@
   </mat-card-header>
   <form class="full-width form-container">
     <mat-form-field class="field">
-      <input type="text" matInput placeholder="First Name" [(ngModel)] = "firstName" name= "firstName"/>
+      <input type="text" matInput placeholder="First Name" [(ngModel)] = "firstName" name= "firstName" required/>
     </mat-form-field>
     <mat-form-field class="field">
       <input type="text" matInput placeholder="Last Name" [(ngModel)] = "lastName" name= "lastName"/>
@@ -18,7 +18,7 @@
       </mat-select>
     </mat-form-field>
     <mat-form-field class="field">
-      <input type="text" matInput placeholder="SOSE Number" [(ngModel)] = "idNumber" name= "id"/>
+      <input type="text" matInput placeholder="SOSE Number" [(ngModel)] = "idNumber" name= "id" required/>
     </mat-form-field>
     <mat-card-header>
       <mat-card-subtitle class="top-margin" style="margin-bottom:0"><b>Address Details:</b></mat-card-subtitle>
@@ -40,32 +40,32 @@
       <input type="text" matInput placeholder="Address Line5" [(ngModel)] = "addline5" name= "addline5"/>
     </mat-form-field>
     <mat-form-field class="field">
-      <input type="text" matInput placeholder="Country" [(ngModel)] = "countryOfResidency" name= "countryOfResidency"/>
+      <input type="text" matInput placeholder="Country" [(ngModel)] = "countryOfResidency" name= "countryOfResidency" required/>
     </mat-form-field>
     <mat-form-field class="field">
       <input type="text" matInput placeholder="Building" [(ngModel)] = "buildingNumber" name= "buildingNumber"/>
     </mat-form-field>
     <mat-form-field class="field">
-      <input type="number" matInput placeholder="Postal Code" [(ngModel)] = "postalCode" name= "postalCode"/>
+      <input type="number" matInput placeholder="Postal Code" [(ngModel)] = "postalCode" name= "postalCode" required/>
     </mat-form-field>
   </address>
   <mat-card-header>
     <mat-card-subtitle class="top-margin" style="margin-bottom:0"><b>Contact Details:</b></mat-card-subtitle>
   </mat-card-header>
   <mat-form-field class="field">
-    <input type="email" matInput placeholder="Email id" [(ngModel)] = "emailAddress" name= "emailAddress"/>
+    <input type="email" matInput placeholder="Email id" [(ngModel)] = "emailAddress" name= "emailAddress" required/>
   </mat-form-field>
   <mat-form-field class="field">
-    <input type="number" matInput placeholder="Phone number" [(ngModel)] = "phoneNumber" name= "phoneNumber"/>
+    <input type="number" matInput placeholder="Phone number" [(ngModel)] = "phoneNumber" name= "phoneNumber" required/>
   </mat-form-field>
   <mat-card-header>
     <mat-card-subtitle class="top-margin" style="margin-bottom:0"><b>Login Credentials:</b></mat-card-subtitle>
   </mat-card-header>
   <mat-form-field class="field">
-    <input type="text" matInput placeholder="User Name" [(ngModel)] = "userName" name= "userName"/>
+    <input type="text" matInput placeholder="User Name" [(ngModel)] = "userName" name= "userName" required/>
   </mat-form-field>
   <mat-form-field class="field">
-    <input type="password" matInput placeholder="Password" [(ngModel)] = "password" name= "password"/>
+    <input type="password" matInput placeholder="Password" [(ngModel)] = "password" name= "password" required/>
   </mat-form-field>
   <br>
   <button mat-raised-button [disabled]="customerAdded" color="primary" class="top-margin left-margin" (click)="[addCustomer(), onCompletion()]" type="submit">Register Seller</button>
