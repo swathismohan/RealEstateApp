@@ -65,3 +65,18 @@ button.legal{
   background-color: darkmagenta;
   color: white;
 }
+.legalContainer{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+.legalContainer>form{
+  width: 35%;
+  margin: 20px;
+}
+.quesArea{
+  width: 100%;
+}
+.panel{
+  flex-grow: 1;
+}
