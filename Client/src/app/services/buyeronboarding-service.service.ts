@@ -23,6 +23,11 @@ export class BuyeronboardingServiceService {
     return this.httpClient.get<any>(url);
   }
 
+  getBuyerByUserIdFromFFDC(userid: string){
+    const url = "http://localhost:3000/user/"+ userid;
+    return this.httpClient.get<any>(url);
+  }
+
   getLegalSubscription(buyerId: string){
     const url = "http://localhost:3000/buyer/" + buyerId + "/getlegalsubscription";
     return this.httpClient.put(

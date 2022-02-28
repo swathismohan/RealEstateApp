@@ -1,6 +1,6 @@
 <header>
   <h1>
-    <i>Welcome {{ buyer.firstName }},</i>
+    <i>Welcome {{ apibuyer.firstName }},</i>
     <button mat-raised-button class="legal" (click)="onCompletion()">Logout</button>
     <button *ngIf = "!buyer.legalSubscription" mat-raised-button class="legal" (click)="openDialog()">Get Legal Subscription</button>
   </h1>
@@ -23,11 +23,11 @@
           <h4>Phone number:</h4>
         </div>
         <div class="contents">
-          <p>{{buyer.firstName}} {{buyer.lastName}}</p>
-          <p>{{buyer.addresses[0].line1}}</p>
-          <p>{{buyer.countryOfResidency}}</p>
-          <p>{{buyer.emailAddresses[0].address}}</p>
-          <p>{{buyer.phoneNumbers[0].number}}</p>
+          <p>{{apibuyer.firstName}} {{apibuyer.lastName}}</p>
+          <p>{{apibuyer.addresses[0].line1}}</p>
+          <p>{{apibuyer.countryOfResidency}}</p>
+          <p>{{apibuyer.emailAddresses[0].address}}</p>
+          <p>{{apibuyer.phoneNumbers[0].number}}</p>
         </div>
       </mat-card-content>
     </mat-card>

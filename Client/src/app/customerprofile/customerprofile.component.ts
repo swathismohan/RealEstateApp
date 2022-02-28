@@ -3,7 +3,7 @@ import { Property } from '../models/property';
 import { CustomeronboardingServiceService } from '../services/customeronboarding-service.service';
 import { QaService } from '../services/qa.service';
 import { PropertyServiceService } from '../services/property-service.service';
-import { DBCustomer } from '../models/customer';
+import { DBCustomer, Customer } from '../models/customer';
 import { Router, ActivatedRoute } from '@angular/router';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { v4 as uuid } from 'uuid';
@@ -44,6 +44,7 @@ export class CustomerprofileComponent implements OnInit {
   propertyType!: string;
   qaId!: string;
   question!: string;
+  apicustomer!: Customer;
 
   public customer!: DBCustomer;
   constructor(private customeronboardingService : CustomeronboardingServiceService, private router: Router, private activatedroute: ActivatedRoute,
@@ -138,7 +139,11 @@ export class CustomerprofileComponent implements OnInit {
 
   ngOnInit() {
     this.customerId = this.activatedroute.snapshot.params['customerId'];
-    this.customeronboardingService.getCustomerById(this.customerId)
+    this.customeronboardingService.getCustomerByUserIdFromFFDC(this.customerId)
+      .subscribe((response: Customer) =>{
+        this.apicustomer = response;
+      });
+      this.customeronboardingService.getCustomerById(this.customerId)
       .subscribe((response: DBCustomer) =>{
         this.customer = response;
       });

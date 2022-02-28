@@ -22,6 +22,11 @@ export class CustomeronboardingServiceService {
     return this.httpClient.get<any>(url);
   }
 
+  getCustomerByUserIdFromFFDC(userid: string){
+    const url = "http://localhost:3000/user/"+ userid;
+    return this.httpClient.get<any>(url);
+  }
+
   getLegalSubscription(customerId: string){
     const url = "http://localhost:3000/customer/" + customerId + "/getlegalsubscription";
     return this.httpClient.put(

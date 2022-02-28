@@ -2,7 +2,7 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { Property } from '../models/property';
 import { PropertyServiceService } from '../services/property-service.service';
 import { QaService } from '../services/qa.service';
-import { DBBuyer } from '../models/buyer';
+import { DBBuyer, Buyer } from '../models/buyer';
 import { Bid } from '../models/bid';
 import { Router, ActivatedRoute } from '@angular/router';
 import { v4 as uuid } from 'uuid';
@@ -38,6 +38,7 @@ export class BuyerprofileComponent implements OnInit {
   qaId!: string;
   question!: string;
   questions: QuestionAnswer[] = [];
+  apibuyer!: Buyer;
 
   constructor(private buyerOnboardingService:BuyeronboardingServiceService, private router: Router, private activatedroute: ActivatedRoute, private propertyService: PropertyServiceService,
     private bidService: BidServiceService, public dialog: MatDialog, private qaService: QaService ) { }
@@ -111,6 +112,10 @@ export class BuyerprofileComponent implements OnInit {
 
   ngOnInit(): void {
     this.buyerId = this.activatedroute.snapshot.params['buyerId'];
+    this.buyerOnboardingService.getBuyerByUserIdFromFFDC(this.buyerId)
+    .subscribe((response: Buyer) =>{
+      this.apibuyer = response;
+  });
     this.buyerOnboardingService.getBuyerById(this.buyerId)
       .subscribe((response: DBBuyer) =>{
         this.buyer = response;

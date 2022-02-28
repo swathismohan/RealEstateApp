@@ -78,6 +78,42 @@ issuer.then(issuer => {
   app.listen(config.port, () => console.log(`Sample app listening on port ${config.port}!`))
 })
 
+app.get('/user/:userid', async (req, res, next) => {
+
+  const grant = {
+    grant_type: 'client_credentials',
+    scope: config.scope
+  }
+  // Get token
+  try {
+    const token = await client.grant(grant)
+    access_token = token.access_token
+    console.log(access_token);
+  } catch (e) {
+    res.send('Error', e)
+  }
+
+  try {
+    const response = await fetch(config.baseUrl + "/retail-banking/customers/v1/personal-customers/"+req.params.userid, {
+      method: 'get',
+      headers: new Headers({
+        Authorization: 'Bearer ' + access_token,
+        'Content-Type': 'application/x-www-form-urlencoded'
+      })
+    });
+
+    if (!response.ok) {
+      console.log(response);
+    return res.send(response.statusText)
+  }
+
+  const results = await response.json();
+  return res.json(results)
+} catch (err) {
+  res.send(err)
+}
+})
+
 app.post('/customer/api', async (req, res) => {
 
     const grant = {
