@@ -39,6 +39,8 @@ export class BuyerprofileComponent implements OnInit {
   question!: string;
   questions: QuestionAnswer[] = [];
   apibuyer!: Buyer;
+  allproperty!: boolean;
+
 
   constructor(private buyerOnboardingService:BuyeronboardingServiceService, private router: Router, private activatedroute: ActivatedRoute, private propertyService: PropertyServiceService,
     private bidService: BidServiceService, public dialog: MatDialog, private qaService: QaService ) { }
@@ -110,12 +112,32 @@ export class BuyerprofileComponent implements OnInit {
     },2000);
   }
 
+  filterProperty(){
+    if(this.allproperty){
+      this.propertyService.getAvailableVerifiedProperty()
+      .subscribe((response:Property[]) => {
+        this.properties = response;
+    });
+    this.allproperty=false;
+    }
+    else{
+      this.propertyService.getAvailableProperty()
+      .subscribe((response:Property[]) => {
+        this.properties = response;
+    });
+    this.allproperty=true;
+    }
+  }
+
   ngOnInit(): void {
     this.buyerId = this.activatedroute.snapshot.params['buyerId'];
     this.buyerOnboardingService.getBuyerByUserIdFromFFDC(this.buyerId)
     .subscribe((response: Buyer) =>{
       this.apibuyer = response;
   });
+
+  this.allproperty=true;
+
     this.buyerOnboardingService.getBuyerById(this.buyerId)
       .subscribe((response: DBBuyer) =>{
         this.buyer = response;

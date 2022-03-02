@@ -427,8 +427,14 @@ app.get('/properties/available', (req, res, next) => {
   })
 });
 
+app.get('/availableverifiedproperties', (req, res, next) => {
+  Property.find({status: "AVAILABLE", verification: "VERIFIED"}, function(err, properties){
+      res.json(properties);
+  })
+});
+
 app.get('/properties/requested', (req, res, next) => {
-  Property.find({verification: "REQUESTED"}, function(err, properties){
+  Property.find({verification: "VERIFICATION REQUESTED"}, function(err, properties){
       res.json(properties);
   })
 });

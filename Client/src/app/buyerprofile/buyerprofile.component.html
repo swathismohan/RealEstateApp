@@ -36,14 +36,16 @@
 
   <mat-tab label="Available properties">
     <br>
+    <button mat-raised-button class="btn btn btn-success" (click)="filterProperty()" type="submit" color="primary" *ngIf="allproperty">Show Verified Properties</button>
+    <button mat-raised-button class="btn btn btn-success" (click)="filterProperty()" type="submit" color="primary" *ngIf="!allproperty">Show All Properties</button>
       <mat-expansion-panel *ngFor="let prop of properties">
         <mat-expansion-panel-header>
           <mat-panel-title>
             <b>{{ prop.propertyName }}</b>
           </mat-panel-title>
 
-          <mat-panel-description *ngIf="prop.verification === 'VERIFIED'">
-            VERIFIED
+          <mat-panel-description *ngIf="prop.verification != 'REJECTED'">
+            {{prop.verification}}
           </mat-panel-description>
         </mat-expansion-panel-header>
         <ul>

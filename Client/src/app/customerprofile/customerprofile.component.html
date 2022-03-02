@@ -93,8 +93,8 @@
           <b>{{ prop.propertyName }}</b>
         </mat-panel-title>
 
-        <mat-panel-description *ngIf="prop.verification === 'VERIFIED'">
-          VERIFIED
+        <mat-panel-description>
+          {{prop.verification}}
         </mat-panel-description>
 
 
@@ -129,9 +129,10 @@
     </button>
     <button
       mat-raised-button
-      (click)="requestVerification(prop.propertyId,'REQUESTED')"
+      (click)="requestVerification(prop.propertyId,'VERIFICATION REQUESTED')"
       class="top-margin left-margin"
-      color="primary">
+      color="primary"
+      *ngIf="prop.verification === 'PENDING VERIFICATION'">
       Request Verification
     </button>
   </mat-card-actions>

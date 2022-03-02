@@ -82,7 +82,7 @@ export class CustomerprofileComponent implements OnInit {
       contactDetails: this.contactDetails,
       status: "AVAILABLE",
       greenBelt: this.greenBelt,
-      verification: "NOT REQUESTED",
+      verification: "PENDING VERIFICATION",
       comment: "",
       propertyType: this.propertyType
     }

@@ -27,6 +27,10 @@ export class PropertyServiceService {
     return this.httpClient.get<any>("http://localhost:3000/properties/available");
   }
 
+  getAvailableVerifiedProperty(){
+    return this.httpClient.get<any>("http://localhost:3000/availableverifiedproperties");
+  }
+
   getVerifyRequestedProperty(){
     return this.httpClient.get<any>("http://localhost:3000/properties/requested");
   }
