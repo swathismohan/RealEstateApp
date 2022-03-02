@@ -22,6 +22,8 @@ export interface EmailAddress {
 }
 
 export interface Buyer {
+  title: string;
+  dateOfBirth: string;
   firstName: string;
   lastName: string;
   gender: string;

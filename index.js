@@ -132,8 +132,8 @@ app.post('/customer/api', async (req, res) => {
 
       let apicustomer = new Customer({
         branchCode: "00000001",
-        title: "Doctor",
-        dateOfBirth: "1997-11-20",
+        title: req.body.title,
+        dateOfBirth: req.body.dateOfBirth,
         firstName: req.body.firstName,
         lastName: req.body.lastName,
         gender: req.body.gender,
@@ -187,8 +187,8 @@ app.post('/buyer/api', async (req, res) => {
 
       let apibuyer = new Buyer({
         branchCode: "00000001",
-        title: "Doctor",
-        dateOfBirth: "1997-11-20",
+        title: req.body.title,
+        dateOfBirth: req.body.dateOfBirth,
         firstName: req.body.firstName,
         lastName: req.body.lastName,
         gender: req.body.gender,

@@ -4,6 +4,7 @@ import { DBCustomer ,Customer, Address, PhoneNumber, EmailAddress } from '../mod
 import { ApiServiceService } from '../services/api-service.service';
 import { Router } from '@angular/router';
 import { v4 as uuid } from 'uuid';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-customeronboarding',
@@ -19,6 +20,8 @@ export class CustomeronboardingComponent implements OnInit {
   userName!: string;
   password!: string;
   customerId!: string;
+  title!: string;
+  dateOfBirth!: string;
   firstName!: string;
   lastName!: string;
   gender!: string;
@@ -67,7 +70,12 @@ export class CustomeronboardingComponent implements OnInit {
       buildingNumber: this.buildingNumber
     });
 
+     const momentDate = new Date(this.dateOfBirth);
+     const formattedDate = moment(momentDate).format("YYYY-MM-DD");
+
     const newapiCustomer = {
+      title: this.title,
+      dateOfBirth: formattedDate,
       firstName: this.firstName,
       lastName: this.lastName,
       gender: this.gender,

@@ -4,6 +4,16 @@
   </mat-card-header>
   <form class="full-width form-container">
     <mat-form-field class="field">
+      <mat-label>Title</mat-label>
+      <mat-select [(ngModel)]="title" name="title">
+        <mat-option value="Mrs">Mrs</mat-option>
+        <mat-option value="Ms">Ms</mat-option>
+        <mat-option value="Mr">Mr</mat-option>
+        <mat-option value="Doctor">Doctor</mat-option>
+        <mat-option value="Professor">Professor</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field class="field">
       <input type="text" matInput placeholder="First Name" [(ngModel)] = "firstName" name= "firstName" required/>
     </mat-form-field>
     <mat-form-field class="field">
@@ -16,6 +26,11 @@
         <mat-option value="FEMALE">FEMALE</mat-option>
         <mat-option value="UNDISCLOSED">UNDISCLOSED</mat-option>
       </mat-select>
+    </mat-form-field>
+    <mat-form-field class="field">
+      <input matInput [matDatepicker]="picker" placeholder="Date of Birth" [(ngModel)] = "dateOfBirth" name= "dateOfBirth">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
     </mat-form-field>
     <mat-form-field class="field">
       <input type="text" matInput placeholder="SOSE Number" [(ngModel)] = "idNumber" name= "id" required/>
