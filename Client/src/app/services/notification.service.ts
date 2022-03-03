@@ -11,6 +11,18 @@ export class NotificationService {
 
   constructor(private httpClient: HttpClient) { }
 
+  welcomeEmail(username: string, email: string){
+    const url = "http://localhost:3000/sendmail";
+    let body = {"to": email,
+                "subject": "Welcome to ESTATE AIDE",
+                "text": "Hi "+username+", \n\nYour user registration has been successfully completed. Please login to ESTATE AIDE to use our services. \nENJOY:) \n\nRegards, \nTeam Estate Aide" };
+    return this.httpClient.post(
+      url,
+      body
+   ).pipe(map((res:any) => res.json()));
+  }
+
+
   propertyVerifiedEmail(propertyName: string, email: string){
     const url = "http://localhost:3000/sendmail";
     let body = {"to": email,

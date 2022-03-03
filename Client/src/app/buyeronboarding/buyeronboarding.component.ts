@@ -5,12 +5,13 @@ import { DBBuyer ,Buyer, Address, PhoneNumber, EmailAddress } from '../models/bu
 import { Router } from '@angular/router';
 import { v4 as uuid } from 'uuid';
 import * as moment from 'moment';
+import { NotificationService } from '../services/notification.service';
 
 @Component({
   selector: 'app-buyeronboarding',
   templateUrl: './buyeronboarding.component.html',
   styleUrls: ['./buyeronboarding.component.scss'],
-  providers: [BuyeronboardingServiceService, ApiServiceService]
+  providers: [BuyeronboardingServiceService, ApiServiceService, NotificationService]
 })
 export class BuyeronboardingComponent implements OnInit {
 
@@ -43,7 +44,8 @@ export class BuyeronboardingComponent implements OnInit {
   buyerAdded!: boolean;
   tin!: string;
 
-  constructor(private buyeronboardingService: BuyeronboardingServiceService, private apiService : ApiServiceService, private router: Router) {  }
+  constructor(private buyeronboardingService: BuyeronboardingServiceService, private apiService : ApiServiceService,
+    private router: Router, private notificationService: NotificationService) {  }
 
   addBuyer(){
     this.phoneNumbers.push({
@@ -117,6 +119,9 @@ export class BuyeronboardingComponent implements OnInit {
         });
     });
     this.buyerAdded = true;
+    this.notificationService.welcomeEmail(this.firstName, this.emailAddresses[0].address)
+    .subscribe( (resp: any) =>{
+  });
   }
 
   onCompletion() {

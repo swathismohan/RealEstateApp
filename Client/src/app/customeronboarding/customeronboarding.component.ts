@@ -5,12 +5,13 @@ import { ApiServiceService } from '../services/api-service.service';
 import { Router } from '@angular/router';
 import { v4 as uuid } from 'uuid';
 import * as moment from 'moment';
+import { NotificationService } from '../services/notification.service';
 
 @Component({
   selector: 'app-customeronboarding',
   templateUrl: './customeronboarding.component.html',
   styleUrls: ['./customeronboarding.component.scss'],
-  providers: [CustomeronboardingServiceService, ApiServiceService],
+  providers: [CustomeronboardingServiceService, ApiServiceService, NotificationService],
 })
 export class CustomeronboardingComponent implements OnInit {
 
@@ -44,7 +45,8 @@ export class CustomeronboardingComponent implements OnInit {
   customerAdded!: boolean;
   tin!: string;
 
-  constructor(private customeronboardingService : CustomeronboardingServiceService, private apiService : ApiServiceService, private router: Router) { }
+  constructor(private customeronboardingService : CustomeronboardingServiceService, private apiService : ApiServiceService,
+    private router: Router, private notificationService: NotificationService) { }
 
   addCustomer(){
 
@@ -119,6 +121,9 @@ export class CustomeronboardingComponent implements OnInit {
         });
     });
     this.customerAdded=true;
+    this.notificationService.welcomeEmail(this.firstName, this.emailAddresses[0].address)
+    .subscribe( (resp: any) =>{
+  });
   }
 
   onCompletion() {
