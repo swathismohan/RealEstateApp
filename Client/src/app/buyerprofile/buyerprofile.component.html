@@ -33,32 +33,41 @@
     </mat-card>
   </mat-tab>
 
-
   <mat-tab label="Available properties">
     <br>
     <button mat-raised-button class="btn btn btn-success" (click)="filterProperty()" type="submit" color="primary" *ngIf="allproperty">Show Verified Properties</button>
     <button mat-raised-button class="btn btn btn-success" (click)="filterProperty()" type="submit" color="primary" *ngIf="!allproperty">Show All Properties</button>
-      <mat-expansion-panel *ngFor="let prop of properties">
+      <mat-expansion-panel  class="panel" *ngFor="let prop of properties">
         <mat-expansion-panel-header>
-          <mat-panel-title>
-            <b>{{ prop.propertyName }}</b>
+          <mat-panel-title class = "title-margin">
+            <h2>{{ prop.propertyName }}</h2>
           </mat-panel-title>
-
-          <mat-panel-description *ngIf="prop.verification != 'REJECTED'">
+          <mat-panel-description class = "title-margin" *ngIf="prop.verification === 'VERIFIED'" style="color:rgb(60, 145, 60);">
+           VERIFIED 
+          <mat-icon style="color:rgb(60, 145, 60);">  verified</mat-icon>
+          </mat-panel-description>
+          <mat-panel-description *ngIf="prop.verification != 'REJECTED' && prop.verification != 'VERIFIED'">
             {{prop.verification}}
           </mat-panel-description>
+       
+           
         </mat-expansion-panel-header>
-        <ul>
-          <li>Property Number: {{prop.propertyNumber}}</li>
-          <li>Address: {{prop.addline1}}, {{prop.addline2}}, {{prop.addline3}}, {{prop.addline4}}</li>
-          <li>Postal Code: {{prop.postalCode}}</li>
-          <li>Market Value: {{prop.marketValue}}</li>
-          <li>Contact Details: {{prop.contactDetails}}</li>
-          <li>GreenBelt: {{prop.greenBelt}}</li>
-          <li *ngIf="prop.verification === 'VERIFIED'">comment: {{prop.comment}} </li>
-        </ul>
+        <mat-card>
+          <mat-card-content class="card-contents">
+            <div class="contents">
+              <h2>Property Number: {{prop.propertyNumber}}</h2>
+                     <h4>Address: {{prop.addline1}} {{prop.addline2}} {{prop.addline3}} {{prop.addline4}}</h4>
+            <h4>Postal Code: {{prop.postalCode}}</h4>
+            <h4>Market Value: {{prop.marketValue}}</h4>
+            <h4>Contact Details: {{prop.contactDetails}}</h4>
+            <h4>GreenBelt: {{prop.greenBelt}}</h4>
+            <h4 *ngIf="prop.verification === 'VERIFIED'">comment: {{prop.comment}} </h4>
+            </div>
+          </mat-card-content>
+        </mat-card>
+        <br>
         <form>
-          <label>Proposed Amount : </label>
+          <label>Proposed Amount : </label>          
           <input type="text" [(ngModel)] = "proposedAmount" name= "proposedAmount">&nbsp;
           <button mat-raised-button class="btn btn btn-success" (click)="createBid(prop.propertyId, prop.customerId, prop.propertyName)" type="submit" color="primary">Submit bid</button>
         </form>
