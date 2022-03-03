@@ -518,7 +518,6 @@ app.put('/property/:propertyId/verified', (req, res, next) => {
 
 //edit property details
 app.put('/updateproperty/:propertyId', (req, res, next) => {
-  console.log("inside edit prop---------------------->>>>>>>>>>>>",req.params.propertyId);
   Property.findOneAndUpdate(
     {
       propertyId: req.params.propertyId

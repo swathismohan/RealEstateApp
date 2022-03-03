@@ -33,24 +33,6 @@ export class EditPropertyComponent implements OnInit {
   }
 
   updateProperty(){
-    // this.updatedProperty.propertyName = ;
-    // this.updatedProperty.propertyNumber = ;
-    // this.updatedProperty.addline1 = ;
-    // this.updatedProperty.addline2 = this.propertyForm.value.addline2;
-    // this.updatedProperty.addline3 = this.propertyForm.value.addline3;
-    // this.updatedProperty.addline4 = this.propertyForm.value.addline4;
-    // this.updatedProperty.postalCode = ;
-    // this.updatedProperty.marketValue = ;
-    // this.updatedProperty.contactDetails = ;
-
-
-    // this.updatedProperty.greenBelt = ;
-    // this.updatedProperty.propertyType = this.property.propertyType;
-    // this.updatedProperty.status = this.property.status;
-    // this.updatedProperty.verification = this.property.verification;
-    // this.updatedProperty.comment = this.property.comment;
-    // this.updatedProperty.customerId =  this.property.customerId;
-    // this.updatedProperty.propertyId = this.propertyId;
 
     const updatedProperty = {
 
