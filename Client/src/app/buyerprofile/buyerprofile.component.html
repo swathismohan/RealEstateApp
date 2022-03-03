@@ -43,14 +43,14 @@
             <h2>{{ prop.propertyName }}</h2>
           </mat-panel-title>
           <mat-panel-description class = "title-margin" *ngIf="prop.verification === 'VERIFIED'" style="color:rgb(60, 145, 60);">
-           VERIFIED 
+           VERIFIED
           <mat-icon style="color:rgb(60, 145, 60);">  verified</mat-icon>
           </mat-panel-description>
-          <mat-panel-description *ngIf="prop.verification != 'REJECTED' && prop.verification != 'VERIFIED'">
+          <mat-panel-description class = "title-margin" *ngIf="prop.verification != 'REJECTED' && prop.verification != 'VERIFIED'">
             {{prop.verification}}
           </mat-panel-description>
-       
-           
+
+
         </mat-expansion-panel-header>
         <mat-card>
           <mat-card-content class="card-contents">
@@ -67,7 +67,7 @@
         </mat-card>
         <br>
         <form>
-          <label>Proposed Amount : </label>          
+          <label>Proposed Amount : </label>
           <input type="text" [(ngModel)] = "proposedAmount" name= "proposedAmount">&nbsp;
           <button mat-raised-button class="btn btn btn-success" (click)="createBid(prop.propertyId, prop.customerId, prop.propertyName)" type="submit" color="primary">Submit bid</button>
         </form>

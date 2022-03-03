@@ -136,6 +136,11 @@ export class CustomerprofileComponent implements OnInit {
     },2000);
   }
 
+  gotoEditProperty(propertyId: string){
+    const url = "/edit/property/"+ propertyId;
+    this.router.navigateByUrl(url);
+  }
+
 
   ngOnInit() {
     this.customerId = this.activatedroute.snapshot.params['customerId'];

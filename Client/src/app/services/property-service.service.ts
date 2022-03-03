@@ -54,8 +54,16 @@ export class PropertyServiceService {
       url,
       null
    ).pipe(map((res:any) => res.json()));
-
   }
+
+  editPropertyDetails(property: Property){
+    const url = "http://localhost:3000/updateproperty/" + property.propertyId;
+    return this.httpClient.put(
+      url,
+      property
+   ).pipe(map((res:any) => res.json()));
+  }
+
   propertyVerify(propertyId: string, verification: string){
     const url = "http://localhost:3000/property/" + propertyId + "/verification/" + verification;
     return this.httpClient.put(

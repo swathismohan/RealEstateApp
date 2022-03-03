@@ -120,6 +120,13 @@
         </div>
       </mat-card-content>
       <mat-card-actions>
+        <button
+        mat-raised-button
+        (click)="gotoEditProperty(prop.propertyId)"
+        class="top-margin left-margin"
+        color="primary">
+        Edit Property
+      </button>
       <button
       mat-raised-button
       (click)="gotoPropertyBids(prop.propertyId)"

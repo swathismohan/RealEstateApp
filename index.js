@@ -90,7 +90,7 @@ app.get('/user/:userid', async (req, res, next) => {
     access_token = token.access_token
     console.log(access_token);
   } catch (e) {
-    res.send('Error', e)
+    res.send(e)
   }
 
   try {
@@ -507,6 +507,35 @@ app.put('/property/:propertyId/verification/:verification', (req, res, next) => 
 //request property verification
 app.put('/property/:propertyId/verified', (req, res, next) => {
   Property.findOneAndUpdate({propertyId: req.params.propertyId}, {verification: req.body.verification, comment: req.body.comment}, null , function(err, property){
+      if(err){
+          res.json(err);
+      }
+      else{
+          res.json(property);
+      }
+  })
+});
+
+//edit property details
+app.put('/updateproperty/:propertyId', (req, res, next) => {
+  console.log("inside edit prop---------------------->>>>>>>>>>>>",req.params.propertyId);
+  Property.findOneAndUpdate(
+    {
+      propertyId: req.params.propertyId
+    }, 
+    { 
+      propertyName: req.body.propertyName,
+      propertyNumber: req.body.propertyNumber,
+      addline1: req.body.addline1,
+      addline2: req.body.addline2,
+      addline3: req.body.addline3,
+      addline4: req.body.addline4,
+      postalCode: req.body.postalCode,
+      marketValue: req.body.marketValue,
+      contactDetails: req.body.contactDetails,
+      verification: req.body.verification
+    },
+      null , function(err, property){
       if(err){
           res.json(err);
       }

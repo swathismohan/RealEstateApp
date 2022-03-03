@@ -8,6 +8,7 @@ import { BuyerprofileComponent } from './buyerprofile/buyerprofile.component';
 import { PropertyComponent } from './property/property.component';
 import { AdminComponent } from './admin/admin.component';
 import { AdminPageComponent } from './admin-page/admin-page.component';
+import { EditPropertyComponent } from './edit-property/edit-property.component';
 
 
 const routes: Routes = [
@@ -18,7 +19,8 @@ const routes: Routes = [
 { path: 'buyer/:buyerId', component: BuyerprofileComponent},
 { path: 'property/:propertyId/bids', component: PropertyComponent },
 { path: 'admin', component: AdminComponent},
-{ path: 'adminpage', component: AdminPageComponent}
+{ path: 'adminpage', component: AdminPageComponent},
+{ path: 'edit/property/:propertyId', component: EditPropertyComponent}
 ];
 
 @NgModule({
