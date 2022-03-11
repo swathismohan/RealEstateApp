@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { BuyeronboardingServiceService } from '../services/buyeronboarding-service.service';
 import { ApiServiceService } from '../services/api-service.service';
 import { DBBuyer ,Buyer, Address, PhoneNumber, EmailAddress } from '../models/buyer';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { v4 as uuid } from 'uuid';
 import * as moment from 'moment';
 import { NotificationService } from '../services/notification.service';
@@ -43,9 +43,10 @@ export class BuyeronboardingComponent implements OnInit {
   id!: string;
   buyerAdded!: boolean;
   tin!: string;
+  updateDetails!: boolean;
 
   constructor(private buyeronboardingService: BuyeronboardingServiceService, private apiService : ApiServiceService,
-    private router: Router, private notificationService: NotificationService) {  }
+    private router: Router, private activatedroute: ActivatedRoute, private notificationService: NotificationService) {  }
 
   addBuyer(){
     this.phoneNumbers.push({
@@ -124,6 +125,10 @@ export class BuyeronboardingComponent implements OnInit {
   });
   }
 
+  updateBuyer() {
+    console.log('Update Buyer');
+  }
+
   onCompletion() {
     setTimeout(() =>
     {
@@ -137,7 +142,37 @@ export class BuyeronboardingComponent implements OnInit {
       .subscribe( buyers =>
         this.buyers = buyers);
 
-        this.buyerAdded = false;
+    this.buyerAdded = false;
+    this.updateDetails = false;
+    if (this.activatedroute.snapshot.params && this.activatedroute.snapshot.params['buyerId']) {
+      const buyerId = this.activatedroute.snapshot.params['buyerId'];
+    this.buyeronboardingService.getBuyerByUserIdFromFFDC(buyerId)
+    .subscribe((response: Buyer) =>{
+      this.title = response.title;
+        this.dateOfBirth = response.dateOfBirth;
+  });
+
+    this.buyeronboardingService.getBuyerById(buyerId)
+      .subscribe((response: DBBuyer) =>{
+        this.firstName = response.firstName;
+          this.lastName = response.lastName;
+          this.addline1 = response.addresses[0].line1;
+          this.addline2 = response.addresses[0].line2;
+          this.addline3 = response.addresses[0].line3;
+          this.addline4 = response.addresses[0].line4;
+          this.addline5 = response.addresses[0].line5;
+          this.buildingNumber = response.addresses[0].buildingNumber;
+          this.postalCode = response.addresses[0].postalCode;
+          this.gender = response.gender;
+          this.countryOfResidency = response.countryOfResidency;
+          this.userName = response.userName;
+          this.emailAddress = response.emailAddresses[0].address;
+          this.password = response.password;
+          this.phoneNumber = response.phoneNumbers[0].number;
+          this.idNumber = response.identification.id;
+          this.updateDetails = true;
+    });
+    }
   }
 
 }

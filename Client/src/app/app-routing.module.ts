@@ -13,8 +13,10 @@ import { EditPropertyComponent } from './edit-property/edit-property.component';
 
 const routes: Routes = [
 { path: '', component: StartComponent},
-{ path: 'customeronboarding', component: CustomeronboardingComponent },
-{ path: 'buyeronboarding', component: BuyeronboardingComponent },
+  { path: 'customeronboarding', component: CustomeronboardingComponent },
+  { path: 'customeronboarding/:customerId', component: CustomeronboardingComponent },
+  { path: 'buyeronboarding', component: BuyeronboardingComponent },
+  { path: 'buyeronboarding/:buyerId', component: BuyeronboardingComponent },
 { path: 'customer/:customerId', component: CustomerprofileComponent },
 { path: 'buyer/:buyerId', component: BuyerprofileComponent},
 { path: 'property/:propertyId/bids', component: PropertyComponent },

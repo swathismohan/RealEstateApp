@@ -10,11 +10,15 @@
   <mat-tab label="Your profile">
     <mat-card class="profile-card-container">
       <mat-card-header class="card-header">
-        <mat-card-title class="bottom-margin">Your Profile</mat-card-title>
+        <mat-card-title>Your Profile</mat-card-title>
+        <button mat-icon-button aria-label="edit button" style="margin-left: auto;" (click)="editCustomerProfile()">
+          <mat-icon>create</mat-icon>
+        </button>
       </mat-card-header>
       <mat-card-content class="card-contents">
         <div class="contents">
           <h4>Name:</h4>
+          <h4>SOSE Number:</h4>
           <h4>Address:</h4>
           <h4>Country:</h4>
           <h4>E-mail:</h4>
@@ -22,7 +26,8 @@
         </div>
         <div class="contents">
           <p>{{apicustomer.firstName}} {{apicustomer.lastName}}</p>
-          <p>{{apicustomer.addresses[0].line1}}</p>
+          <p>{{apicustomer.identification.id}}</p>
+          <p>{{apicustomer.addresses[0].line1}}, {{apicustomer.addresses[0].line2}}</p>
           <p>{{apicustomer.countryOfResidency}}</p>
           <p>{{apicustomer.emailAddresses[0].address}}</p>
           <p>{{apicustomer.phoneNumbers[0].number}}</p>

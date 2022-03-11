@@ -83,6 +83,7 @@
     <input type="password" matInput placeholder="Password" [(ngModel)] = "password" name= "password" required/>
   </mat-form-field>
   <br>
-  <button mat-raised-button [disabled]="buyerAdded" color="primary" class="top-margin left-margin" (click)="[addBuyer(), onCompletion()]" type="submit">Register Buyer</button>
-</form>
+  <button mat-raised-button *ngIf="updateDetails" [disabled]="buyerAdded" color="primary" class="top-margin left-margin" (click)="[updateBuyer(), onCompletion()]" type="submit">Update Buyer Details</button>
+  <button mat-raised-button *ngIf="!updateDetails" [disabled]="buyerAdded" color="primary" class="top-margin left-margin" (click)="[addBuyer(), onCompletion()]" type="submit">Register Buyer</button>
+  </form>
 </mat-card>

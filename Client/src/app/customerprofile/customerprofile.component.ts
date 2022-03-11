@@ -135,7 +135,10 @@ export class CustomerprofileComponent implements OnInit {
       this.router.navigateByUrl(url);
     },2000);
   }
-
+  editCustomerProfile() {
+    const url = "/customeronboarding/" + this.customerId;
+    this.router.navigateByUrl(url);
+  }
   gotoEditProperty(propertyId: string){
     const url = "/edit/property/"+ propertyId;
     this.router.navigateByUrl(url);

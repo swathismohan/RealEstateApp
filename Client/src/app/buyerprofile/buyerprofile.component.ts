@@ -104,6 +104,11 @@ export class BuyerprofileComponent implements OnInit {
     window.location.reload();
   }
 
+  editBuyerProfile() {
+    const url = "/buyeronboarding/" + this.buyerId;
+    this.router.navigateByUrl(url);
+  }
+
   onCompletion() {
     setTimeout(() =>
     {
