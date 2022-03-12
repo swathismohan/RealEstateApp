@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Property } from '../models/property';
 import { PropertyServiceService } from '../services/property-service.service';
-import {  FormControl, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-edit-property',
@@ -12,47 +11,50 @@ import {  FormControl, FormGroup } from '@angular/forms';
 })
 export class EditPropertyComponent implements OnInit {
 
-  public propertyForm: FormGroup;
-  propertyId!: string;
   property!: Property;
+  propertyId!: string;
+  customerId!: string;
+  propertyName!: string;
+  propertyNumber!: string;
+  addline1!: string;
+  addline2!: string;
+  addline3!: string;
+  addline4!: string;
+  postalCode!: string;
+  marketValue!: number;
+  contactDetails!: string;
+  status!: string;
+  greenBelt!: string;
+  propertyType!: string;
+  type: string[] = ["Coastal areas", "Inland areas", "Valley regions", "Hilly regions", "Plains"];
 
   constructor(private router: Router,
     private activatedroute: ActivatedRoute,
     private propertyService: PropertyServiceService ) {
-      this.propertyForm = new FormGroup({
-        propertyName: new FormControl(''),
-        propertyNumber: new FormControl(''),
-        addline1: new FormControl(''),
-        addline2: new FormControl(''),
-        addline3: new FormControl(''),
-        addline4: new FormControl(''),
-        postalCode: new FormControl(''),
-        marketValue: new FormControl(''),
-        contactDetails: new FormControl('')
-    });
   }
 
   updateProperty(){
 
     const updatedProperty = {
 
-    propertyName: this.propertyForm.value.propertyName,
-    propertyNumber: this.propertyForm.value.propertyNumber,
-    addline1: this.propertyForm.value.addline1,
-    addline2: this.propertyForm.value.addline2,
-    addline3: this.propertyForm.value.addline3,
-    addline4: this.propertyForm.value.addline4,
-    postalCode: this.propertyForm.value.postalCode,
-    marketValue: this.propertyForm.value.marketValue,
-    contactDetails: this.propertyForm.value.contactDetails,
+    propertyName: this.propertyName,
+    propertyNumber: this.propertyNumber,
+    addline1: this.addline1,
+    addline2: this.addline2,
+    addline3: this.addline3,
+    addline4: this.addline4,
+    postalCode: this.postalCode,
+    marketValue: this.marketValue,
+    contactDetails: this.contactDetails,
+    propertyType: this.propertyType,
+    greenBelt: this.greenBelt,
 
     customerId: this.property.customerId,
     propertyId: this.property.propertyId,
     status: this.property.status,
-    greenBelt: this.property.greenBelt,
     verification: this.property.verification,
-    comment: this.property.comment,
-    propertyType: this.property.propertyType
+    comment: this.property.comment
+
     }
 
     this.propertyService.editPropertyDetails(updatedProperty)
@@ -72,15 +74,18 @@ export class EditPropertyComponent implements OnInit {
     this.propertyService.getPropertyById(this.propertyId)
       .subscribe((response: Property) =>{
         this.property = response;
-        this.propertyForm.controls["propertyName"].setValue(this.property.propertyName);
-        this.propertyForm.controls["propertyNumber"].setValue(this.property.propertyNumber);
-        this.propertyForm.controls["addline1"].setValue(this.property.addline1);
-        this.propertyForm.controls["addline2"].setValue(this.property.addline2);
-        this.propertyForm.controls["addline3"].setValue(this.property.addline3);
-        this.propertyForm.controls["addline4"].setValue(this.property.addline4);
-        this.propertyForm.controls["postalCode"].setValue(this.property.postalCode);
-        this.propertyForm.controls["marketValue"].setValue(this.property.marketValue);
-        this.propertyForm.controls["contactDetails"].setValue(this.property.contactDetails);
+
+        this.propertyName= response.propertyName;
+        this.propertyNumber = response.propertyNumber;
+        this.addline1 =  response.addline1;
+        this.addline2 = response.addline2;
+        this.addline3 = response.addline3;
+        this.addline4 = response.addline4;
+        this.postalCode = response.postalCode;
+        this.marketValue = response.marketValue;
+        this.contactDetails = response.contactDetails;
+        this.propertyType = response.propertyType;
+        this.greenBelt = response.greenBelt;
       });
   }
 }

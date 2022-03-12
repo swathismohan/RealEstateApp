@@ -2,35 +2,50 @@
   <mat-card-header class="card-header">
     <mat-card-title class="bottom-margin">Edit Property Details</mat-card-title>
   </mat-card-header>
-  <form class="full-width form-container" [formGroup]="propertyForm">
+  <form class="full-width form-container">
     <mat-form-field class="field">
-      <input type="text" matInput placeholder="Property Name"  formControlName= "propertyName"/>
+      <input type="text" matInput placeholder="Property Name" [(ngModel)] = "propertyName" name= "propertyName"/>
     </mat-form-field>
     <mat-form-field class="field">
-      <input type="text" matInput placeholder="Property Number"  formControlName= "propertyNumber" name= "propertyNumber" required/>
+      <input type="text" matInput placeholder="Property Number" [(ngModel)] = "propertyNumber" name= "propertyNumber" required/>
     </mat-form-field>
     <mat-form-field class="field">
-      <input type="text" matInput placeholder="Address Line 1"  formControlName= "addline1" name= "addline1"/>
+      <input type="text" matInput placeholder="Address Line 1" [(ngModel)] = "addline1" name= "addline1"/>
     </mat-form-field>
     <mat-form-field class="field">
-      <input type="text" matInput placeholder="Address Line 2"  formControlName= "addline2" name= "addline2"/>
+      <input type="text" matInput placeholder="Address Line 2" [(ngModel)] = "addline2" name= "addline2"/>
     </mat-form-field>
     <mat-form-field class="field">
-      <input type="text" matInput placeholder="Address Line 3"  formControlName= "addline3" name= "addline3"/>
+      <input type="text" matInput placeholder="Address Line 3" [(ngModel)] = "addline3" name= "addline3"/>
     </mat-form-field>
     <mat-form-field class="field">
-      <input type="text" matInput placeholder="Address Line 4"  formControlName= "addline4" name= "addline4"/>
+      <input type="text" matInput placeholder="Address Line 4" [(ngModel)] = "addline4" name= "addline4"/>
     </mat-form-field>
     <mat-form-field class="field">
-      <input type="number" matInput placeholder="Postal Code"  formControlName= "postalCode" name= "postalCode" required/>
+      <input type="number" matInput placeholder="Postal Code" [(ngModel)] = "postalCode" name= "postalCode" required/>
     </mat-form-field>
   <mat-form-field class="field">
-    <input type="number" matInput placeholder="Market Value" formControlName= "marketValue" name= "marketValue" required/>
+    <input type="number" matInput placeholder="Market Value" [(ngModel)] = "marketValue" name= "marketValue" required/>
   </mat-form-field>
   <mat-form-field class="field">
-    <input type="number" matInput placeholder="Contact Details" formControlName= "contactDetails" name= "contactDetails"/>
+    <input type="number" matInput placeholder="Contact Details" [(ngModel)] = "contactDetails" name= "contactDetails"/>
+  </mat-form-field>
+  <mat-form-field class="field">
+    <mat-label>Green Belt</mat-label>
+  <mat-select [(ngModel)]="greenBelt" name="greenBelt" required>
+    <mat-option value="YES">YES</mat-option>
+    <mat-option value="NO">NO</mat-option>
+  </mat-select>
+  </mat-form-field>
+  <mat-form-field class="field">
+    <mat-label>Property Type</mat-label>
+    <mat-select [(ngModel)] = "propertyType" name="propertyType" required>
+      <mat-option *ngFor="let t of type" [value]= "t">
+        {{t}}
+      </mat-option>
+    </mat-select>
   </mat-form-field>
   <br>
-  <button mat-raised-button color="primary" class="left-margin" (click)="updateProperty()" type="submit">Save</button>
-   </form>
+  <button mat-raised-button color="primary" class="left-margin" (click)="updateProperty()" type="submit">Save Changes</button>
+  </form>
 </mat-card>
