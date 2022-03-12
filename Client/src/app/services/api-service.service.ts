@@ -37,4 +37,20 @@ return this.httpClient.post<any>(url, buyer, {
   .pipe(map((response) => response));
 }
 
+editCustomer(userid: string, customer: Customer){
+  const url = "http://localhost:3000/updateuser/api/" + userid;
+  return this.httpClient.put(
+    url,
+    customer
+ ).pipe(map((res:any) => res.json()));
+}
+
+editBuyer(userid: string, buyer: Buyer){
+  const url = "http://localhost:3000/updateuser/api/" + userid;
+  return this.httpClient.put(
+    url,
+    buyer
+ ).pipe(map((res:any) => res.json()));
+}
+
 }

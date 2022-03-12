@@ -73,17 +73,17 @@
   <mat-form-field class="field">
     <input type="number" matInput placeholder="Phone number" [(ngModel)] = "phoneNumber" name= "phoneNumber" required/>
   </mat-form-field>
-  <mat-card-header>
+  <mat-card-header *ngIf="!updateDetails">
     <mat-card-subtitle class="top-margin" style="margin-bottom:0"><b>Login Credentials:</b></mat-card-subtitle>
   </mat-card-header>
-  <mat-form-field class="field">
+  <mat-form-field class="field" *ngIf="!updateDetails">
     <input type="text" matInput placeholder="User Name" [(ngModel)] = "userName" name= "userName" required/>
   </mat-form-field>
-  <mat-form-field class="field">
-    <input type="password" matInput placeholder="Password" [(ngModel)] = "password" name= "password" required/>
+  <mat-form-field class="field" *ngIf="!updateDetails">
+    <input type="password"  matInput placeholder="Password" [(ngModel)] = "password" name= "password" required/>
   </mat-form-field>
   <br>
-  <button mat-raised-button *ngIf="updateDetails" color="primary" class="top-margin left-margin" (click)="[updateCustomer(), onCompletion()]" type="submit">Update Seller Details</button>
+  <button mat-raised-button *ngIf="updateDetails" color="primary" class="top-margin left-margin" (click)="updateCustomer()" type="submit">Update Seller Details</button>
   <button mat-raised-button *ngIf="!updateDetails" color="primary" class="top-margin left-margin" (click)="[addCustomer(), onCompletion()]" type="submit">Register Seller</button>
 
   </form>

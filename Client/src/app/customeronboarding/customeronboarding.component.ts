@@ -128,8 +128,57 @@ export class CustomeronboardingComponent implements OnInit {
   }
 
   updateCustomer() {
-    console.log('Update Customer');
+    this.phoneNumbers.push({
+      type: "MOBILE",
+      number: this.phoneNumber
+    });
+
+    this.emailAddresses.push({
+      type: "OTHER",
+      address: this.emailAddress
+    });
+
+    this.addresses.push({
+      addressType: "RESIDENTIAL",
+      country: this.countryOfResidency,
+      line1: this.addline1,
+      line2: this.addline2,
+      line3: this.addline3,
+      line4: this.addline4,
+      line5: this.addline5,
+      postalCode: this.postalCode,
+      buildingNumber: this.buildingNumber
+    });
+
+     const momentDate = new Date(this.dateOfBirth);
+     const formattedDate = moment(momentDate).format("YYYY-MM-DD");
+
+    const updatedCustomer = {
+      title: this.title,
+      dateOfBirth: formattedDate,
+      firstName: this.firstName,
+      lastName: this.lastName,
+      gender: this.gender,
+      countryOfResidency : this.countryOfResidency,
+      identification: {
+        type: "SOSE",
+        id: this.idNumber
+      },
+      addresses: this.addresses,
+      phoneNumbers: this.phoneNumbers,
+      emailAddresses: this.emailAddresses,
+      fatcaDetails: {
+        isUSResident: true,
+        isUSTaxResident: false,
+        tin: this.tin
+    }
+    }
+
+    this.apiService.editCustomer(this.customerId, updatedCustomer)
+    .subscribe( (resp: any) =>{
+    });
   }
+
   onCompletion() {
     setTimeout(() =>
     {
@@ -150,32 +199,29 @@ export class CustomeronboardingComponent implements OnInit {
     this.updateDetails = false;
 
     if (this.activatedroute.snapshot.params && this.activatedroute.snapshot.params['customerId']) {
-      const customerId = this.activatedroute.snapshot.params['customerId'];
+      this.customerId = this.activatedroute.snapshot.params['customerId'];
 
-      this.customeronboardingService.getCustomerByUserIdFromFFDC(customerId)
+      this.customeronboardingService.getCustomerByUserIdFromFFDC(this.customerId)
       .subscribe((response: any) =>{
         this.title = response.title;
         this.dateOfBirth = response.dateOfBirth;
-      });
-      this.customeronboardingService.getCustomerById(customerId)
-        .subscribe((response: any) => {
-          this.firstName = response.firstName;
-          this.lastName = response.lastName;
-          this.addline1 = response.addresses[0].line1;
-          this.addline2 = response.addresses[0].line2;
-          this.addline3 = response.addresses[0].line3;
-          this.addline4 = response.addresses[0].line4;
-          this.addline5 = response.addresses[0].line5;
-          this.buildingNumber = response.addresses[0].buildingNumber;
-          this.postalCode = response.addresses[0].postalCode;
-          this.gender = response.gender;
-          this.countryOfResidency = response.countryOfResidency;
-          this.userName = response.userName;
-          this.emailAddress = response.emailAddresses[0].address;
-          this.password = response.password;
-          this.phoneNumber = response.phoneNumbers[0].number;
-          this.idNumber = response.identification.id;
-          this.updateDetails = true;
+        this.firstName = response.firstName;
+        this.lastName = response.lastName;
+        this.addline1 = response.addresses[0].line1;
+        this.addline2 = response.addresses[0].line2;
+        this.addline3 = response.addresses[0].line3;
+        this.addline4 = response.addresses[0].line4;
+        this.addline5 = response.addresses[0].line5;
+        this.buildingNumber = response.addresses[0].buildingNumber;
+        this.postalCode = response.addresses[0].postalCode;
+        this.gender = response.gender;
+        this.countryOfResidency = response.countryOfResidency;
+        this.userName = response.userName;
+        this.emailAddress = response.emailAddresses[0].address;
+        this.password = response.password;
+        this.phoneNumber = response.phoneNumbers[0].number;
+        this.idNumber = response.identification.id;
+        this.updateDetails = true;
       });
     }
   }

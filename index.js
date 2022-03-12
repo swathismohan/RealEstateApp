@@ -169,6 +169,65 @@ try {
   }
 });
 
+//update ffdc customer
+app.put('/updateuser/api/:userid', async (req, res) => {
+
+  const grant = {
+      grant_type: 'client_credentials',
+      scope: config.scope
+    }
+  
+    // Get token
+    try {
+      const token = await client.grant(grant)
+      access_token = token.access_token
+      console.log(access_token);
+    } catch (e) {
+      res.send('Error', e)
+    }
+
+    let apiuser = {
+      branchCode: "00000001",
+      title: req.body.title,
+      dateOfBirth: req.body.dateOfBirth,
+      firstName: req.body.firstName,
+      lastName: req.body.lastName,
+      gender: req.body.gender,
+      countryOfResidency: req.body.countryOfResidency,
+      identification: req.body.identification,
+      addresses: req.body.addresses,
+      phoneNumbers: req.body.phoneNumbers,
+      emailAddresses: req.body.emailAddresses,
+      fatcaDetails: req.body.fatcaDetails,
+      customerId: req.params.userid
+  };
+
+  console.log(apiuser);
+
+try {
+  const response = await fetch("https://api.preprod.fusionfabric.cloud/retail-banking/customers/v1/personal-customers", {
+    method: 'PUT',
+    body: JSON.stringify(apiuser),
+    headers: new Headers({
+      Authorization: 'Bearer ' + access_token,
+      Accept: 'application/json',
+      'Content-Type': 'application/json'
+    })
+  });
+
+  if (!response.ok) {
+      console.log(response);
+    return res.send(response.statusText)
+  }
+
+  const results = await response.json();
+  console.log("Updated Customer in FFDC API with customerId: "+ results.customerId);
+  return res.json(results.customerId)
+} catch (err) {
+  res.send(err)
+}
+});
+
 app.post('/buyer/api', async (req, res) => {
 
     const grant = {
