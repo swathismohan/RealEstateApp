@@ -171,7 +171,7 @@ export class CustomeronboardingComponent implements OnInit {
         isUSResident: true,
         isUSTaxResident: false,
         tin: this.tin
-    }
+      }
     }
 
     this.apiService.editCustomer(this.customerId, updatedCustomer)
