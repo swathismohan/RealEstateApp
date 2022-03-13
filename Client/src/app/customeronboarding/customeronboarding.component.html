@@ -83,7 +83,9 @@
     <input type="password"  matInput placeholder="Password" [(ngModel)] = "password" name= "password" required/>
   </mat-form-field>
   <br>
-  <button mat-raised-button *ngIf="updateDetails" color="primary" class="top-margin left-margin" (click)="updateCustomer()" type="submit">Update Seller Details</button>
+  <a routerLink = "/customer/{{this.customerId}}">
+    <button mat-raised-button *ngIf="updateDetails" color="primary" class="top-margin left-margin" (click)="updateCustomer()" type="submit">Update Seller Details</button>
+  </a>
   <button mat-raised-button *ngIf="!updateDetails" [disabled] = "customerAdded" color="primary" class="top-margin left-margin" (click)="[addCustomer(), onCompletion()]" type="submit">Register Seller</button>
 
   </form>
