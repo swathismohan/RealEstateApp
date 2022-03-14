@@ -53,4 +53,18 @@ editBuyer(userid: string, buyer: Buyer){
  ).pipe(map((res:any) => res.json()));
 }
 
+makePayment(fromAccountId: string, narrative: string, amount: string){
+  let body = {
+    "fromAccountId": fromAccountId,
+    "narrative": narrative,
+    "amount": amount
+  }
+  const url="http://localhost:3000/estateaide/payments";
+  return this.httpClient.post<any>(url, body, {
+      headers: {
+        'Content-Type': 'application/json' }
+    })
+    .pipe(map((response) => response));
+}
+
 }

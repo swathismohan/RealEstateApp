@@ -12,7 +12,9 @@ import { BidServiceService } from '../services/bid-service.service';
 import { QuestionAnswer } from '../models/qa';
 
 export interface DialogData {
+  userId: string;
   subscription: boolean;
+  requestPayment: boolean;
 }
 
 @Component({

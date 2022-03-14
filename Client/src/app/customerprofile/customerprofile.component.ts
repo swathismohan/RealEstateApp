@@ -8,7 +8,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { v4 as uuid } from 'uuid';
 import { DialogData } from '../buyerprofile/buyerprofile.component';
-import { AppRoutingModule } from '../app-routing.module';
+import { ApiServiceService } from '../services/api-service.service';
 import { QuestionAnswer } from '../models/qa';
 
 @Component({
@@ -45,6 +45,7 @@ export class CustomerprofileComponent implements OnInit {
   qaId!: string;
   question!: string;
   apicustomer!: Customer;
+  requestPayment!: Boolean;
 
   public customer!: DBCustomer;
   constructor(private customeronboardingService : CustomeronboardingServiceService, private router: Router, private activatedroute: ActivatedRoute,
@@ -53,16 +54,15 @@ export class CustomerprofileComponent implements OnInit {
      openDialog(): void {
       const dialogRef = this.dialog.open(DialogLegalCustomer, {
         width: '500px',
-        data: { subscription: this.customer.legalSubscription},
+        data: {
+          userId: this.customerId,
+          subscription: this.customer.legalSubscription,
+          requestPayment: this.requestPayment
+        },
       });
 
-      dialogRef.afterClosed().subscribe(result => {
-        this.customer.legalSubscription = result;
-        if(this.customer.legalSubscription){
-          this.customeronboardingService.getLegalSubscription(this.customerId)
-          .subscribe((response: DBCustomer) =>{
-          });
-        }
+      dialogRef.afterClosed().subscribe(result =>{
+        window.location.reload();
       });
     }
 
@@ -166,20 +166,43 @@ export class CustomerprofileComponent implements OnInit {
     .subscribe((resp: QuestionAnswer[]) =>{
       this.questions = resp;
     });
+    this.requestPayment = false;
   }
 }
 
 @Component({
   selector: 'dialog-legal-customer',
   templateUrl: './dialog-legal-customer.html',
+  providers: [CustomeronboardingServiceService, ApiServiceService]
 })
 export class DialogLegalCustomer {
+
+  fromAccountId!: string;
+  narrative!: string;
+
   constructor(
+    private customerOnboardingService: CustomeronboardingServiceService,
+    private apiService: ApiServiceService,
     public dialogRef: MatDialogRef<DialogLegalCustomer>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
   ) {}
 
   onNoClick(): void {
+    this.dialogRef.close();
+  }
+
+  showPaymentDetails(){
+    this.data.requestPayment = true;
+  }
+
+  makePayment(){
+    this.apiService.makePayment(this.fromAccountId, this.narrative, "250")
+    .subscribe((resp: any) =>{
+    });
+    this.customerOnboardingService.getLegalSubscription(this.data.userId)
+    .subscribe((response: DBCustomer) =>{
+    });
+
     this.dialogRef.close();
   }
 }

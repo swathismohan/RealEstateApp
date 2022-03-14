@@ -305,7 +305,7 @@ app.post('/estateaide/payments', async (req, res) => {
       toAccountId: "0001000004001",
       payee: "Estate Aide",
       amount: {
-        amount: req.body.amount.amount,
+        amount: req.body.amount,
         currency: "USD"
       },
       narrative: req.body.narrative
@@ -329,6 +329,7 @@ try {
 
   const results = await response.json();
   console.log("Payment made using FFDC API: "+ results.transactionId);
+  console.log(results)
   return res.json(results)
 } catch (err) {
   res.send(err)
