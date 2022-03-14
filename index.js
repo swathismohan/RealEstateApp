@@ -283,6 +283,59 @@ try {
   }
 });
 
+//make payment
+app.post('/estateaide/payments', async (req, res) => {
+
+  const grant = {
+      grant_type: 'client_credentials',
+      scope: config.scope
+    }
+  
+    // Get token
+    try {
+      const token = await client.grant(grant)
+      access_token = token.access_token
+      console.log(access_token);
+    } catch (e) {
+      res.send('Error', e)
+    }
+
+    let payment = {
+      fromAccountId: req.body.fromAccountId,
+      toAccountId: "0001000004001",
+      payee: "Estate Aide",
+      amount: {
+        amount: req.body.amount.amount,
+        currency: "USD"
+      },
+      narrative: req.body.narrative
+      };
+
+try {
+  const response = await fetch("https://api.preprod.fusionfabric.cloud/retail-banking/payments/v1/fund-transfers/external", {
+    method: 'POST',
+    body: JSON.stringify(payment),
+    headers: new Headers({
+      Authorization: 'Bearer ' + access_token,
+      Accept: 'application/json',
+      'Content-Type': 'application/json'
+    })
+  });
+
+  if (!response.ok) {
+      console.log(response);
+    return res.send(response)
+  }
+
+  const results = await response.json();
+  console.log("Payment made using FFDC API: "+ results.transactionId);
+  return res.json(results)
+} catch (err) {
+  res.send(err)
+}
+});
+
+
 //DB Routes
 //get all customers
 app.get('/customers', (req, res, next) => {
