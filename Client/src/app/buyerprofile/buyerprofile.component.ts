@@ -9,6 +9,7 @@ import { v4 as uuid } from 'uuid';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { BuyeronboardingServiceService } from '../services/buyeronboarding-service.service';
 import { BidServiceService } from '../services/bid-service.service';
+import { ApiServiceService } from '../services/api-service.service';
 import { QuestionAnswer } from '../models/qa';
 
 export interface DialogData {
@@ -42,7 +43,7 @@ export class BuyerprofileComponent implements OnInit {
   questions: QuestionAnswer[] = [];
   apibuyer!: Buyer;
   allproperty!: boolean;
-
+  requestPayment!: Boolean;
 
   constructor(private buyerOnboardingService:BuyeronboardingServiceService, private router: Router, private activatedroute: ActivatedRoute, private propertyService: PropertyServiceService,
     private bidService: BidServiceService, public dialog: MatDialog, private qaService: QaService ) { }
@@ -50,16 +51,15 @@ export class BuyerprofileComponent implements OnInit {
     openDialog(): void {
       const dialogRef = this.dialog.open(DialogLegalBuyer, {
         width: '500px',
-        data: { subscription: this.buyer.legalSubscription},
+        data: {
+          userId: this.buyerId,
+          subscription: this.buyer.legalSubscription,
+          requestPayment: this.requestPayment
+        },
       });
 
-      dialogRef.afterClosed().subscribe(result => {
-        this.buyer.legalSubscription = result;
-        if(this.buyer.legalSubscription){
-          this.buyerOnboardingService.getLegalSubscription(this.buyerId)
-          .subscribe((response: DBBuyer) =>{
-          });
-        }
+      dialogRef.afterClosed().subscribe(result =>{
+        window.location.reload();
       });
     }
 
@@ -169,15 +169,37 @@ export class BuyerprofileComponent implements OnInit {
 @Component({
   selector: 'dialog-legal-buyer',
   templateUrl: './dialog-legal-buyer.html',
+  providers: [BuyeronboardingServiceService, ApiServiceService]
 })
 
 export class DialogLegalBuyer {
+
+  fromAccountId!: string;
+  narrative!: string;
+
   constructor(
+    private buyerOnboardingService: BuyeronboardingServiceService,
+    private apiService: ApiServiceService,
     public dialogRef: MatDialogRef<DialogLegalBuyer>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
   ) {}
 
   onNoClick(): void {
+    this.dialogRef.close();
+  }
+
+  showPaymentDetails(){
+    this.data.requestPayment = true;
+  }
+
+  makePayment(){
+    this.apiService.makePayment(this.fromAccountId, this.narrative, "250")
+    .subscribe((resp: any) =>{
+    });
+    this.buyerOnboardingService.getLegalSubscription(this.data.userId)
+    .subscribe((response: DBBuyer) =>{
+    });
+
     this.dialogRef.close();
   }
 }
