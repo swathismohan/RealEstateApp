@@ -44,6 +44,9 @@ export class BuyeronboardingComponent implements OnInit {
   buyerAdded!: boolean;
   tin!: string;
   updateDetails!: boolean;
+  otpId!: string;
+  passcode!: string;
+  otpStatus!: string;
 
   constructor(private buyeronboardingService: BuyeronboardingServiceService, private apiService : ApiServiceService,
     private router: Router, private activatedroute: ActivatedRoute, private notificationService: NotificationService) {  }
@@ -114,10 +117,12 @@ export class BuyeronboardingComponent implements OnInit {
         password: this.password,
         legalSubscription: false
       }
-      this.buyeronboardingService.addBuyer(newBuyer)
+      if(this.otpStatus == "approved"){
+        this.buyeronboardingService.addBuyer(newBuyer)
         .subscribe((buyer: any) =>{
           this.buyers.push(buyer);
         });
+      }
     });
     this.buyerAdded = true;
     this.notificationService.welcomeEmail(this.firstName, this.emailAddresses[0].address)
@@ -171,10 +176,11 @@ export class BuyeronboardingComponent implements OnInit {
         tin: this.tin
     }
     }
-
-    this.apiService.editBuyer(this.buyerId, updatedBuyer)
-    .subscribe( (resp: any) =>{
-    });
+    if(this.otpStatus == "approved"){
+      this.apiService.editBuyer(this.buyerId, updatedBuyer)
+      .subscribe( (resp: any) =>{
+      });
+    }
   }
 
   onCompletion() {
@@ -183,6 +189,20 @@ export class BuyeronboardingComponent implements OnInit {
       const url = "/";
       this.router.navigateByUrl(url);
     },2000);
+  }
+
+  sendOtp(){
+    this.apiService.sendOtp(this.phoneNumber)
+    .subscribe( (resp: any) =>{
+      this.otpId = resp;
+    });
+  }
+
+  verifyOtp(){
+    this.apiService.verifyOtp(this.phoneNumber, this.otpId, this.passcode)
+    .subscribe( (resp: any) =>{
+      this.otpStatus = resp;
+    });
   }
 
   ngOnInit() {

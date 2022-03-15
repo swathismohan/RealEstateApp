@@ -67,4 +67,30 @@ makePayment(fromAccountId: string, narrative: string, amount: string){
     .pipe(map((response) => response));
 }
 
+sendOtp(to: string){
+  let body = {
+    "to": to
+  }
+  const url="http://localhost:3000/receive/otp/";
+  return this.httpClient.post<any>(url, body, {
+      headers: {
+        'Content-Type': 'application/json' }
+    })
+    .pipe(map((response) => response));
+}
+
+verifyOtp(to: string, otpId: string, passcode: string){
+  let body = {
+    "to": to,
+    "otpId": otpId,
+    "passcode": passcode
+  }
+  const url="http://localhost:3000/otp/verifyotp/";
+  return this.httpClient.post<any>(url, body, {
+      headers: {
+        'Content-Type': 'application/json' }
+    })
+    .pipe(map((response) => response));
+}
+
 }

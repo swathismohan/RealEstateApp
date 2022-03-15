@@ -908,3 +908,100 @@ app.delete('/questions/', (req, res, next) => {
       }
   })
 });
+
+//get OTP
+
+app.post('/receive/otp/', async (req, res) => {
+
+  const grant = {
+      grant_type: 'client_credentials',
+      scope: config.scope
+    }
+  
+    // Get token
+    try {
+      const token = await client.grant(grant)
+      access_token = token.access_token
+      console.log(access_token);
+    } catch (e) {
+      res.send('Error', e)
+    }
+
+    let otpBody = {
+      serviceId : "VA656532b480ff52f8e4cc15b68466a164",
+      to: req.body.to,
+      message: "Sending OTP",
+      channel: "sms"
+    
+    };
+
+try {
+  const response = await fetch("https://api.preprod.fusionfabric.cloud/text-message/otp/v1/send", {
+    method: 'POST',
+    body: JSON.stringify(otpBody),
+    headers: new Headers({
+      Authorization: 'Bearer ' + access_token,
+      Accept: 'application/json',
+      'Content-Type': 'application/json'
+    })
+  });
+
+  if (!response.ok) {
+      console.log(response);
+    return res.send(response.statusText)
+  }
+
+  const results = await response.json();
+  console.log("OTP send successfully with otp id: "+ results.otpId);
+  return res.json(results.otpId)
+} catch (err) {
+  res.send(err)
+}
+});
+
+//verify OTP
+app.post('/otp/verifyotp/', async (req, res) => {
+
+  const grant = {
+      grant_type: 'client_credentials',
+      scope: config.scope
+    }
+  
+    // Get token
+    try {
+      const token = await client.grant(grant)
+      access_token = token.access_token
+      console.log(access_token);
+    } catch (e) {
+      res.send('Error', e)
+    }
+
+    let otpVerifyBody = {
+      otpId: req.body.otpId,
+      to: req.body.to,
+      passcode: req.body.passcode
+    };
+
+try {
+  const response = await fetch("https://api.preprod.fusionfabric.cloud/text-message/otp/v1/verify", {
+    method: 'POST',
+    body: JSON.stringify(otpVerifyBody),
+    headers: new Headers({
+      Authorization: 'Bearer ' + access_token,
+      Accept: 'application/json',
+      'Content-Type': 'application/json'
+    })
+  });
+
+  if (!response.ok) {
+      console.log(response);
+    return res.send(response.statusText)
+  }
+
+  const results = await response.json();
+  console.log("OTP verification status: "+ results.status);
+  return res.json(results.status)
+} catch (err) {
+  res.send(err)
+}
+});

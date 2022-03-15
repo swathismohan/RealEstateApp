@@ -71,7 +71,7 @@
     <input type="email" matInput placeholder="Email id" [(ngModel)] = "emailAddress" name= "emailAddress" required/>
   </mat-form-field>
   <mat-form-field class="field">
-    <input type="number" matInput placeholder="Phone number" [(ngModel)] = "phoneNumber" name= "phoneNumber" required/>
+    <input type="text" matInput placeholder="Phone number" [(ngModel)] = "phoneNumber" name= "phoneNumber" required/>
   </mat-form-field>
   <mat-card-header *ngIf="!updateDetails">
     <mat-card-subtitle class="top-margin" style="margin-bottom:0"><b>Login Credentials:</b></mat-card-subtitle>
@@ -82,7 +82,17 @@
   <mat-form-field class="field" *ngIf="!updateDetails">
     <input type="password" matInput placeholder="Password" [(ngModel)] = "password" name= "password" required/>
   </mat-form-field>
-  <br>
+  <mat-card-header *ngIf="!updateDetails">
+    <mat-card-subtitle class="top-margin" style="margin-bottom:0"><b>OTP Verification:</b></mat-card-subtitle>
+  </mat-card-header>
+  <mat-form-field class="field" *ngIf="!updateDetails">
+    <input type="text" matInput placeholder="Enter OTP" [(ngModel)] = "passcode" name= "passcode"/>
+  </mat-form-field>
+  <div *ngIf="otpStatus != 'approved' ">
+    <button mat-raised-button color="primary" class="top-margin left-margin" (click) = "sendOtp()">Get OTP</button>
+    <button mat-raised-button color="primary" class="top-margin left-margin" (click) = "verifyOtp()">Verify OTP</button>
+  </div>
+  &nbsp;
   <a routerLink = "/buyer/{{this.buyerId}}">
     <button mat-raised-button *ngIf="updateDetails" color="primary" class="top-margin left-margin" (click)="updateBuyer()" type="submit">Update Buyer Details</button>
   </a>
