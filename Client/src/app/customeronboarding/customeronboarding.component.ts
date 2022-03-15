@@ -45,6 +45,9 @@ export class CustomeronboardingComponent implements OnInit {
   customerAdded!: boolean;
   tin!: string;
   updateDetails!: boolean;
+  otpId!: string;
+  passcode!: string;
+  otpStatus!: string;
 
   constructor(private customeronboardingService : CustomeronboardingServiceService, private apiService : ApiServiceService,
     private router: Router, private activatedroute: ActivatedRoute, private notificationService: NotificationService) { }
