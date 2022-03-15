@@ -98,6 +98,7 @@ export class BuyeronboardingComponent implements OnInit {
     }
     }
 
+    if(this.otpStatus == "approved"){
     this.apiService.postBuyer(newapiBuyer).subscribe((buyerid: any) =>{
       this.buyerId=buyerid;
       const newBuyer = {
@@ -117,18 +118,17 @@ export class BuyeronboardingComponent implements OnInit {
         password: this.password,
         legalSubscription: false
       }
-      if(this.otpStatus == "approved"){
         this.buyeronboardingService.addBuyer(newBuyer)
         .subscribe((buyer: any) =>{
           this.buyers.push(buyer);
         });
-      }
-    });
+      });
     this.buyerAdded = true;
     this.notificationService.welcomeEmail(this.firstName, this.emailAddresses[0].address)
     .subscribe( (resp: any) =>{
-  });
+    });
   }
+}
 
   updateBuyer() {
     this.phoneNumbers.push({
@@ -184,11 +184,13 @@ export class BuyeronboardingComponent implements OnInit {
   }
 
   onCompletion() {
-    setTimeout(() =>
-    {
-      const url = "/";
-      this.router.navigateByUrl(url);
-    },2000);
+    if(this.otpStatus == "approved"){
+      setTimeout(() =>
+      {
+        const url = "/";
+        this.router.navigateByUrl(url);
+      },2000);
+    }
   }
 
   sendOtp(){

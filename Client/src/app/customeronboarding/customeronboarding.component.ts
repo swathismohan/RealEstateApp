@@ -45,6 +45,9 @@ export class CustomeronboardingComponent implements OnInit {
   customerAdded!: boolean;
   tin!: string;
   updateDetails!: boolean;
+  otpId!: string;
+  passcode!: string;
+  otpStatus!: string;
 
   constructor(private customeronboardingService : CustomeronboardingServiceService, private apiService : ApiServiceService,
     private router: Router, private activatedroute: ActivatedRoute, private notificationService: NotificationService) { }
@@ -97,34 +100,36 @@ export class CustomeronboardingComponent implements OnInit {
     }
     }
 
-    this.apiService.postCustomer(newapiCustomer).subscribe((customerid: any) =>{
-      this.customerId=customerid;
-      const newCustomer = {
-        customerId: this.customerId,
-        firstName: this.firstName,
-        lastName: this.lastName,
-        gender: this.gender,
-        countryOfResidency : this.countryOfResidency,
-        identification: {
-          type: "SOSE",
-          id: this.idNumber
-        },
-        addresses: this.addresses,
-        phoneNumbers: this.phoneNumbers,
-        emailAddresses: this.emailAddresses,
-        userName: this.userName,
-        password: this.password,
-        legalSubscription: false
-      }
-      this.customeronboardingService.addCustomer(newCustomer)
-        .subscribe((customer: any) =>{
-          this.customers.push(customer);
-        });
+    if(this.otpStatus == "approved"){
+      this.apiService.postCustomer(newapiCustomer).subscribe((customerid: any) =>{
+        this.customerId=customerid;
+        const newCustomer = {
+          customerId: this.customerId,
+          firstName: this.firstName,
+          lastName: this.lastName,
+          gender: this.gender,
+          countryOfResidency : this.countryOfResidency,
+          identification: {
+            type: "SOSE",
+            id: this.idNumber
+          },
+          addresses: this.addresses,
+          phoneNumbers: this.phoneNumbers,
+          emailAddresses: this.emailAddresses,
+          userName: this.userName,
+          password: this.password,
+          legalSubscription: false
+        }
+        this.customeronboardingService.addCustomer(newCustomer)
+          .subscribe((customer: any) =>{
+            this.customers.push(customer);
+          });
+      });
+      this.customerAdded=true;
+      this.notificationService.welcomeEmail(this.firstName, this.emailAddresses[0].address)
+      .subscribe( (resp: any) =>{
     });
-    this.customerAdded=true;
-    this.notificationService.welcomeEmail(this.firstName, this.emailAddresses[0].address)
-    .subscribe( (resp: any) =>{
-  });
+    }
   }
 
   updateCustomer() {
@@ -174,17 +179,36 @@ export class CustomeronboardingComponent implements OnInit {
       }
     }
 
-    this.apiService.editCustomer(this.customerId, updatedCustomer)
+    if(this.otpStatus == "approved"){
+      this.apiService.editCustomer(this.customerId, updatedCustomer)
+      .subscribe( (resp: any) =>{
+      });
+    }
+  }
+
+
+  onCompletion() {
+    if(this.otpStatus == "approved"){
+      setTimeout(() =>
+      {
+        const url = "/";
+        this.router.navigateByUrl(url);
+      },2000);
+    }
+  }
+
+  sendOtp(){
+    this.apiService.sendOtp(this.phoneNumber)
     .subscribe( (resp: any) =>{
+      this.otpId = resp;
     });
   }
 
-  onCompletion() {
-    setTimeout(() =>
-    {
-      const url = "/";
-      this.router.navigateByUrl(url);
-    },2000);
+  verifyOtp(){
+    this.apiService.verifyOtp(this.phoneNumber, this.otpId, this.passcode)
+    .subscribe( (resp: any) =>{
+      this.otpStatus = resp;
+    });
   }
 
   getCustomer(){
