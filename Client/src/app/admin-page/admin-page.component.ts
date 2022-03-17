@@ -3,15 +3,19 @@ import { Property } from '../models/property';
 import { PropertyServiceService } from '../services/property-service.service';
 import { NotificationService } from '../services/notification.service';
 import { CustomeronboardingServiceService } from '../services/customeronboarding-service.service';
+import { BuyeronboardingServiceService } from '../services/buyeronboarding-service.service';
+import { PaymentService } from '../services/payment.service';
 import { Customer } from '../models/customer';
+import { Buyer } from '../models/buyer';
 import { QaService } from '../services/qa.service';
 import { QuestionAnswer } from '../models/qa';
+import { Payment } from '../models/payment';
 
 @Component({
   selector: 'app-admin-page',
   templateUrl: './admin-page.component.html',
   styleUrls: ['./admin-page.component.scss'],
-  providers: [ PropertyServiceService, NotificationService, CustomeronboardingServiceService, QaService ],
+  providers: [ PropertyServiceService, NotificationService, CustomeronboardingServiceService, BuyeronboardingServiceService, QaService, PaymentService ],
 })
 export class AdminPageComponent implements OnInit {
 
@@ -20,10 +24,12 @@ export class AdminPageComponent implements OnInit {
   comment!: string;
   email!: string;
   questions: QuestionAnswer[] = [];
+  payments: Payment[] = [];
   answer!: string;
 
   constructor( private propertyService:PropertyServiceService, private notificationService: NotificationService,
-    private customeronboardingService: CustomeronboardingServiceService, private qaService: QaService) { }
+    private customeronboardingService: CustomeronboardingServiceService, private qaService: QaService,
+    private paymentService: PaymentService, private buyeronboardingService: BuyeronboardingServiceService) { }
 
   propertyVerified(property: Property, verification: string){
     this.propertyService.propertyVerified(property.propertyId, verification,this.comment)
@@ -37,6 +43,26 @@ export class AdminPageComponent implements OnInit {
         .subscribe((response: any) =>{
       });
     });
+  }
+
+  paymentVerified(transId:string, entityId: string, entityType: string)
+  {
+    this.paymentService.verifyPaymentInfo(transId)
+    .subscribe((response: Payment) =>{
+    });
+    if(entityType == "CUSTOMER"){
+      this.customeronboardingService.getLegalSubscription(entityId)
+      .subscribe((response: Customer) =>{
+      });
+    }
+    else if(entityType == "BUYER"){
+      this.buyeronboardingService.getLegalSubscription(entityId)
+      .subscribe((response: Buyer) =>{
+      });
+    }
+    else{
+      // for verifying payments for property verification request
+    }
   }
 
   questionAnswered(qaid : string){
@@ -54,6 +80,11 @@ export class AdminPageComponent implements OnInit {
     .subscribe((response:QuestionAnswer[]) => {
       this.questions = response;
   });
+  this.paymentService.getPendingPayments()
+    .subscribe((response:Payment[]) => {
+      this.payments = response;
+  });
+
   }
 
 }
