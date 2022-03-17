@@ -50,6 +50,7 @@ const DBBuyer = require('./models/dbbuyer.ts');
 var Property = require('./models/property.ts');
 var Bid = require('./models/bid.ts');
 const QuestionAnswer = require('./models/qa.ts');
+const Payment = require('./models/payment.ts');
 
 //port no
 const port = 3000;
@@ -1004,4 +1005,65 @@ try {
 } catch (err) {
   res.send(err)
 }
+});
+
+
+//post payment request
+app.post('/payment/info', (req, res, next) => {
+  let newPayment = new Payment({
+    entityId: req.body.entityId,
+    entityType: req.body.entityType,
+    transactionAmount: req.body.transactionAmount,
+    transactionId: req.body.transactionId,
+    transactionTime: req.body.transactionTime,
+    transactionDate: req.body.transactionDate,
+    status: "PENDING"
+  });
+
+  newPayment.save((err, result) => {
+      if(err){
+          res.json(err);
+      }
+      else{
+          res.json(result);
+      }
+  });
+});
+
+//get all payments
+app.get('/payments', (req, res, next) => {
+  Payment.find(function(err, payments){
+      res.json(payments);
+  })
+});
+
+//delete all payments
+app.delete('/payments', (req, res, next) => {
+  Payment.deleteMany( function(err, result){
+    if(err){
+        res.json(err);
+    }
+    else{
+        res.json(result);
+    }
+})
+});
+
+//get all PENDING payment requests
+app.get('/payments/status/pending', (req, res, next) => {
+  Payment.find({status: "PENDING"}, function(err, payments){
+      res.json(payments);
+  })
+});
+
+//VERIFY payment request
+app.put('/payment/status/verify', (req, res, next) => {
+  Payment.findOneAndUpdate({transactionId: req.body.transactionId}, {status: "VERIFIED"}, null , function(err, payment){
+      if(err){
+          res.json(err);
+      }
+      else{
+          res.json(payment);
+      }
+  })
 });
