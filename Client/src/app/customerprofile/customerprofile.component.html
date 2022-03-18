@@ -97,9 +97,10 @@
         </mat-select>
       </mat-form-field>
       <mat-form-field class="field">
-        <mat-label>Additional Details</mat-label>
+        <mat-label>Additional Details(Upload if any files)</mat-label>
         <textarea matInput [(ngModel)] = "notes" name= "notes"></textarea>
       </mat-form-field>
+        <input type="file" class="field" onchange="console.log(event.target.files)">
       <br>
       <button mat-raised-button [disabled]="propertyAdded" color="primary" class="left-margin" (click)="addProperty()" type="submit">Add Property <mat-icon *ngIf="propertyAdded">check_box</mat-icon></button>
       </form>

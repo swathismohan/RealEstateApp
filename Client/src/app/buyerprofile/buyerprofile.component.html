@@ -42,14 +42,14 @@
     <button mat-raised-button class="btn btn btn-success" (click)="filterProperty()" type="submit" color="primary" *ngIf="!allproperty">Show All Properties</button>
       <mat-expansion-panel  class="panel" *ngFor="let prop of properties">
         <mat-expansion-panel-header>
-          <mat-panel-title class = "title-margin">
-            <h2>{{ prop.propertyName }}</h2>
+          <mat-panel-title>
+            <b>{{ prop.propertyName }}</b>
           </mat-panel-title>
-          <mat-panel-description class = "title-margin" *ngIf="prop.verification === 'VERIFIED'" style="color:rgb(60, 145, 60);">
+          <mat-panel-description *ngIf="prop.verification === 'VERIFIED'" style="color:rgb(60, 145, 60);">
            VERIFIED
           <mat-icon style="color:rgb(60, 145, 60);">  verified</mat-icon>
           </mat-panel-description>
-          <mat-panel-description class = "title-margin" *ngIf="prop.verification != 'REJECTED' && prop.verification != 'VERIFIED'">
+          <mat-panel-description *ngIf="prop.verification != 'REJECTED' && prop.verification != 'VERIFIED'">
             {{prop.verification}}
           </mat-panel-description>
 
@@ -57,13 +57,19 @@
         </mat-expansion-panel-header>
         <mat-card>
           <mat-card-content class="card-contents">
-            <div class="contents">
-              <h2>Property Number: {{prop.propertyNumber}}</h2>
-                     <h4>Address: {{prop.addline1}} {{prop.addline2}} {{prop.addline3}}</h4>
-            <h4>Postal Code: {{prop.postalCode}}</h4>
-            <h4>Market Value: {{prop.marketValue}}</h4>
-            <h4>GreenBelt: {{prop.greenBelt}}</h4>
-            <h4 *ngIf="prop.verification === 'VERIFIED'">comment: {{prop.comment}} </h4>
+            <div class="property-contents">
+              <h4>Address:</h4>
+              <h4>Postal code:</h4>
+              <h4>Market value:</h4>
+              <h4>GreenBelt:</h4>
+              <h4 *ngIf="prop.verification === 'VERIFIED'">Verification comment:</h4>
+            </div>
+            <div class="property-contents">
+              <p>{{prop.addline1}}</p>
+              <p>{{prop.postalCode}}</p>
+              <p>{{prop.marketValue}}</p>
+              <p>{{prop.greenBelt}}</p>
+              <p *ngIf="prop.verification === 'VERIFIED'">{{prop.comment}}</p>
             </div>
           </mat-card-content>
         </mat-card>
