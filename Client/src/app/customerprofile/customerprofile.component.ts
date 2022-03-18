@@ -34,7 +34,6 @@ export class CustomerprofileComponent implements OnInit {
   addline1!: string;
   addline2!: string;
   addline3!: string;
-  addline4!: string;
   postalCode!: string;
   marketValue!: number;
   contactDetails!: string;
@@ -48,6 +47,13 @@ export class CustomerprofileComponent implements OnInit {
   question!: string;
   apicustomer!: Customer;
   requestPayment!: Boolean;
+  area: string;
+  areaUnit: string;
+  ownership: string;
+  notes: string;
+
+  areaunits: string[] = ["sq ft","Cents","Acre", "Hectare"];
+  ownershiptype: string[] = ["Sole/ Individual", "Family owned", "Joint"];
 
   public customer!: DBCustomer;
   constructor(private customeronboardingService : CustomeronboardingServiceService, private router: Router, private activatedroute: ActivatedRoute,
@@ -62,9 +68,6 @@ export class CustomerprofileComponent implements OnInit {
           requestPayment: this.requestPayment
         },
       });
-      // dialogRef.afterClosed().subscribe(result =>{
-      //   window.location.reload();
-      // });
     }
 
   addProperty(){
@@ -77,7 +80,6 @@ export class CustomerprofileComponent implements OnInit {
       addline1: this.addline1,
       addline2: this.addline2,
       addline3: this.addline3,
-      addline4: this.addline4,
       postalCode: this.postalCode,
       marketValue: this.marketValue,
       contactDetails: this.contactDetails,
@@ -85,7 +87,11 @@ export class CustomerprofileComponent implements OnInit {
       greenBelt: this.greenBelt,
       verification: "PENDING VERIFICATION",
       comment: "",
-      propertyType: this.propertyType
+      propertyType: this.propertyType,
+      area: this.area,
+      areaUnit: this.areaUnit,
+      ownership: this.ownership,
+      notes: this.notes
     }
     this.propertyService.addProperty(newProperty)
       .subscribe((property: any) =>{
@@ -162,7 +168,7 @@ export class CustomerprofileComponent implements OnInit {
     this.getPropertyByCustomerId();
     this.propertyAdded = false;
 
-    this.type = ["Coastal areas", "Inland areas", "Valley regions", "Hilly regions", "Plains"];
+    this.type = ["Land", "Apartment", "Villa", "House", "Housing Plot"];
 
     this.qaService.getQuestionsByUserId(this.customerId)
     .subscribe((resp: QuestionAnswer[]) =>{
@@ -226,5 +232,5 @@ export class DialogLegalCustomer {
       this.dialogRef.close();
     });
   }
-  
+
 }

@@ -19,16 +19,18 @@
       <input type="text" matInput placeholder="Address Line 3" [(ngModel)] = "addline3" name= "addline3"/>
     </mat-form-field>
     <mat-form-field class="field">
-      <input type="text" matInput placeholder="Address Line 4" [(ngModel)] = "addline4" name= "addline4"/>
-    </mat-form-field>
-    <mat-form-field class="field">
       <input type="number" matInput placeholder="Postal Code" [(ngModel)] = "postalCode" name= "postalCode" required/>
     </mat-form-field>
   <mat-form-field class="field">
     <input type="number" matInput placeholder="Market Value" [(ngModel)] = "marketValue" name= "marketValue" required/>
   </mat-form-field>
   <mat-form-field class="field">
-    <input type="number" matInput placeholder="Contact Details" [(ngModel)] = "contactDetails" name= "contactDetails"/>
+    <mat-label>Ownership</mat-label>
+    <mat-select [(ngModel)] = "ownership" name="ownership" required>
+      <mat-option *ngFor="let o of ownershiptype" [value]= "o">
+        {{o}}
+      </mat-option>
+    </mat-select>
   </mat-form-field>
   <mat-form-field class="field">
     <mat-label>Green Belt</mat-label>
@@ -44,6 +46,21 @@
         {{t}}
       </mat-option>
     </mat-select>
+  </mat-form-field>
+  <mat-form-field class="field">
+    <input type="text" matInput placeholder="Area" [(ngModel)] = "area" name= "area" required/>
+  </mat-form-field>
+  <mat-form-field class="field">
+    <mat-label>Area Unit</mat-label>
+    <mat-select [(ngModel)] = "areaUnit" name="areaUnit" required>
+      <mat-option *ngFor="let a of areaunits" [value]= "a">
+        {{a}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field class="field">
+    <mat-label>Additional Details</mat-label>
+    <textarea matInput [(ngModel)] = "notes" name= "notes"></textarea>
   </mat-form-field>
   <br>
   <button mat-raised-button color="primary" class="left-margin" (click)="updateProperty()" type="submit">Save Changes</button>

@@ -19,14 +19,19 @@ export class EditPropertyComponent implements OnInit {
   addline1!: string;
   addline2!: string;
   addline3!: string;
-  addline4!: string;
   postalCode!: string;
   marketValue!: number;
-  contactDetails!: string;
   status!: string;
   greenBelt!: string;
   propertyType!: string;
-  type: string[] = ["Coastal areas", "Inland areas", "Valley regions", "Hilly regions", "Plains"];
+  area: string;
+  areaUnit: string;
+  ownership: string;
+  notes: string;
+
+  areaunits: string[] = ["sq ft","Cents","Acre", "Hectare"];
+  type: string[] = ["Land", "Apartment", "Villa", "House", "Housing Plot"];
+  ownershiptype: string[] = ["Sole/ Individual", "Family owned", "Joint"];
 
   constructor(private router: Router,
     private activatedroute: ActivatedRoute,
@@ -42,12 +47,14 @@ export class EditPropertyComponent implements OnInit {
     addline1: this.addline1,
     addline2: this.addline2,
     addline3: this.addline3,
-    addline4: this.addline4,
     postalCode: this.postalCode,
     marketValue: this.marketValue,
-    contactDetails: this.contactDetails,
     propertyType: this.propertyType,
     greenBelt: this.greenBelt,
+    area: this.area,
+    areaUnit: this.areaUnit,
+    ownership: this.ownership,
+    notes: this.notes,
 
     customerId: this.property.customerId,
     propertyId: this.property.propertyId,
@@ -80,12 +87,15 @@ export class EditPropertyComponent implements OnInit {
         this.addline1 =  response.addline1;
         this.addline2 = response.addline2;
         this.addline3 = response.addline3;
-        this.addline4 = response.addline4;
         this.postalCode = response.postalCode;
         this.marketValue = response.marketValue;
-        this.contactDetails = response.contactDetails;
         this.propertyType = response.propertyType;
         this.greenBelt = response.greenBelt;
+        this.area = response.area;
+        this.areaUnit = response.areaUnit;
+        this.ownership = response.ownership;
+        this.notes = response.notes;
+
       });
   }
 }

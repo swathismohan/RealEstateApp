@@ -59,10 +59,9 @@
           <mat-card-content class="card-contents">
             <div class="contents">
               <h2>Property Number: {{prop.propertyNumber}}</h2>
-                     <h4>Address: {{prop.addline1}} {{prop.addline2}} {{prop.addline3}} {{prop.addline4}}</h4>
+                     <h4>Address: {{prop.addline1}} {{prop.addline2}} {{prop.addline3}}</h4>
             <h4>Postal Code: {{prop.postalCode}}</h4>
             <h4>Market Value: {{prop.marketValue}}</h4>
-            <h4>Contact Details: {{prop.contactDetails}}</h4>
             <h4>GreenBelt: {{prop.greenBelt}}</h4>
             <h4 *ngIf="prop.verification === 'VERIFIED'">comment: {{prop.comment}} </h4>
             </div>
