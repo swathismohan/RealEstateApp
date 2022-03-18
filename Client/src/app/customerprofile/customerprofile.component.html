@@ -1,6 +1,6 @@
 <header>
   <h1>
-    <i>Welcome {{ apicustomer.firstName }},</i>
+    <i *ngIf = "apicustomer.firstName">Welcome {{ apicustomer.firstName }},</i>
     <button mat-raised-button class="legal" (click)="onCompletion()">Logout</button>
     <button *ngIf = "!customer.legalSubscription" mat-raised-button class="legal" (click)="openDialog()">Get Legal Subscription</button>
   </h1>

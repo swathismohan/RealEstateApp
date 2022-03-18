@@ -35,5 +35,4 @@ export class PaymentService {
   getPendingPayments(){
     return this.httpClient.get<any>("http://localhost:3000/payments/status/pending");
   }
-  
 }

@@ -3,6 +3,7 @@ import { Property } from '../models/property';
 import { CustomeronboardingServiceService } from '../services/customeronboarding-service.service';
 import { QaService } from '../services/qa.service';
 import { PropertyServiceService } from '../services/property-service.service';
+import { PaymentService } from '../services/payment.service';
 import { DBCustomer, Customer } from '../models/customer';
 import { Router, ActivatedRoute } from '@angular/router';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
@@ -10,6 +11,7 @@ import { v4 as uuid } from 'uuid';
 import { DialogData } from '../buyerprofile/buyerprofile.component';
 import { ApiServiceService } from '../services/api-service.service';
 import { QuestionAnswer } from '../models/qa';
+import { Payment } from '../models/payment';
 
 @Component({
   selector: 'app-customerprofile',
@@ -60,10 +62,9 @@ export class CustomerprofileComponent implements OnInit {
           requestPayment: this.requestPayment
         },
       });
-
-      dialogRef.afterClosed().subscribe(result =>{
-        window.location.reload();
-      });
+      // dialogRef.afterClosed().subscribe(result =>{
+      //   window.location.reload();
+      // });
     }
 
   addProperty(){
@@ -148,6 +149,7 @@ export class CustomerprofileComponent implements OnInit {
 
 
   ngOnInit() {
+    console.log("Inside ngOnit");
     this.customerId = this.activatedroute.snapshot.params['customerId'];
     this.customeronboardingService.getCustomerByUserIdFromFFDC(this.customerId)
       .subscribe((response: Customer) =>{
@@ -173,16 +175,26 @@ export class CustomerprofileComponent implements OnInit {
 @Component({
   selector: 'dialog-legal-customer',
   templateUrl: './dialog-legal-customer.html',
-  providers: [CustomeronboardingServiceService, ApiServiceService]
+  providers: [CustomeronboardingServiceService, ApiServiceService, PaymentService]
 })
 export class DialogLegalCustomer {
 
   fromAccountId!: string;
   narrative!: string;
+  entityId: string;
+  entityType: string;
+  transactionAmount: string;
+  transactionId: string;
+  transactionTime: string;
+  transactionDate: string;
+  status: string;
+  newPaymenttest: Payment;
+
 
   constructor(
     private customerOnboardingService: CustomeronboardingServiceService,
     private apiService: ApiServiceService,
+    private paymentService: PaymentService,
     public dialogRef: MatDialogRef<DialogLegalCustomer>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
   ) {}
@@ -197,12 +209,22 @@ export class DialogLegalCustomer {
 
   makePayment(){
     this.apiService.makePayment(this.fromAccountId, this.narrative, "250")
-    .subscribe((resp: any) =>{
+    .subscribe((response: any) =>{
+      this.newPaymenttest = {
+        entityId: this.data.userId,
+        entityType: "CUSTOMER",
+        transactionAmount: "250",
+        transactionId: response.transactionId,
+        transactionTime: response.transactionTime,
+        transactionDate: response.transactionDate,
+        status: "PENDING"
+      }
+      this.paymentService.postPaymentInfo(this.newPaymenttest)
+      .subscribe((res: any) =>{
+      });
+      alert("Payment Successful");
+      this.dialogRef.close();
     });
-    this.customerOnboardingService.getLegalSubscription(this.data.userId)
-    .subscribe((response: DBCustomer) =>{
-    });
-
-    this.dialogRef.close();
   }
+  
 }

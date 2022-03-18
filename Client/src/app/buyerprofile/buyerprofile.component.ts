@@ -2,8 +2,10 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { Property } from '../models/property';
 import { PropertyServiceService } from '../services/property-service.service';
 import { QaService } from '../services/qa.service';
+import { PaymentService } from '../services/payment.service';
 import { DBBuyer, Buyer } from '../models/buyer';
 import { Bid } from '../models/bid';
+import { Payment } from '../models/payment';
 import { Router, ActivatedRoute } from '@angular/router';
 import { v4 as uuid } from 'uuid';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
@@ -58,9 +60,9 @@ export class BuyerprofileComponent implements OnInit {
         },
       });
 
-      dialogRef.afterClosed().subscribe(result =>{
-        window.location.reload();
-      });
+      // dialogRef.afterClosed().subscribe(result =>{
+      //   window.location.reload();
+      // });
     }
 
   createBid(propertyId: any, customerId: any, propertyName: string){
@@ -169,17 +171,26 @@ export class BuyerprofileComponent implements OnInit {
 @Component({
   selector: 'dialog-legal-buyer',
   templateUrl: './dialog-legal-buyer.html',
-  providers: [BuyeronboardingServiceService, ApiServiceService]
+  providers: [BuyeronboardingServiceService, ApiServiceService, PaymentService]
 })
 
 export class DialogLegalBuyer {
 
   fromAccountId!: string;
   narrative!: string;
+  entityId: string;
+  entityType: string;
+  transactionAmount: string;
+  transactionId: string;
+  transactionTime: string;
+  transactionDate: string;
+  status: string;
+  newPaymenttest: Payment;
 
   constructor(
     private buyerOnboardingService: BuyeronboardingServiceService,
     private apiService: ApiServiceService,
+    private paymentService: PaymentService,
     public dialogRef: MatDialogRef<DialogLegalBuyer>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
   ) {}
@@ -194,12 +205,22 @@ export class DialogLegalBuyer {
 
   makePayment(){
     this.apiService.makePayment(this.fromAccountId, this.narrative, "250")
-    .subscribe((resp: any) =>{
+    .subscribe((response: any) =>{
+      this.newPaymenttest = {
+        entityId: this.data.userId,
+        entityType: "BUYER",
+        transactionAmount: "250",
+        transactionId: response.transactionId,
+        transactionTime: response.transactionTime,
+        transactionDate: response.transactionDate,
+        status: "PENDING"
+      }
+      this.paymentService.postPaymentInfo(this.newPaymenttest)
+      .subscribe((res: any) =>{
+      });
+      alert("Payment Successful");
+      this.dialogRef.close();
     });
-    this.buyerOnboardingService.getLegalSubscription(this.data.userId)
-    .subscribe((response: DBBuyer) =>{
-    });
-
-    this.dialogRef.close();
   }
+
 }

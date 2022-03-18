@@ -53,7 +53,7 @@ editBuyer(userid: string, buyer: Buyer){
  ).pipe(map((res:any) => res.json()));
 }
 
-makePayment(fromAccountId: string, narrative: string, amount: string){
+makePayment(fromAccountId: string, narrative: string, amount: string): Observable<any>{
   let body = {
     "fromAccountId": fromAccountId,
     "narrative": narrative,
@@ -64,7 +64,7 @@ makePayment(fromAccountId: string, narrative: string, amount: string){
       headers: {
         'Content-Type': 'application/json' }
     })
-    .pipe(map((response) => response));
+    .pipe(map((response) => {console.log(response); return response;}));
 }
 
 sendOtp(to: string){

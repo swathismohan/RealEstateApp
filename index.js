@@ -330,8 +330,8 @@ try {
 
   const results = await response.json();
   console.log("Payment made using FFDC API: "+ results.transactionId);
-  console.log(results)
-  return res.json(results)
+  console.log(results);
+  res.send(results);
 } catch (err) {
   res.send(err)
 }
@@ -1020,6 +1020,7 @@ app.post('/payment/info', (req, res, next) => {
     status: "PENDING"
   });
 
+  console.log(newPayment);
   newPayment.save((err, result) => {
       if(err){
           res.json(err);
