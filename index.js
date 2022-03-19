@@ -562,15 +562,17 @@ app.post('/property', (req, res, next) => {
       addline1: req.body.addline1,
       addline2: req.body.addline2,
       addline3: req.body.addline3,
-      addline4: req.body.addline4,
       postalCode: req.body.postalCode,
       marketValue: req.body.marketValue,
-      contactDetails: req.body.contactDetails,
       status: req.body.status,
       greenBelt: req.body.greenBelt,
       verification: req.body.verification,
       comment: req.body.comment,
-      propertyType: req.body.propertyType
+      propertyType: req.body.propertyType,
+      area: req.body.area,
+      areaUnit: req.body.areaUnit,
+      ownership: req.body.ownership,
+      notes: req.body.notes
   });
 
   newProperty.save((err) => {
@@ -642,11 +644,13 @@ app.put('/updateproperty/:propertyId', (req, res, next) => {
       addline1: req.body.addline1,
       addline2: req.body.addline2,
       addline3: req.body.addline3,
-      addline4: req.body.addline4,
       postalCode: req.body.postalCode,
       marketValue: req.body.marketValue,
-      contactDetails: req.body.contactDetails,
-      verification: req.body.verification
+      verification: req.body.verification,
+      area: req.body.area,
+      areaUnit: req.body.areaUnit,
+      ownership: req.body.ownership,
+      notes: req.body.notes
     },
       null , function(err, property){
       if(err){

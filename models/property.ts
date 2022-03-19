@@ -8,15 +8,17 @@ const PropertySchema = mongoose.Schema({
     addline1: "string",
     addline2: "string",
     addline3: "string",
-    addline4: "string",
     postalCode: "string",
     marketValue: "number",
-    contactDetails: "string",
     status: "string",
     greenBelt: "string",
     verification: "string",
     comment: "string",
-    propertyType: "string"
+    propertyType: "string",
+    area: "string",
+    areaUnit: "string",
+    ownership: "string",
+    notes: "string"
 });
 
 var Property = module.exports = mongoose.model('Property', PropertySchema);
