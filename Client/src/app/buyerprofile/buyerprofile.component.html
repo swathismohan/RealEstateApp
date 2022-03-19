@@ -97,6 +97,7 @@
           <div class="property-contents">
             <h4>Bid value: {{ bid.proposedAmount }}</h4>
             <h4>Bid status: {{ bid.status }}</h4>
+            <button *ngIf="bid.status === 'ACCEPTED'" mat-raised-button class="btn btn btn-success" (click) = "getCustomerDetails(bid.customerId)" color="primary">Get Seller Details</button>
           </div>
         </mat-card-content>
       </mat-card>

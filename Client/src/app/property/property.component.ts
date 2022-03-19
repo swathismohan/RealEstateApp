@@ -49,7 +49,7 @@ export class PropertyComponent implements OnInit {
       .subscribe((buyer: Buyer) => {
         this.email = buyer.emailAddresses[0].address;
         this.notificationService
-          .bidAcceptanceEmail(bid.propertyName, this.email)
+          .bidAcceptanceEmail(bid.propertyName, this.email, status)
           .subscribe((res: any) => {});
       });
   }

@@ -10,9 +10,11 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { v4 as uuid } from 'uuid';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { BuyeronboardingServiceService } from '../services/buyeronboarding-service.service';
+import { CustomeronboardingServiceService } from '../services/customeronboarding-service.service';
 import { BidServiceService } from '../services/bid-service.service';
 import { ApiServiceService } from '../services/api-service.service';
 import { QuestionAnswer } from '../models/qa';
+import { Customer } from '../models/customer';
 
 export interface DialogData {
   userId: string;
@@ -20,11 +22,17 @@ export interface DialogData {
   requestPayment: boolean;
 }
 
+export interface CustomerContact {
+  name: string;
+  phone: string;
+  email: string;
+}
+
 @Component({
   selector: 'app-buyerprofile',
   templateUrl: './buyerprofile.component.html',
   styleUrls: ['./buyerprofile.component.scss'],
-  providers: [BuyeronboardingServiceService, PropertyServiceService, QaService ],
+  providers: [BuyeronboardingServiceService, PropertyServiceService, QaService, CustomeronboardingServiceService ],
 })
 export class BuyerprofileComponent implements OnInit {
 
@@ -46,9 +54,17 @@ export class BuyerprofileComponent implements OnInit {
   apibuyer!: Buyer;
   allproperty!: boolean;
   requestPayment!: Boolean;
+  customer: Customer;
 
-  constructor(private buyerOnboardingService:BuyeronboardingServiceService, private router: Router, private activatedroute: ActivatedRoute, private propertyService: PropertyServiceService,
-    private bidService: BidServiceService, public dialog: MatDialog, private qaService: QaService ) { }
+  constructor(
+    private buyerOnboardingService:BuyeronboardingServiceService,
+    private router: Router,
+    private activatedroute: ActivatedRoute,
+    private propertyService: PropertyServiceService,
+    private bidService: BidServiceService,
+    public dialog: MatDialog,
+    private qaService: QaService,
+    private customeronboardingServiceService: CustomeronboardingServiceService ) { }
 
     openDialog(): void {
       const dialogRef = this.dialog.open(DialogLegalBuyer, {
@@ -59,10 +75,6 @@ export class BuyerprofileComponent implements OnInit {
           requestPayment: this.requestPayment
         },
       });
-
-      // dialogRef.afterClosed().subscribe(result =>{
-      //   window.location.reload();
-      // });
     }
 
   createBid(propertyId: any, customerId: any, propertyName: string){
@@ -91,6 +103,21 @@ export class BuyerprofileComponent implements OnInit {
         this.bids = response;
       });
     }
+  }
+
+  getCustomerDetails(customerId){
+    this.customeronboardingServiceService.getCustomerByUserIdFromFFDC(customerId)
+    .subscribe((response) => {
+      this.customer = response;
+      this.dialog.open(DialogContactDetails, {
+        width: '500px',
+        data: {
+          name: this.customer.firstName,
+          phone: this.customer.phoneNumbers[0].number,
+          email: this.customer.emailAddresses[0].address
+        },
+      });
+    });
   }
 
   postQuestion(){
@@ -221,6 +248,25 @@ export class DialogLegalBuyer {
       alert("Payment Successful");
       this.dialogRef.close();
     });
+  }
+
+}
+
+@Component({
+  selector: 'dialog-contact-details',
+  templateUrl: './dialog-contact-details.html',
+  providers: []
+})
+
+export class DialogContactDetails {
+
+  constructor(
+    public dialogRef: MatDialogRef<DialogContactDetails>,
+    @Inject(MAT_DIALOG_DATA) public data: CustomerContact,
+  ) {}
+
+  onNoClick(): void {
+    this.dialogRef.close();
   }
 
 }

@@ -34,11 +34,11 @@ export class NotificationService {
    ).pipe(map((res:any) => res.json()));
   }
 
-  bidAcceptanceEmail(propertyName: string, email: string){
+  bidAcceptanceEmail(propertyName: string, email: string, status: string){
     const url = "http://localhost:3000/sendmail";
     let body = {"to": email,
                 "subject": "Bid Status Changed",
-                "text": "Hi, \n\nYour bid for property "+ propertyName+ " has been reviewed by the seller. Please login to see the bid status. \n\nRegards, \nTeam Estate Aide" };
+                "text": "Hi, \n\nYour bid for property "+ propertyName+ " has been "+ status +" by the seller. Please login to see the details. \n\nRegards, \nTeam Estate Aide" };
     return this.httpClient.post(
       url,
       body

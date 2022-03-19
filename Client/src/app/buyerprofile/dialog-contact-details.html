@@ -1,0 +1,15 @@
+<div mat-dialog-content>
+  <b>Seller Details:-</b>
+  <mat-card>
+    <mat-card-content class="card-contents">
+      <div class="property-contents">
+        <h4>Name: {{ data.name }}</h4>
+        <h4>Phone: {{ data.phone }}</h4>
+        <h4>Email: {{data.email}}</h4>
+         </div>
+    </mat-card-content>
+  </mat-card>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Close</button>
+</div>
