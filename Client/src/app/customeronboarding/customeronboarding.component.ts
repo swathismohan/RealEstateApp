@@ -48,6 +48,7 @@ export class CustomeronboardingComponent implements OnInit {
   otpId!: string;
   passcode!: string;
   otpStatus!: string;
+  idType: string;
 
   constructor(private customeronboardingService : CustomeronboardingServiceService, private apiService : ApiServiceService,
     private router: Router, private activatedroute: ActivatedRoute, private notificationService: NotificationService) { }
@@ -87,7 +88,7 @@ export class CustomeronboardingComponent implements OnInit {
       gender: this.gender,
       countryOfResidency : this.countryOfResidency,
       identification: {
-        type: "SOSE",
+        type: this.idType,
         id: this.idNumber
       },
       addresses: this.addresses,
@@ -110,7 +111,7 @@ export class CustomeronboardingComponent implements OnInit {
           gender: this.gender,
           countryOfResidency : this.countryOfResidency,
           identification: {
-            type: "SOSE",
+            type: this.idType,
             id: this.idNumber
           },
           addresses: this.addresses,
@@ -166,7 +167,7 @@ export class CustomeronboardingComponent implements OnInit {
       gender: this.gender,
       countryOfResidency : this.countryOfResidency,
       identification: {
-        type: "SOSE",
+        type: this.idType,
         id: this.idNumber
       },
       addresses: this.addresses,
@@ -178,12 +179,9 @@ export class CustomeronboardingComponent implements OnInit {
         tin: this.tin
       }
     }
-
-    if(this.otpStatus == "approved"){
       this.apiService.editCustomer(this.customerId, updatedCustomer)
       .subscribe( (resp: any) =>{
       });
-    }
   }
 
 
@@ -244,6 +242,7 @@ export class CustomeronboardingComponent implements OnInit {
         this.emailAddress = response.emailAddresses[0].address;
         this.password = response.password;
         this.phoneNumber = response.phoneNumbers[0].number;
+        this.idType = response.identification.type;
         this.idNumber = response.identification.id;
         this.updateDetails = true;
       });

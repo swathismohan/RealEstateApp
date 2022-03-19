@@ -146,6 +146,8 @@ app.post('/customer/api', async (req, res) => {
         fatcaDetails: req.body.fatcaDetails
     });
 
+    console.log(apicustomer);
+    
 try {
     const response = await fetch("https://api.preprod.fusionfabric.cloud/retail-banking/customers/v1/personal-customers", {
       method: 'POST',

@@ -28,12 +28,20 @@
       </mat-select>
     </mat-form-field>
     <mat-form-field class="field">
+      <mat-label>Id Type</mat-label>
+      <mat-select [(ngModel)] = "idType" name="idType" required>
+        <mat-option [value]="'CCPT'">Passport Number</mat-option>
+        <mat-option [value]="'EMPL'">Drivers License Number</mat-option>
+        <mat-option [value]="'SOSE'">PAN</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field class="field">
+      <input type="text" matInput placeholder="Id Number" [(ngModel)] = "idNumber" name= "id" required/>
+    </mat-form-field>
+    <mat-form-field class="field">
       <input matInput [matDatepicker]="picker" placeholder="Date of Birth" [(ngModel)] = "dateOfBirth" name= "dateOfBirth">
       <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
       <mat-datepicker #picker></mat-datepicker>
-    </mat-form-field>
-    <mat-form-field class="field">
-      <input type="number" matInput placeholder="SOSE Number" [(ngModel)] = "idNumber" name= "idNumber" required/>
     </mat-form-field>
     <mat-card-header>
       <mat-card-subtitle class="top-margin" style="margin-bottom:0"><b>Address Details:</b></mat-card-subtitle>
