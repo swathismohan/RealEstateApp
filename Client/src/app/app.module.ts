@@ -32,6 +32,7 @@ import { AdminPageComponent } from './admin-page/admin-page.component';
 import { MAT_DATE_LOCALE } from '@angular/material/core';
 import { EditPropertyComponent } from './edit-property/edit-property.component';
 import { DialogContactDetails } from './buyerprofile/buyerprofile.component';
+import { DialogBuyerDetails } from './property/property.component';
 
 
 @NgModule({
@@ -49,7 +50,8 @@ import { DialogContactDetails } from './buyerprofile/buyerprofile.component';
     DialogLegalCustomer,
     DialogLegalBuyer,
     EditPropertyComponent,
-    DialogContactDetails
+    DialogContactDetails,
+    DialogBuyerDetails
   ],
   imports: [
     BrowserModule,
