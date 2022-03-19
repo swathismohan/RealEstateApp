@@ -20,7 +20,7 @@
             </mat-card-content>
           </mat-card>
           <br>
-          <button mat-raised-button [disabled]="bidResponded" (click)="[updateBid(bid, 'ACCEPTED'), updateProperty(bid.propertyId,'NOT AVAILABLE')]" color="primary">Accept</button>
+          <button mat-raised-button [disabled]="bidResponded" (click)="updateBid(bid, 'ACCEPTED')" color="primary">Accept</button>
           &nbsp;
           <button mat-raised-button [disabled]="bidResponded" (click)="updateBid(bid, 'DECLINED')" color="primary">Decline</button>
         </mat-expansion-panel>
@@ -41,7 +41,7 @@
           </mat-card-content>
         </mat-card>
         <br>
-        <button mat-raised-button [disabled]="bidResponded" (click)="[updateBid(bid, 'DECLINED'), updateProperty(bid.propertyId,'AVAILABLE')]" color="primary">Decline</button>
+        <button mat-raised-button [disabled]="bidResponded" (click)="[updateBid(bid, 'DECLINED')]" color="primary">Decline</button>
       </mat-expansion-panel>
     </mat-card>
   </mat-tab>
@@ -60,7 +60,7 @@
           </mat-card-content>
         </mat-card>
         <br>
-        <button mat-raised-button [disabled]="bidResponded" (click)="[updateBid(bid, 'ACCEPTED'), updateProperty(bid.propertyId,'NOT AVAILABLE')]" color="primary">Accept</button>
+        <button mat-raised-button [disabled]="bidResponded" (click)="[updateBid(bid, 'ACCEPTED')]" color="primary">Accept</button>
         </mat-expansion-panel>
     </mat-card>
   </mat-tab>

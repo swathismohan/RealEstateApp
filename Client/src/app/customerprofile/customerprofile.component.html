@@ -163,6 +163,23 @@
       *ngIf="prop.verification === 'PENDING VERIFICATION'">
       Request Verification
     </button>
+    <button
+    mat-raised-button
+    (click)="updateProperty(prop.propertyId,'NOT AVAILABLE')"
+    class="top-margin left-margin"
+    color="primary"
+    *ngIf="prop.status === 'AVAILABLE'">
+    Make it Unavailable
+    </button>
+    <button
+    mat-raised-button
+    (click)="updateProperty(prop.propertyId,'AVAILABLE')"
+    class="top-margin left-margin"
+    color="primary"
+    *ngIf="prop.status === 'NOT AVAILABLE'">
+    Make it Available
+    </button>
+
   </mat-card-actions>
     </mat-card>
     </mat-expansion-panel>

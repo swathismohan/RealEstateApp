@@ -135,6 +135,14 @@ export class CustomerprofileComponent implements OnInit {
     window.location.reload();
   }
 
+  updateProperty(propertyId: string, status: string) {
+    this.propertyService.updateProperty(propertyId, status).subscribe(
+      (response: Property) => {
+        this.property = response;
+      }
+    );
+  }
+
   onCompletion() {
     setTimeout(() =>
     {

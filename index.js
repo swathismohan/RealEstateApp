@@ -89,7 +89,7 @@ app.get('/user/:userid', async (req, res, next) => {
   try {
     const token = await client.grant(grant)
     access_token = token.access_token
-    console.log(access_token);
+    // console.log(access_token);
   } catch (e) {
     res.send(e)
   }
@@ -126,7 +126,7 @@ app.post('/customer/api', async (req, res) => {
       try {
         const token = await client.grant(grant)
         access_token = token.access_token
-        console.log(access_token);
+        // console.log(access_token);
       } catch (e) {
         res.send('Error', e)
       }
@@ -184,7 +184,7 @@ app.put('/updateuser/api/:userid', async (req, res) => {
     try {
       const token = await client.grant(grant)
       access_token = token.access_token
-      console.log(access_token);
+      // console.log(access_token);
     } catch (e) {
       res.send('Error', e)
     }
@@ -242,7 +242,7 @@ app.post('/buyer/api', async (req, res) => {
       try {
         const token = await client.grant(grant)
         access_token = token.access_token
-        console.log(access_token);
+        // console.log(access_token);
       } catch (e) {
         res.send('Error', e)
       }
@@ -298,7 +298,7 @@ app.post('/estateaide/payments', async (req, res) => {
     try {
       const token = await client.grant(grant)
       access_token = token.access_token
-      console.log(access_token);
+      // console.log(access_token);
     } catch (e) {
       res.send('Error', e)
     }
@@ -605,7 +605,7 @@ app.put('/property/:propertyId/status/:status', (req, res, next) => {
           res.json(err);
       }
       else{
-          res.json(property);
+        console.log(property);
       }
   })
 });
@@ -929,7 +929,7 @@ app.post('/receive/otp/', async (req, res) => {
     try {
       const token = await client.grant(grant)
       access_token = token.access_token
-      console.log(access_token);
+      // console.log(access_token);
     } catch (e) {
       res.send('Error', e)
     }
@@ -978,7 +978,7 @@ app.post('/otp/verifyotp/', async (req, res) => {
     try {
       const token = await client.grant(grant)
       access_token = token.access_token
-      console.log(access_token);
+      // console.log(access_token);
     } catch (e) {
       res.send('Error', e)
     }
