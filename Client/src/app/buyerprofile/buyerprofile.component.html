@@ -9,10 +9,10 @@
 
 
 <mat-tab-group mat-align-tabs="start" (selectedTabChange)="getAllBidsByBuyer($event)">
-  <mat-tab label="Your profile">
+  <mat-tab label="My profile">
     <mat-card class="profile-card-container">
       <mat-card-header class="card-header">
-        <mat-card-title class="bottom-margin">Your Profile</mat-card-title>
+        <mat-card-title class="bottom-margin">My Profile</mat-card-title>
         <button mat-icon-button aria-label="edit button" style="margin-left: auto;" (click)="editBuyerProfile()">
           <mat-icon>create</mat-icon>
         </button>
@@ -21,14 +21,12 @@
         <div class="contents">
           <h4>Name:</h4>
           <h4>Address:</h4>
-          <h4>Country:</h4>
           <h4>E-mail:</h4>
           <h4>Phone number:</h4>
         </div>
         <div class="contents">
           <p>{{apibuyer.firstName}} {{apibuyer.lastName}}</p>
           <p>{{apibuyer.addresses[0].line1}}</p>
-          <p>{{apibuyer.countryOfResidency}}</p>
           <p>{{apibuyer.emailAddresses[0].address}}</p>
           <p>{{apibuyer.phoneNumbers[0].number}}</p>
         </div>
@@ -38,8 +36,8 @@
 
   <mat-tab label="Available properties">
     <br>
-    <button mat-raised-button class="btn btn btn-success" (click)="filterProperty()" type="submit" color="primary" *ngIf="allproperty">Show Verified Properties</button>
-    <button mat-raised-button class="btn btn btn-success" (click)="filterProperty()" type="submit" color="primary" *ngIf="!allproperty">Show All Properties</button>
+    <button mat-raised-button style="margin-left:.5cm;" class="btn btn btn-success" (click)="filterProperty()" type="submit" color="primary" *ngIf="allproperty">Show Verified Properties</button>
+    <button mat-raised-button style="margin-left:.5cm;" class="btn btn btn-success" (click)="filterProperty()" type="submit" color="primary" *ngIf="!allproperty">Show All Properties</button>
       <mat-expansion-panel  class="panel" *ngFor="let prop of properties">
         <mat-expansion-panel-header>
           <mat-panel-title>
