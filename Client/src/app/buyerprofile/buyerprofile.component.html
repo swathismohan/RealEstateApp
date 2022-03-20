@@ -47,10 +47,9 @@
            VERIFIED
           <mat-icon style="color:rgb(60, 145, 60);">  verified</mat-icon>
           </mat-panel-description>
-          <mat-panel-description *ngIf="prop.verification != 'REJECTED' && prop.verification != 'VERIFIED'">
+          <mat-panel-description *ngIf="prop.verification != 'VERIFIED'">
             {{prop.verification}}
           </mat-panel-description>
-
 
         </mat-expansion-panel-header>
         <mat-card>

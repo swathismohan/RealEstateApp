@@ -538,7 +538,7 @@ app.get('/properties', (req, res, next) => {
 });
 
 app.get('/properties/available', (req, res, next) => {
-  Property.find({status: "AVAILABLE"}, function(err, properties){
+  Property.find({status: "AVAILABLE", verification: { $ne: "REJECTED" }}, function(err, properties){
       res.json(properties);
   })
 });
