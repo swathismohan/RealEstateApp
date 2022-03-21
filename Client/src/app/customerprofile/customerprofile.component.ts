@@ -91,7 +91,8 @@ export class CustomerprofileComponent implements OnInit {
       area: this.area,
       areaUnit: this.areaUnit,
       ownership: this.ownership,
-      notes: this.notes
+      notes: this.notes,
+      active: true
     }
     this.propertyService.addProperty(newProperty)
       .subscribe((property: any) =>{
@@ -163,7 +164,6 @@ export class CustomerprofileComponent implements OnInit {
 
 
   ngOnInit() {
-    console.log("Inside ngOnit");
     this.customerId = this.activatedroute.snapshot.params['customerId'];
     this.customeronboardingService.getCustomerByUserIdFromFFDC(this.customerId)
       .subscribe((response: Customer) =>{

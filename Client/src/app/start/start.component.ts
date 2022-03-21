@@ -25,7 +25,13 @@ export class StartComponent implements OnInit {
       .subscribe((response: DBCustomer) =>{
         this.customer = response;
         const url = "/customer/" + response.customerId;
-        this.router.navigateByUrl(url);
+        if(this.customer.active){
+          this.router.navigateByUrl(url);
+        }
+        else{
+          this.router.navigateByUrl(url);
+        }
+
       });
   }
 
@@ -34,7 +40,13 @@ export class StartComponent implements OnInit {
       .subscribe((response: DBBuyer) =>{
         this.buyer = response;
         const url = "/buyer/" + response.buyerId;
-        this.router.navigateByUrl(url);;
+        if(this.buyer.active){
+          this.router.navigateByUrl(url);
+        }
+        else{
+          this.router.navigateByUrl(url);
+        }
+
       });
   }
 

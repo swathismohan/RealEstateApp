@@ -8,4 +8,5 @@ export interface Bid{
     buyerName: string;
     buyerEmail: string;
     propertyName: string;
-    }
+    active: boolean;
+}

@@ -9,7 +9,8 @@ const BidSchema = mongoose.Schema({
     status: "string",
     buyerName: "string",
     buyerEmail: "string",
-    propertyName: "string"
+    propertyName: "string",
+    active: "boolean"
   });
   
   var Bid = module.exports = mongoose.model('Bid', BidSchema);

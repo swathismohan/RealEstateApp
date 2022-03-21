@@ -58,4 +58,5 @@ export interface DBCustomer {
   password: string;
   customerId: string;
   legalSubscription: boolean;
+  active: boolean;
 }

@@ -18,7 +18,8 @@ const PropertySchema = mongoose.Schema({
     area: "string",
     areaUnit: "string",
     ownership: "string",
-    notes: "string"
+    notes: "string",
+    active: "boolean"
 });
 
 var Property = module.exports = mongoose.model('Property', PropertySchema);

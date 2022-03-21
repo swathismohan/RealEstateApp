@@ -37,7 +37,8 @@ const DBBuyerSchema = mongoose.Schema({
   userName: "string",
   password: "string",
   buyerId: "string",
-  legalSubscription: "boolean"
+  legalSubscription: "boolean",
+  active: "boolean"
 });
   
   var DBBuyer = module.exports = mongoose.model('DBBuyer', DBBuyerSchema);

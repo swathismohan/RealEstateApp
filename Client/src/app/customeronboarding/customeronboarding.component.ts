@@ -119,7 +119,8 @@ export class CustomeronboardingComponent implements OnInit {
           emailAddresses: this.emailAddresses,
           userName: this.userName,
           password: this.password,
-          legalSubscription: false
+          legalSubscription: false,
+          active: true
         }
         this.customeronboardingService.addCustomer(newCustomer)
           .subscribe((customer: any) =>{

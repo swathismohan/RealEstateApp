@@ -13,6 +13,7 @@ import { BuyeronboardingServiceService } from '../services/buyeronboarding-servi
 import { CustomeronboardingServiceService } from '../services/customeronboarding-service.service';
 import { BidServiceService } from '../services/bid-service.service';
 import { ApiServiceService } from '../services/api-service.service';
+import { DeactivationService } from '../services/deactivation.service';
 import { QuestionAnswer } from '../models/qa';
 import { Customer } from '../models/customer';
 
@@ -32,7 +33,7 @@ export interface CustomerContact {
   selector: 'app-buyerprofile',
   templateUrl: './buyerprofile.component.html',
   styleUrls: ['./buyerprofile.component.scss'],
-  providers: [BuyeronboardingServiceService, PropertyServiceService, QaService, CustomeronboardingServiceService ],
+  providers: [BuyeronboardingServiceService, PropertyServiceService, QaService, CustomeronboardingServiceService, DeactivationService ],
 })
 export class BuyerprofileComponent implements OnInit {
 
@@ -64,7 +65,8 @@ export class BuyerprofileComponent implements OnInit {
     private bidService: BidServiceService,
     public dialog: MatDialog,
     private qaService: QaService,
-    private customeronboardingServiceService: CustomeronboardingServiceService ) { }
+    private customeronboardingServiceService: CustomeronboardingServiceService,
+    private deactivationService: DeactivationService ) { }
 
     openDialog(): void {
       const dialogRef = this.dialog.open(DialogLegalBuyer, {
@@ -88,7 +90,8 @@ export class BuyerprofileComponent implements OnInit {
       status: this.status,
       buyerName: this.buyer.firstName,
       buyerEmail: this.buyer.emailAddresses[0].address,
-      propertyName: propertyName
+      propertyName: propertyName,
+      active: true
     }
     this.bidService.addBid(newBid)
       .subscribe((bid: any) =>{
@@ -118,6 +121,23 @@ export class BuyerprofileComponent implements OnInit {
         },
       });
     });
+  }
+
+  deactivateAccount(){
+    this.deactivationService.activateBuyer(this.buyerId, false)
+    .subscribe((response:Buyer) => {
+      console.log("deactivating buyer");
+    });
+    this.bidService.getBidByBuyer(this.buyerId)
+      .subscribe((resp:Bid[]) => {
+        this.bids = resp;
+        for (var bi in this.bids){
+          this.deactivationService.activateBid(this.bids[bi].bidId, false)
+          .subscribe((res:Bid) => {
+          });
+        }
+      });
+      this.onCompletion();
   }
 
   postQuestion(){

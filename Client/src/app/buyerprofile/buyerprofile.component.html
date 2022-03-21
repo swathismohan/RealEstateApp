@@ -1,9 +1,24 @@
 <header>
   <h1>
     <i>Welcome {{ apibuyer.firstName }},</i>
-    <button mat-raised-button class="legal" (click)="onCompletion()">Logout</button>
-    <button *ngIf = "!buyer.legalSubscription" mat-raised-button class="legal" (click)="openDialog()">Get Legal Subscription</button>
-  </h1>
+    <button mat-icon-button class="legal" [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+      <mat-icon>more_vert</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item [disabled] = "buyer.legalSubscription" (click)="openDialog()">
+        <mat-icon>workspace_premium</mat-icon>
+        <span>Get Legal Subscription</span>
+      </button>
+      <button mat-menu-item (click)="deactivateAccount()">
+        <mat-icon>no_accounts</mat-icon>
+        <span>Deactivate Account</span>
+      </button>
+      <button mat-menu-item (click)="onCompletion()">
+        <mat-icon>logout</mat-icon>
+        <span>Logout</span>
+      </button>
+    </mat-menu>
+   </h1>
 
 </header>
 

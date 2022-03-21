@@ -57,5 +57,6 @@ export interface DBBuyer {
   password: string;
   buyerId: string;
   legalSubscription: boolean;
+  active: boolean;
 }
 

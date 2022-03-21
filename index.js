@@ -363,7 +363,8 @@ app.post('/customer', (req, res, next) => {
       userName: req.body.userName,
       password: req.body.password,
       customerId: req.body.customerId,
-      legalSubscription: req.body.legalSubscription
+      legalSubscription: req.body.legalSubscription,
+      active: req.body.active
   });
 
   newCustomer.save((err, result) => {
@@ -458,7 +459,8 @@ app.post('/buyer', (req, res, next) => {
       userName: req.body.userName,
       password: req.body.password,
       buyerId: req.body.buyerId,
-      legalSubscription: req.body.legalSubscription
+      legalSubscription: req.body.legalSubscription,
+      active: req.body.active
   });
 
   newBuyer.save((err, result) => {
@@ -574,7 +576,8 @@ app.post('/property', (req, res, next) => {
       area: req.body.area,
       areaUnit: req.body.areaUnit,
       ownership: req.body.ownership,
-      notes: req.body.notes
+      notes: req.body.notes,
+      active: req.body.active
   });
 
   newProperty.save((err) => {
@@ -734,7 +737,8 @@ app.post('/bid', (req, res, next) => {
       status: "Under process",
       buyerName: req.body.buyerName,
       buyerEmail: req.body.buyerEmail,
-      propertyName: req.body.propertyName
+      propertyName: req.body.propertyName,
+      active: req.body.active
   });
 
   newBid.save((err, result) => {
@@ -1074,3 +1078,53 @@ app.put('/payment/status/verify', (req, res, next) => {
       }
   })
 });
+
+//deactivate models
+
+app.put('/activate/customer', (req, res, next) => {
+  DBCustomer.findOneAndUpdate({customerId: req.body.customerId}, {active: req.body.active}, null , function(err, customer){
+      if(err){
+          res.json(err);
+      }
+      else{
+          res.json(customer);
+      }
+  })
+});
+
+app.put('/activate/buyer', (req, res, next) => {
+  DBBuyer.findOneAndUpdate({buyerId: req.body.buyerId}, {active: req.body.active}, null , function(err, buyer){
+      if(err){
+          res.json(err);
+      }
+      else{
+          res.json(buyer);
+      }
+  })
+});
+
+app.put('/activate/property', (req, res, next) => {
+  Property.findOneAndUpdate({propertyId: req.body.propertyId}, {active: req.body.active}, null , function(err, property){
+      if(err){
+          res.json(err);
+      }
+      else{
+          res.json(property);
+      }
+  })
+});
+
+app.put('/activate/bid', (req, res, next) => {
+  Bid.findOneAndUpdate({bidId: req.body.bidId}, {active: req.body.active}, null , function(err, bid){
+      if(err){
+        console.log("error");
+          res.json(err);
+      }
+      else{
+        console.log("no error");
+          res.json(bid);
+      }
+  })
+});
+
+

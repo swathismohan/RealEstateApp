@@ -117,7 +117,8 @@ export class BuyeronboardingComponent implements OnInit {
         emailAddresses: this.emailAddresses,
         userName: this.userName,
         password: this.password,
-        legalSubscription: false
+        legalSubscription: false,
+        active: true
       }
         this.buyeronboardingService.addBuyer(newBuyer)
         .subscribe((buyer: any) =>{

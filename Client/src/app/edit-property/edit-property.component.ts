@@ -60,7 +60,8 @@ export class EditPropertyComponent implements OnInit {
     propertyId: this.property.propertyId,
     status: this.property.status,
     verification: this.property.verification,
-    comment: this.property.comment
+    comment: this.property.comment,
+    active: true
 
     }
 

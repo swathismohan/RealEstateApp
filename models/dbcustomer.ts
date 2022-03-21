@@ -37,7 +37,8 @@ const DBCustomerSchema = mongoose.Schema({
   userName: "string",
   password: "string",
   customerId: "string",
-  legalSubscription: "boolean"
+  legalSubscription: "boolean",
+  active: "boolean"
 });
 
 var DBCustomer = module.exports = mongoose.model('DBCustomer', DBCustomerSchema);

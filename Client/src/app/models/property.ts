@@ -17,4 +17,5 @@ export interface Property {
   areaUnit: string;
   ownership: string;
   notes: string;
+  active: boolean;
 }
