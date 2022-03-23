@@ -22,7 +22,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { StartComponent } from './start/start.component';
-import { CustomeronboardingComponent } from './customeronboarding/customeronboarding.component';
+import { CustomeronboardingComponent, DialogOtpVerification } from './customeronboarding/customeronboarding.component';
 import { BuyeronboardingComponent } from './buyeronboarding/buyeronboarding.component';
 import { CustomerprofileComponent, DialogLegalCustomer } from './customerprofile/customerprofile.component';
 import { BuyerprofileComponent, DialogLegalBuyer } from './buyerprofile/buyerprofile.component';
@@ -44,6 +44,7 @@ import { DialogBuyerDetails } from './property/property.component';
     CustomeronboardingComponent,
     BuyeronboardingComponent,
     CustomerprofileComponent,
+    DialogOtpVerification,
     BuyerprofileComponent,
     PropertyComponent,
     AdminComponent,

@@ -200,11 +200,11 @@ export class BuyeronboardingComponent implements OnInit {
     });
   }
 
-  verifyOtp(){
+  verifyOtp() {
     this.apiService.verifyOtp(this.phoneNumber, this.otpId, this.passcode)
-    .subscribe( (resp: any) =>{
+      .subscribe((resp: any) => {
       this.otpStatus = resp;
-    });
+      });
   }
 
   ngOnInit() {

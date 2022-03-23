@@ -90,20 +90,20 @@
   <mat-form-field class="field" *ngIf="!updateDetails">
     <input type="password"  matInput placeholder="Password" [(ngModel)] = "password" name= "password" required/>
   </mat-form-field>
-  <mat-card-header *ngIf="!updateDetails">
+  <!-- <mat-card-header *ngIf="!updateDetails">
     <mat-card-subtitle class="top-margin" style="margin-bottom:0"><b>OTP Verification:</b></mat-card-subtitle>
   </mat-card-header>
   <mat-form-field class="field" *ngIf="!updateDetails">
     <input type="text" matInput placeholder="Enter OTP" [(ngModel)] = "passcode" name= "passcode"/>
   </mat-form-field>
-  <button *ngIf="otpStatus != 'approved' && !updateDetails" mat-raised-button color="primary" class="top-margin left-margin" (click) = "sendOtp()">Get OTP</button>
-  <button *ngIf="otpStatus != 'approved' && !updateDetails" mat-raised-button color="primary" class="top-margin left-margin" (click) = "verifyOtp()">Verify OTP</button>
-  &nbsp;
+  <button *ngIf="otpStatus != 'approved'" mat-raised-button color="primary" class="top-margin left-margin" (click) = "sendOtp()">Get OTP</button>
+  <button *ngIf="otpStatus != 'approved'" mat-raised-button color="primary" class="top-margin left-margin" (click) = "verifyOtp()">Verify OTP</button>
+  &nbsp; -->
   <br>
   <a routerLink = "/customer/{{this.customerId}}">
     <button mat-raised-button *ngIf="updateDetails" color="primary" class="top-margin left-margin" (click)="updateCustomer()" type="submit">Update Seller Details</button>
   </a>
-  <button mat-raised-button *ngIf="!updateDetails" [disabled] = "customerAdded" color="primary" class="top-margin left-margin" (click)="[addCustomer(), onCompletion()]" type="submit">Register Seller</button>
+  <button mat-raised-button *ngIf="!updateDetails" [disabled] = "customerAdded" color="primary" class="top-margin left-margin" (click)="[openDialog()]" type="submit">Register Seller</button>
 
   </form>
 </mat-card>

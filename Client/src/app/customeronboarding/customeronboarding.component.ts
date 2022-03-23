@@ -1,8 +1,19 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject, Input } from '@angular/core';
 import { CustomeronboardingServiceService } from '../services/customeronboarding-service.service';
-import { DBCustomer ,Customer, Address, PhoneNumber, EmailAddress } from '../models/customer';
+import {
+  DBCustomer,
+  Customer,
+  Address,
+  PhoneNumber,
+  EmailAddress,
+} from '../models/customer';
 import { ApiServiceService } from '../services/api-service.service';
 import { Router, ActivatedRoute } from '@angular/router';
+import {
+  MatDialog,
+  MatDialogRef,
+  MAT_DIALOG_DATA,
+} from '@angular/material/dialog';
 import { v4 as uuid } from 'uuid';
 import * as moment from 'moment';
 import { NotificationService } from '../services/notification.service';
@@ -11,10 +22,13 @@ import { NotificationService } from '../services/notification.service';
   selector: 'app-customeronboarding',
   templateUrl: './customeronboarding.component.html',
   styleUrls: ['./customeronboarding.component.scss'],
-  providers: [CustomeronboardingServiceService, ApiServiceService, NotificationService],
+  providers: [
+    CustomeronboardingServiceService,
+    ApiServiceService,
+    NotificationService,
+  ],
 })
 export class CustomeronboardingComponent implements OnInit {
-
   dbuser!: any;
   customers: Customer[] = [];
   customer!: Customer;
@@ -50,23 +64,28 @@ export class CustomeronboardingComponent implements OnInit {
   otpStatus!: string;
   idType: string;
 
-  constructor(private customeronboardingService : CustomeronboardingServiceService, private apiService : ApiServiceService,
-    private router: Router, private activatedroute: ActivatedRoute, private notificationService: NotificationService) { }
+  constructor(
+    private customeronboardingService: CustomeronboardingServiceService,
+    private apiService: ApiServiceService,
+    private router: Router,
+    public dialog: MatDialog,
+    private activatedroute: ActivatedRoute,
+    private notificationService: NotificationService
+  ) {}
 
-  addCustomer(){
-
+  addCustomer() {
     this.phoneNumbers.push({
-      type: "MOBILE",
-      number: this.phoneNumber
+      type: 'MOBILE',
+      number: this.phoneNumber,
     });
 
     this.emailAddresses.push({
-      type: "OTHER",
-      address: this.emailAddress
+      type: 'OTHER',
+      address: this.emailAddress,
     });
 
     this.addresses.push({
-      addressType: "RESIDENTIAL",
+      addressType: 'RESIDENTIAL',
       country: this.countryOfResidency,
       line1: this.addline1,
       line2: this.addline2,
@@ -74,11 +93,11 @@ export class CustomeronboardingComponent implements OnInit {
       line4: this.addline4,
       line5: this.addline5,
       postalCode: this.postalCode,
-      buildingNumber: this.buildingNumber
+      buildingNumber: this.buildingNumber,
     });
 
-     const momentDate = new Date(this.dateOfBirth);
-     const formattedDate = moment(momentDate).format("YYYY-MM-DD");
+    const momentDate = new Date(this.dateOfBirth);
+    const formattedDate = moment(momentDate).format('YYYY-MM-DD');
 
     const newapiCustomer = {
       title: this.title,
@@ -86,7 +105,7 @@ export class CustomeronboardingComponent implements OnInit {
       firstName: this.firstName,
       lastName: this.lastName,
       gender: this.gender,
-      countryOfResidency : this.countryOfResidency,
+      countryOfResidency: this.countryOfResidency,
       identification: {
         type: this.idType,
         id: this.idNumber
@@ -97,19 +116,20 @@ export class CustomeronboardingComponent implements OnInit {
       fatcaDetails: {
         isUSResident: true,
         isUSTaxResident: false,
-        tin: this.tin
-    }
-    }
+        tin: this.tin,
+      },
+    };
 
-    if(this.otpStatus == "approved"){
-      this.apiService.postCustomer(newapiCustomer).subscribe((customerid: any) =>{
-        this.customerId=customerid;
+    this.apiService
+      .postCustomer(newapiCustomer)
+      .subscribe((customerid: any) => {
+        this.customerId = customerid;
         const newCustomer = {
           customerId: this.customerId,
           firstName: this.firstName,
           lastName: this.lastName,
           gender: this.gender,
-          countryOfResidency : this.countryOfResidency,
+          countryOfResidency: this.countryOfResidency,
           identification: {
             type: this.idType,
             id: this.idNumber
@@ -127,26 +147,25 @@ export class CustomeronboardingComponent implements OnInit {
             this.customers.push(customer);
           });
       });
-      this.customerAdded=true;
-      this.notificationService.welcomeEmail(this.firstName, this.emailAddresses[0].address)
-      .subscribe( (resp: any) =>{
-    });
-    }
+    this.customerAdded = true;
+    this.notificationService
+      .welcomeEmail(this.firstName, this.emailAddresses[0].address)
+      .subscribe((resp: any) => {});
   }
 
   updateCustomer() {
     this.phoneNumbers.push({
-      type: "MOBILE",
-      number: this.phoneNumber
+      type: 'MOBILE',
+      number: this.phoneNumber,
     });
 
     this.emailAddresses.push({
-      type: "OTHER",
-      address: this.emailAddress
+      type: 'OTHER',
+      address: this.emailAddress,
     });
 
     this.addresses.push({
-      addressType: "RESIDENTIAL",
+      addressType: 'RESIDENTIAL',
       country: this.countryOfResidency,
       line1: this.addline1,
       line2: this.addline2,
@@ -154,11 +173,11 @@ export class CustomeronboardingComponent implements OnInit {
       line4: this.addline4,
       line5: this.addline5,
       postalCode: this.postalCode,
-      buildingNumber: this.buildingNumber
+      buildingNumber: this.buildingNumber,
     });
 
-     const momentDate = new Date(this.dateOfBirth);
-     const formattedDate = moment(momentDate).format("YYYY-MM-DD");
+    const momentDate = new Date(this.dateOfBirth);
+    const formattedDate = moment(momentDate).format('YYYY-MM-DD');
 
     const updatedCustomer = {
       title: this.title,
@@ -166,7 +185,7 @@ export class CustomeronboardingComponent implements OnInit {
       firstName: this.firstName,
       lastName: this.lastName,
       gender: this.gender,
-      countryOfResidency : this.countryOfResidency,
+      countryOfResidency: this.countryOfResidency,
       identification: {
         type: this.idType,
         id: this.idNumber
@@ -185,43 +204,45 @@ export class CustomeronboardingComponent implements OnInit {
       });
   }
 
+  openDialog(): void {
+    const dialogRef = this.dialog.open(DialogOtpVerification, {
+      width: '500px',
+      disableClose: true,
+      data: {
+        userId: this.customerId,
+        phoneNumber: this.phoneNumber,
+        updateDetails: this.updateDetails,
+      },
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      this.addCustomer();
+      alert('Customer Registered Successfully');
+      this.onCompletion();
+    });
+  }
 
   onCompletion() {
-    if(this.otpStatus == "approved"){
-      setTimeout(() =>
-      {
-        const url = "/";
-        this.router.navigateByUrl(url);
-      },2000);
-    }
+      const url = '/';
+      this.router.navigateByUrl(url);
   }
 
-  sendOtp(){
-    this.apiService.sendOtp(this.phoneNumber)
-    .subscribe( (resp: any) =>{
-      this.otpId = resp;
-    });
-  }
-
-  verifyOtp(){
-    this.apiService.verifyOtp(this.phoneNumber, this.otpId, this.passcode)
-    .subscribe( (resp: any) =>{
-      this.otpStatus = resp;
-    });
-  }
-
-  getCustomer(){
-    this.customeronboardingService.getCustomer()
-      .subscribe( (customers: Customer[]) =>{
+  getCustomer() {
+    this.customeronboardingService
+      .getCustomer()
+      .subscribe((customers: Customer[]) => {
         this.customers = customers;
-    });
+      });
   }
 
   ngOnInit() {
     this.customerAdded = false;
     this.updateDetails = false;
 
-    if (this.activatedroute.snapshot.params && this.activatedroute.snapshot.params['customerId']) {
+    if (
+      this.activatedroute.snapshot.params &&
+      this.activatedroute.snapshot.params['customerId']
+    ) {
       this.customerId = this.activatedroute.snapshot.params['customerId'];
 
       this.customeronboardingService.getCustomerByUserIdFromFFDC(this.customerId)
@@ -249,5 +270,50 @@ export class CustomeronboardingComponent implements OnInit {
       });
     }
   }
+}
 
+@Component({
+  selector: 'dialog-otp-verification',
+  templateUrl: './dialog-otp-verification.html',
+  styleUrls: ['./customeronboarding.component.scss'],
+  providers: [ApiServiceService],
+})
+export class DialogOtpVerification {
+  otpId!: string;
+  otpStatus!: string;
+  passcode!: string;
+  loading!: boolean;
+
+  constructor(
+    private apiService: ApiServiceService,
+    public dialogRef: MatDialogRef<DialogOtpVerification>,
+    @Inject(MAT_DIALOG_DATA) public data
+  ) {}
+
+  ngOnInit() {
+    this.sendOtp();
+  }
+  sendOtp() {
+    this.otpStatus = undefined;
+    this.passcode = '';
+    this.apiService.sendOtp(this.data.phoneNumber).subscribe((resp: any) => {
+      this.otpId = resp;
+    });
+  }
+  verifyOtp() {
+    this.loading = true;
+
+    this.apiService
+      .verifyOtp(this.data.phoneNumber, this.otpId, this.passcode)
+      .subscribe((resp: any) => {
+        this.otpStatus = resp;
+        this.loading = false;
+        if (this.otpStatus === 'approved') {
+          this.closeDialog();
+        }
+      });
+  }
+  closeDialog(): void {
+    this.dialogRef.close();
+  }
 }
