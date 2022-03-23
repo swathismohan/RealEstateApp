@@ -540,13 +540,13 @@ app.get('/properties', (req, res, next) => {
 });
 
 app.get('/properties/available', (req, res, next) => {
-  Property.find({status: "AVAILABLE", verification: { $ne: "REJECTED" }}, function(err, properties){
+  Property.find({status: "AVAILABLE", verification: { $ne: "REJECTED" }, active: true}, function(err, properties){
       res.json(properties);
   })
 });
 
 app.get('/availableverifiedproperties', (req, res, next) => {
-  Property.find({status: "AVAILABLE", verification: "VERIFIED"}, function(err, properties){
+  Property.find({status: "AVAILABLE", verification: "VERIFIED", active: true}, function(err, properties){
       res.json(properties);
   })
 });
@@ -753,7 +753,7 @@ app.post('/bid', (req, res, next) => {
 
 //bids using buyerID
 app.get('/bids/:buyerId', (req, res, next) => {
-  Bid.find({buyerId: req.params.buyerId}, function(err, bid){
+  Bid.find({buyerId: req.params.buyerId, active: true}, function(err, bid){
       if(err){
           res.json(err);
       }
@@ -777,7 +777,7 @@ app.get('/bid/:bidId', (req, res, next) => {
 
 //bids on each property
 app.get('/bids/property/:propertyId', (req, res, next) => {
-  Bid.find({propertyId: req.params.propertyId, status: "Under process"}, function(err, bid){
+  Bid.find({propertyId: req.params.propertyId, status: "Under process", active: true}, function(err, bid){
       if(err){
           res.json(err);
       }
@@ -789,7 +789,7 @@ app.get('/bids/property/:propertyId', (req, res, next) => {
 
 //accepted bids on each property
 app.get('/bids/accepted/:propertyId', (req, res, next) => {
-  Bid.find({propertyId: req.params.propertyId, status: "ACCEPTED"}, function(err, bid){
+  Bid.find({propertyId: req.params.propertyId, status: "ACCEPTED", active: true}, function(err, bid){
       if(err){
           res.json(err);
       }
@@ -801,7 +801,7 @@ app.get('/bids/accepted/:propertyId', (req, res, next) => {
 
 //declined bids on each property
 app.get('/bids/declined/:propertyId', (req, res, next) => {
-  Bid.find({propertyId: req.params.propertyId, status: "DECLINED"}, function(err, bid){
+  Bid.find({propertyId: req.params.propertyId, status: "DECLINED", active: true}, function(err, bid){
       if(err){
           res.json(err);
       }
