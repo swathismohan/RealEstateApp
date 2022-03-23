@@ -89,7 +89,7 @@ export class CustomerprofileComponent implements OnInit {
           this.deactivationService.activateProperty(this.deProperties[pr].propertyId, false)
           .subscribe((resp:Property) => {
             });
-            this.bidService.getBidsByPropertyId(this.deProperties[pr].propertyId)
+            this.bidService.getAllBidsByPropertyId(this.deProperties[pr].propertyId)
             .subscribe((res:Bid[]) => {
               this.bids=res;
               for (var bi in this.bids){
