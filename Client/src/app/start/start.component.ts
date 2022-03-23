@@ -41,7 +41,7 @@ export class StartComponent implements OnInit {
           this.router.navigateByUrl(url);
         }
         else{
-          this.router.navigateByUrl(url);
+          alert("Customer not active");
         }
 
       });
@@ -56,8 +56,7 @@ export class StartComponent implements OnInit {
           this.router.navigateByUrl(url);
         }
         else{
-          this.activateBuyer();
-          this.router.navigateByUrl(url);
+          alert("Buyer not active");
         }
 
       });
@@ -66,7 +65,6 @@ export class StartComponent implements OnInit {
   activateBuyer(){
     this.deactivationService.activateBuyer(this.buyer.buyerId, true)
     .subscribe((response:DBBuyer) => {
-      console.log("activating buyer");
     });
     this.bidService.getAllBidByBuyer(this.buyer.buyerId)
       .subscribe((respon:Bid[]) => {
@@ -82,6 +80,35 @@ export class StartComponent implements OnInit {
           });
         }
       });
+  }
+
+  activateCustomer(){
+    this.deactivationService.activateCustomer(this.customer.customerId, true)
+    .subscribe((response:DBCustomer) => {
+    });
+    this.propertyService.getPropertyByCustomerId(this.customer.customerId)
+    .subscribe((respo:Property[]) => {
+      this.properties=respo;
+      for(var pr in this.properties){
+        this.deactivationService.activateProperty(this.properties[pr].propertyId, true)
+        .subscribe((resp:Property) => {
+          });
+          this.bidService.getAllBidsByPropertyId(this.properties[pr].propertyId)
+          .subscribe((res:Bid[]) => {
+            this.bids=res;
+            for (var bi in this.bids){
+              this.buyerOnboardingService.getBuyerById(this.bids[bi].buyerId)
+              .subscribe((re:DBBuyer) => {
+                if(re.active){
+                  this.deactivationService.activateBid(this.bids[bi].bidId, true)
+                  .subscribe((res:Bid) => {
+                  });
+                }
+              });
+            }
+        });
+      }
+    });
   }
 
   ngOnInit() {
