@@ -1,6 +1,8 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { Property } from '../models/property';
 import { CustomeronboardingServiceService } from '../services/customeronboarding-service.service';
+import { DeactivationService } from '../services/deactivation.service';
+import { BidServiceService } from '../services/bid-service.service';
 import { QaService } from '../services/qa.service';
 import { PropertyServiceService } from '../services/property-service.service';
 import { PaymentService } from '../services/payment.service';
@@ -12,12 +14,13 @@ import { DialogData } from '../buyerprofile/buyerprofile.component';
 import { ApiServiceService } from '../services/api-service.service';
 import { QuestionAnswer } from '../models/qa';
 import { Payment } from '../models/payment';
+import { Bid } from '../models/bid';
 
 @Component({
   selector: 'app-customerprofile',
   templateUrl: './customerprofile.component.html',
   styleUrls: ['./customerprofile.component.scss'],
-  providers: [CustomeronboardingServiceService, PropertyServiceService, QaService],
+  providers: [CustomeronboardingServiceService, PropertyServiceService, QaService, DeactivationService, BidServiceService],
 })
 export class CustomerprofileComponent implements OnInit {
 
@@ -51,13 +54,17 @@ export class CustomerprofileComponent implements OnInit {
   areaUnit: string;
   ownership: string;
   notes: string;
+  bids: Bid[]=[];
+  deProperties: Property[]= [];
 
   areaunits: string[] = ["sq ft","Cents","Acre", "Hectare"];
   ownershiptype: string[] = ["Sole/ Individual", "Family owned", "Joint"];
 
   public customer!: DBCustomer;
   constructor(private customeronboardingService : CustomeronboardingServiceService, private router: Router, private activatedroute: ActivatedRoute,
-     private propertyService: PropertyServiceService, public dialog: MatDialog, private qaService: QaService) { }
+     private propertyService: PropertyServiceService, public dialog: MatDialog, private qaService: QaService, 
+     private deactivationService: DeactivationService, private bidService: BidServiceService
+     ) { }
 
      openDialog(): void {
       const dialogRef = this.dialog.open(DialogLegalCustomer, {
@@ -68,6 +75,32 @@ export class CustomerprofileComponent implements OnInit {
           requestPayment: this.requestPayment
         },
       });
+    }
+
+    deactivateAccount(){
+      this.deactivationService.activateCustomer(this.customerId, false)
+      .subscribe((response:Customer) => {
+        console.log("deactivating customer");
+      });
+      this.propertyService.getPropertyByCustomerId(this.customerId)
+      .subscribe((respo:Property[]) => {
+        this.deProperties=respo;
+        for(var pr in this.deProperties){
+          this.deactivationService.activateProperty(this.deProperties[pr].propertyId, false)
+          .subscribe((resp:Property) => {
+            });
+            this.bidService.getBidsByPropertyId(this.deProperties[pr].propertyId)
+            .subscribe((res:Bid[]) => {
+              this.bids=res;
+              for (var bi in this.bids){
+                this.deactivationService.activateBid(this.bids[bi].bidId, false)
+                .subscribe((res:Bid) => {
+                });
+              }
+          });
+        }
+      });
+      this.onCompletion();
     }
 
   addProperty(){
