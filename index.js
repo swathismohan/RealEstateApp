@@ -763,6 +763,17 @@ app.get('/bids/:buyerId', (req, res, next) => {
   })
 });
 
+app.get('/bids/active/:buyerId', (req, res, next) => {
+  Bid.find({buyerId: req.params.buyerId, active: true}, function(err, bid){
+      if(err){
+          res.json(err);
+      }
+      else{
+          res.json(bid);
+      }
+  })
+});
+
 app.get('/bid/:bidId', (req, res, next) => {
   Bid.find({bidId: req.params.bidId}, function(err, bid){
       if(err){
@@ -788,7 +799,7 @@ app.get('/bids/allproperty/:propertyId', (req, res, next) => {
 
 //bids on each property
 app.get('/bids/property/:propertyId', (req, res, next) => {
-  Bid.find({propertyId: req.params.propertyId, status: "Under process"}, function(err, bid){
+  Bid.find({propertyId: req.params.propertyId, status: "Under process", active: true}, function(err, bid){
       if(err){
           res.json(err);
       }
@@ -800,7 +811,7 @@ app.get('/bids/property/:propertyId', (req, res, next) => {
 
 //accepted bids on each property
 app.get('/bids/accepted/:propertyId', (req, res, next) => {
-  Bid.find({propertyId: req.params.propertyId, status: "ACCEPTED"}, function(err, bid){
+  Bid.find({propertyId: req.params.propertyId, status: "ACCEPTED", active: true}, function(err, bid){
       if(err){
           res.json(err);
       }
@@ -812,7 +823,7 @@ app.get('/bids/accepted/:propertyId', (req, res, next) => {
 
 //declined bids on each property
 app.get('/bids/declined/:propertyId', (req, res, next) => {
-  Bid.find({propertyId: req.params.propertyId, status: "DECLINED"}, function(err, bid){
+  Bid.find({propertyId: req.params.propertyId, status: "DECLINED", active: true}, function(err, bid){
       if(err){
           res.json(err);
       }

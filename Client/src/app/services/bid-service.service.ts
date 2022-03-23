@@ -11,6 +11,10 @@ export class BidServiceService {
   constructor(private httpClient: HttpClient) { }
 
   getBidByBuyer(buyerId: string){
+    return this.httpClient.get<any>("http://localhost:3000/bids/active/"+ buyerId);
+  }
+
+  getAllBidByBuyer(buyerId: string){
     return this.httpClient.get<any>("http://localhost:3000/bids/"+ buyerId);
   }
 

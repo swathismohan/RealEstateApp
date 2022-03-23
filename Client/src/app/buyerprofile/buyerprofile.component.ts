@@ -128,7 +128,7 @@ export class BuyerprofileComponent implements OnInit {
     .subscribe((response:Buyer) => {
       console.log("deactivating buyer");
     });
-    this.bidService.getBidByBuyer(this.buyerId)
+    this.bidService.getAllBidByBuyer(this.buyerId)
       .subscribe((resp:Bid[]) => {
         this.bids = resp;
         for (var bi in this.bids){
