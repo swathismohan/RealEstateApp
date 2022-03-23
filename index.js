@@ -697,18 +697,6 @@ app.get('/properties/:customerId', (req, res, next) => {
   })
 });
 
-//get property from bidID
-app.get('/propertybybid/:bidId', (req, res, next) => {
-  Property.find({bidId: req.params.bidId}, function(err, property){
-      if(err){
-          res.json(err);
-      }
-      else{
-          res.json(property);
-      }
-  })
-});
-
 app.delete('/property/:id', (req, res, next) => {
   Property.deleteOne({_id: req.params.id}, function(err, result){
       if(err){
