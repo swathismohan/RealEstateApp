@@ -10,11 +10,17 @@ import { DBCustomer, Customer } from '../models/customer';
 import { Router, ActivatedRoute } from '@angular/router';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { v4 as uuid } from 'uuid';
-import { DialogData } from '../buyerprofile/buyerprofile.component';
 import { ApiServiceService } from '../services/api-service.service';
 import { QuestionAnswer } from '../models/qa';
 import { Payment } from '../models/payment';
 import { Bid } from '../models/bid';
+
+export interface DialogData {
+  userId: string;
+  subscription: boolean;
+  requestPayment: boolean;
+  dialogType: boolean;
+}
 
 @Component({
   selector: 'app-customerprofile',
@@ -68,13 +74,14 @@ export class CustomerprofileComponent implements OnInit {
      private deactivationService: DeactivationService, private bidService: BidServiceService
      ) { }
 
-     openDialog(): void {
+     openDialog(diaType: boolean): void {
       const dialogRef = this.dialog.open(DialogLegalCustomer, {
         width: '500px',
         data: {
           userId: this.customerId,
           subscription: this.customer.legalSubscription,
-          requestPayment: this.requestPayment
+          requestPayment: this.requestPayment,
+          dialogType: diaType
         },
       });
     }
@@ -150,6 +157,7 @@ export class CustomerprofileComponent implements OnInit {
   }
 
   requestVerification(propertyId: string, verification: string){
+      this.openDialog(true);
       this.propertyService.propertyVerify(propertyId, verification)
       .subscribe((response: Property) =>{
         this.property = response;
@@ -290,6 +298,11 @@ export class DialogLegalCustomer {
       alert("Payment Successful");
       this.dialogRef.close();
     });
+  }
+
+  paymentSuccessful(){
+    alert("Payment Successful.\n Verification requested");
+    this.dialogRef.close();
   }
 
 }

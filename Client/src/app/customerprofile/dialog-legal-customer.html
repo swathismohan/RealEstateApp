@@ -1,28 +1,61 @@
-<div mat-dialog-content>
-  <p>Legal Advisory is a paid service. Please proceed to pay Rs.250 to get subscription.</p>
-</div>
-<div mat-dialog-actions *ngIf = "!data.requestPayment">
-  <button mat-button (click)="onNoClick()">No Thanks</button>
-  <button mat-raised-button color="primary" (click)="showPaymentDetails()"> Pay and Proceed</button>
-</div>
-<div mat-dialog-content *ngIf="data.requestPayment">
-  <p>Enter Payment details</p>
-  <form>
-    <mat-form-field  >
-    <mat-label>
-      <mat-icon style="margin-right:3px">account_circle</mat-icon> Account Number
-    </mat-label>
-      <input type="text" [(ngModel)] = "fromAccountId" name="fromAccountId" matInput placeholder="Account Number" required>
-    </mat-form-field>
-    <br>
-    <mat-form-field >
-      <mat-label>
-        <mat-icon style="margin-right:3px">note_add</mat-icon> Remark
-      </mat-label>
-      <input type="text" [(ngModel)] = "narrative" name="narrative" matInput placeholder="Remark">
-    </mat-form-field>
-    <br>
+<div *ngIf="!data.dialogType">
+  <div mat-dialog-content>
+    <p>Legal Advisory is a paid service. Please proceed to pay Rs.3000 to get subscription.</p>
+  </div>
+  <div mat-dialog-actions *ngIf = "!data.requestPayment">
     <button mat-button (click)="onNoClick()">No Thanks</button>
-    <button mat-button color="primary" (click)="makePayment()">Make Payment</button>
-  </form>
+    <button mat-raised-button color="primary" (click)="showPaymentDetails()"> Pay and Proceed</button>
+  </div>
+  <div mat-dialog-content *ngIf="data.requestPayment">
+    <p>Enter Payment details</p>
+    <form>
+      <mat-form-field  >
+      <mat-label>
+        <mat-icon style="margin-right:3px">account_circle</mat-icon> Account Number
+      </mat-label>
+        <input type="text" [(ngModel)] = "fromAccountId" name="fromAccountId" matInput placeholder="Account Number" required>
+      </mat-form-field>
+      <br>
+      <mat-form-field >
+        <mat-label>
+          <mat-icon style="margin-right:3px">note_add</mat-icon> Remark
+        </mat-label>
+        <input type="text" [(ngModel)] = "narrative" name="narrative" matInput placeholder="Remark">
+      </mat-form-field>
+      <br>
+      <button mat-button (click)="onNoClick()">No Thanks</button>
+      <button mat-button color="primary" (click)="makePayment()">Make Payment</button>
+    </form>
+  </div>
+</div>
+
+<div *ngIf="data.dialogType">
+  <div mat-dialog-content>
+    <p>Property Verification is a paid service. Please proceed to pay Rs.1500 to get subscription.</p>
+  </div>
+  <div mat-dialog-actions *ngIf = "!data.requestPayment">
+    <button mat-button (click)="onNoClick()">No Thanks</button>
+    <button mat-raised-button color="primary" (click)="showPaymentDetails()"> Pay and Proceed</button>
+  </div>
+  <div mat-dialog-content *ngIf="data.requestPayment">
+    <p>Enter Payment details</p>
+    <form>
+      <mat-form-field  >
+      <mat-label>
+        <mat-icon style="margin-right:3px">account_circle</mat-icon> Account Number
+      </mat-label>
+        <input type="text" [(ngModel)] = "fromAccountId" name="fromAccountId" matInput placeholder="Account Number" required>
+      </mat-form-field>
+      <br>
+      <mat-form-field >
+        <mat-label>
+          <mat-icon style="margin-right:3px">note_add</mat-icon> Remark
+        </mat-label>
+        <input type="text" [(ngModel)] = "narrative" name="narrative" matInput placeholder="Remark">
+      </mat-form-field>
+      <br>
+      <button mat-button (click)="onNoClick()">No Thanks</button>
+      <button mat-button color="primary" (click)="paymentSuccessful()">Make Payment</button>
+    </form>
+  </div>
 </div>
