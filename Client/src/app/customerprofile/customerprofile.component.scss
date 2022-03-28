@@ -8,23 +8,22 @@ h1{
   font-size: 30px;
   font-weight: 500;
 }
-.profile-card-container{
-  margin: 5% auto;
-  max-width: 600px;
-  min-width: 200px;
-}
 .card-header{
   background-color: #1976d2;
   color: white;
   padding-top: 10px;
 }
 .card-contents{
-  display: flex;
   margin: 20px 2px;
 }
-.contents{
-  margin: 5px 10px;
-  width: 100%;
+.card-values{
+  display: flex;
+  flex-direction: row;
+  margin-top: 1px;
+  margin-bottom: 1px;
+}
+.cards{
+  display: flex;
 }
 p{
   margin-bottom: 19px;
@@ -37,6 +36,14 @@ p{
 }
 .left-margin{
   margin-left: 15px;
+}
+.right-margin{
+  margin-right: 15px;
+}
+.card-style{
+  margin: 20px 6px;
+  min-width: 20%;
+  max-width: 30%;
 }
 .card-container{
   margin: 30px 200px;
@@ -58,7 +65,7 @@ input{
   margin: 5px 20px;
 }
 .property-contents{
-  margin: 5px 10px;
+  margin: 5px 2px;
   width: 25%;
 }
 button.legal{
@@ -81,4 +88,88 @@ button.legal{
 }
 .panel{
   flex-grow: 1;
+}
+.profile-page{
+  height: 100%;
+}
+.image1-half{
+  width: 40%;
+  height: 550px;
+  float: left;
+  background-image: url("home1.jpg");
+  box-shadow: 0 0 8px 8px white inset;
+  // filter: blur(4px);
+  // -webkit-filter: blur(4px);
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  margin-right: 0;
+}
+.image2-half{
+  width: 40%;
+  height: 550px;
+  float: left;
+  background-image: url("home2.jpg");
+  box-shadow: 0 0 8px 8px white inset;
+  // filter: blur(4px);
+  // -webkit-filter: blur(4px);
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  margin-right: 0;
+}
+.image3-half{
+  width: 40%;
+  height: 550px;
+  float: left;
+  background-image: url("home3.jpg");
+  box-shadow: 0 0 8px 8px white inset;
+  // filter: blur(4px);
+  // -webkit-filter: blur(4px);
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  margin-right: 0;
+}
+.image4-half{
+  width: 40%;
+  height: 550px;
+  float: left;
+  background-image: url("home4.jpg");
+  box-shadow: 0 0 8px 8px white inset;
+  // filter: blur(4px);
+  // -webkit-filter: blur(4px);
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  margin-right: 0;
+}
+.profile-details{
+  float: right;
+  width: 57.92%;
+}
+.profile-card{
+  margin: 0;
+  padding: 0;
+  height: 580px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: #1976d2;
+}
+.profile-card-content{
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  font-style: italic;
+  font-size: 40px;
+  margin-bottom: 5px;
+}
+.adv{
+ font-size: 20px;
+ color: black;
+}
+
+.my-profile{
+  display: flex;
+  justify-content: center;
+}
+
+.disable-click{
+  pointer-events: none;
 }

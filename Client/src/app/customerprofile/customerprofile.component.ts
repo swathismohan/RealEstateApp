@@ -55,14 +55,16 @@ export class CustomerprofileComponent implements OnInit {
   ownership: string;
   notes: string;
   bids: Bid[]=[];
-  deProperties: Property[]= [];
+  deProperties: Property[] = [];
+  content: string;
+  profile!: Boolean;
 
   areaunits: string[] = ["sq ft","Cents","Acre", "Hectare"];
   ownershiptype: string[] = ["Sole/ Individual", "Family owned", "Joint"];
 
   public customer!: DBCustomer;
   constructor(private customeronboardingService : CustomeronboardingServiceService, private router: Router, private activatedroute: ActivatedRoute,
-     private propertyService: PropertyServiceService, public dialog: MatDialog, private qaService: QaService, 
+     private propertyService: PropertyServiceService, public dialog: MatDialog, private qaService: QaService,
      private deactivationService: DeactivationService, private bidService: BidServiceService
      ) { }
 
@@ -195,7 +197,6 @@ export class CustomerprofileComponent implements OnInit {
     this.router.navigateByUrl(url);
   }
 
-
   ngOnInit() {
     this.customerId = this.activatedroute.snapshot.params['customerId'];
     this.customeronboardingService.getCustomerByUserIdFromFFDC(this.customerId)
@@ -216,6 +217,23 @@ export class CustomerprofileComponent implements OnInit {
       this.questions = resp;
     });
     this.requestPayment = false;
+    this.changeContent();
+  }
+
+  changeContent() {
+    this.content = 'addProperty';
+    setTimeout(() => {
+      this.content = 'legalVerification'
+    }, 2000);
+    setTimeout(() => {
+      this.content = 'sellProperty'
+    }, 4000);
+    setTimeout(() => {
+      this.content = 'price'
+    }, 6000);
+    setTimeout(() => {
+      this.changeContent()
+    }, 8000);
   }
 }
 

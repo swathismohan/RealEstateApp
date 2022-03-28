@@ -5,9 +5,13 @@
       <mat-icon>more_vert</mat-icon>
     </button>
     <mat-menu #menu="matMenu">
+      <button mat-menu-item [matMenuTriggerFor]="profile">
+        <mat-icon>account_circle</mat-icon>
+        <span>My Profile</span>
+      </button>
       <button mat-menu-item [disabled] = "customer.legalSubscription" (click)="openDialog()">
         <mat-icon>workspace_premium</mat-icon>
-        <span>Get Legal Subscription</span>
+        <span>Legal Subscription</span>
       </button>
       <button mat-menu-item (click)="deactivateAccount()">
         <mat-icon>no_accounts</mat-icon>
@@ -18,35 +22,53 @@
         <span>Logout</span>
       </button>
     </mat-menu>
+    <mat-menu #profile="matMenu">
+      <button mat-menu-item class="disable-click">
+        <mat-icon>face</mat-icon>
+        <span>{{apicustomer.firstName}} {{apicustomer.lastName}}</span>
+      </button>
+      <button mat-menu-item class="disable-click">
+        <mat-icon>perm_identity</mat-icon>
+        <span>{{apicustomer.identification.id}}</span>
+      </button>
+      <button mat-menu-item class="disable-click">
+        <mat-icon>email</mat-icon>
+        <span>{{apicustomer.emailAddresses[0].address}}</span>
+      </button>
+      <button mat-menu-item class="disable-click">
+        <mat-icon>phone</mat-icon>
+        <span>{{apicustomer.phoneNumbers[0].number}}</span>
+      </button>
+      <button mat-menu-item (click)="editCustomerProfile()">
+        <mat-icon>create</mat-icon>
+        <span>Edit Profile</span>
+      </button>
+    </mat-menu>
  </h1>
 </header>
 
 <mat-tab-group mat-align-tabs="start" (selectedTabChange)="getPropertyByCustomerId($event)">
-  <mat-tab label="My profile">
-    <mat-card class="profile-card-container">
-      <mat-card-header class="card-header">
-        <mat-card-title>My Profile</mat-card-title>
-        <button mat-icon-button aria-label="edit button" style="margin-left: auto;" (click)="editCustomerProfile()">
-          <mat-icon>create</mat-icon>
-        </button>
-      </mat-card-header>
-      <mat-card-content class="card-contents">
-        <div class="contents">
-          <h4>Name:</h4>
-          <h4>Id Number:</h4>
-          <h4>Address:</h4>
-          <h4>E-mail:</h4>
-          <h4>Phone number:</h4>
-        </div>
-        <div class="contents">
-          <p>{{apicustomer.firstName}} {{apicustomer.lastName}}</p>
-          <p>{{apicustomer.identification.id}}</p>
-          <p>{{apicustomer.addresses[0].line1}}, {{apicustomer.addresses[0].line2}}</p>
-          <p>{{apicustomer.emailAddresses[0].address}}</p>
-          <p>{{apicustomer.phoneNumbers[0].number}}</p>
-        </div>
-      </mat-card-content>
+  <mat-tab label="Home" class="profile-page">
+    <mat-card class="image1-half" *ngIf="content === 'addProperty'">
     </mat-card>
+    <mat-card class="image2-half" *ngIf="content === 'legalVerification'">
+    </mat-card>
+    <mat-card class="image3-half" *ngIf="content === 'sellProperty'">
+    </mat-card>
+    <mat-card class="image4-half" *ngIf="content === 'price'">
+    </mat-card>
+    <div class="profile-details">
+      <mat-card class="profile-card">
+        <mat-card-content class="profile-card-content">Sell your properties without hustle</mat-card-content>
+        <div>
+          <br>
+          <mat-card-content *ngIf="content === 'addProperty'" class="adv">Add your property for sale</mat-card-content>
+          <mat-card-content *ngIf="content === 'legalVerification'" class="adv">Get your property legally verified</mat-card-content>
+          <mat-card-content *ngIf="content === 'sellProperty'" class="adv">It helps you sell your property easily</mat-card-content>
+          <mat-card-content *ngIf="content === 'price'" class="adv">Get the best market price for your property</mat-card-content>
+        </div>
+      </mat-card>
+    </div>
   </mat-tab>
   <mat-tab label="Add property">
     <mat-card class="card-container">
@@ -122,85 +144,86 @@
 
   <mat-tab label="Property details">
     <br />
-    <div *ngIf=properties.length>
-    <mat-expansion-panel class="panel" *ngFor="let prop of properties">
-      <mat-expansion-panel-header>
-        <mat-panel-title>
-          <b>{{ prop.propertyName }}</b>
-        </mat-panel-title>
-
-        <mat-panel-description>
-          {{prop.verification}}
-        </mat-panel-description>
-
+    <div class="cards" *ngIf=properties.length>
+    <mat-card class="card-style" *ngFor="let prop of properties">
+      <mat-card-title>{{ prop.propertyName }}
         <button mat-icon-button aria-label="edit button" *ngIf="prop.verification != 'VERIFIED'" style="margin-right: 1cm;" (click)="gotoEditProperty(prop.propertyId)">
-          Edit
           <mat-icon>create</mat-icon>
         </button>
-
-      </mat-expansion-panel-header>
-
-      <mat-card>
-      <mat-card-content class="card-contents">
-        <div class="property-contents">
-          <h4>Address:</h4>
-          <h4>Postal code:</h4>
-          <h4>Expected Amount:</h4>
-          <h4>GreenBelt:</h4>
-          <h4 *ngIf="prop.verification === 'VERIFIED' || prop.verification === 'REJECTED'">Verification comment:</h4>
-        </div>
-        <div class="property-contents">
-          <p>{{prop.addline1}}</p>
-          <p>{{prop.postalCode}}</p>
-          <p>{{prop.marketValue}}</p>
-          <p>{{prop.greenBelt}}</p>
-          <p *ngIf="prop.verification === 'VERIFIED' || prop.verification === 'REJECTED'">{{prop.comment}}</p>
+      </mat-card-title>
+      <mat-card-subtitle>{{prop.verification}}</mat-card-subtitle>
+      <mat-card-content>
+        <div>
+          <div class="card-values">
+            <h3 class="right-margin">Address:</h3><h3>{{prop.addline1}}, {{prop.addline2}}</h3>
+          </div>
+          <div class="card-values">
+            <h3 class="right-margin">Postal code:</h3><h3>{{prop.postalCode}}</h3>
+          </div>
+          <div class="card-values">
+            <h3 class="right-margin">Area:</h3><h3>{{prop.area}} {{prop.areaUnit}}</h3>
+          </div>
+          <div class="card-values">
+            <h3 class="right-margin">Expected Amount:</h3><h3>{{prop.marketValue}}</h3>
+          </div>
+          <div class="card-values">
+            <h3 class="right-margin">GreenBelt:</h3><h3>{{prop.greenBelt}}</h3>
+          </div>
+          <div class="card-values">
+            <h3 class="right-margin" *ngIf="prop.verification === 'VERIFIED' || prop.verification === 'REJECTED'">Verification comment:</h3><h3 *ngIf="prop.verification === 'VERIFIED' || prop.verification === 'REJECTED'">{{prop.comment}}</h3>
+          </div>
         </div>
       </mat-card-content>
       <mat-card-actions>
+        <button
+        mat-button
+        (click)="gotoPropertyBids(prop.propertyId)"
+        class="top-margin left-margin"
+        color="primary">
+        Bids
+      </button>
       <button
-      mat-raised-button
-      (click)="gotoPropertyBids(prop.propertyId)"
-      class="top-margin left-margin"
-      color="primary">
-      View bids
-    </button>
-    <button
-      mat-raised-button
-      (click)="requestVerification(prop.propertyId,'VERIFICATION REQUESTED')"
+      mat-button
+        (click)="requestVerification(prop.propertyId,'VERIFICATION REQUESTED')"
+        class="top-margin left-margin"
+        color="primary"
+        *ngIf="prop.verification === 'PENDING VERIFICATION'">
+        Verify
+      </button>
+      <button
+      mat-button
+        (click)="requestVerification(prop.propertyId,'VERIFICATION REQUESTED')"
+        class="top-margin left-margin"
+        color="primary"
+        *ngIf="prop.verification === 'REJECTED'">
+        Re-verify
+      </button>
+      <button
+      mat-button
+        class="top-margin left-margin disable-click"
+        color="accent"
+        *ngIf="prop.verification !== 'PENDING VERIFICATION' && prop.verification !== 'REJECTED' && prop.verification !== 'VERIFIED'">
+        Verifying..
+      </button>
+      <button
+      mat-button
+      (click)="updateProperty(prop.propertyId,'NOT AVAILABLE')"
       class="top-margin left-margin"
       color="primary"
-      *ngIf="prop.verification === 'PENDING VERIFICATION'">
-      Request Verification
-    </button>
-    <button
-      mat-raised-button
-      (click)="requestVerification(prop.propertyId,'VERIFICATION REQUESTED')"
+      *ngIf="prop.status === 'AVAILABLE'">
+      Make it Unavailable
+      </button>
+      <button
+      mat-button
+      (click)="updateProperty(prop.propertyId,'AVAILABLE')"
       class="top-margin left-margin"
       color="primary"
-      *ngIf="prop.verification === 'REJECTED'">
-      Resubmit for Verification
-    </button>
-    <button
-    mat-raised-button
-    (click)="updateProperty(prop.propertyId,'NOT AVAILABLE')"
-    class="top-margin left-margin"
-    color="primary"
-    *ngIf="prop.status === 'AVAILABLE'">
-    Make it Unavailable
-    </button>
-    <button
-    mat-raised-button
-    (click)="updateProperty(prop.propertyId,'AVAILABLE')"
-    class="top-margin left-margin"
-    color="primary"
-    *ngIf="prop.status === 'NOT AVAILABLE'">
-    Make it Available
-    </button>
+      *ngIf="prop.status === 'NOT AVAILABLE'">
+      Make it Available
+      </button>
 
-  </mat-card-actions>
+    </mat-card-actions>
     </mat-card>
-    </mat-expansion-panel>
   </div>
     <h3 *ngElse>No properties added</h3>
   </mat-tab>
