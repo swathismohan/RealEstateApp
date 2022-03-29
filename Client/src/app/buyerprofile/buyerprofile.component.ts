@@ -56,6 +56,7 @@ export class BuyerprofileComponent implements OnInit {
   allproperty!: boolean;
   requestPayment!: Boolean;
   customer: Customer;
+  profile!: Boolean;
 
   constructor(
     private buyerOnboardingService:BuyeronboardingServiceService,

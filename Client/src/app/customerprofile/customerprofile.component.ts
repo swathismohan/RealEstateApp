@@ -69,9 +69,14 @@ export class CustomerprofileComponent implements OnInit {
   ownershiptype: string[] = ["Sole/ Individual", "Family owned", "Joint"];
 
   public customer!: DBCustomer;
-  constructor(private customeronboardingService : CustomeronboardingServiceService, private router: Router, private activatedroute: ActivatedRoute,
-     private propertyService: PropertyServiceService, public dialog: MatDialog, private qaService: QaService,
-     private deactivationService: DeactivationService, private bidService: BidServiceService
+  constructor(private customeronboardingService : CustomeronboardingServiceService,
+    private router: Router,
+    private activatedroute: ActivatedRoute,
+    private propertyService: PropertyServiceService,
+    public dialog: MatDialog,
+    private qaService: QaService,
+    private deactivationService: DeactivationService,
+    private bidService: BidServiceService
      ) { }
 
      openDialog(diaType: boolean): void {
