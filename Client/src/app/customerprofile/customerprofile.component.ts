@@ -170,7 +170,7 @@ export class CustomerprofileComponent implements OnInit {
       QAId: this.qaId,
       userId: this.customerId,
       question: this.question,
-      answer: "Not answered",
+      answer: "Awaiting Response",
       QAstatus: "UNANSWERED"
     }
     this.qaService.postQuestion(newQuestion)

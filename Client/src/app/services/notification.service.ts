@@ -45,4 +45,16 @@ export class NotificationService {
    ).pipe(map((res:any) => res.json()));
   }
 
+  legalSubEmail(firstName: string, email: string){
+    const url = "http://localhost:3000/sendmail";
+    let body = {"to": email,
+                "subject": "Bid Status Changed",
+                "text": "Hi" + firstName + ", \n\nYou have subscribed for Legal Advisory feature. Swathi Mohan is your Legal Advisor.\n Contact:\nPh: 9654564764\nEmail: abcd@gmail.com. \n\nRegards, \nTeam Estate Aide" };
+    return this.httpClient.post(
+      url,
+      body
+   ).pipe(map((res:any) => res.json()));
+  }
+
+
 }

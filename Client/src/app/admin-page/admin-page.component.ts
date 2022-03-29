@@ -54,10 +54,22 @@ export class AdminPageComponent implements OnInit {
       this.customeronboardingService.getLegalSubscription(entityId)
       .subscribe((response: Customer) =>{
       });
+      this.customeronboardingService.getCustomerById(entityId)
+      .subscribe((response: Customer) =>{
+        this.notificationService.legalSubEmail(response.firstName,response.emailAddresses[0].address)
+        .subscribe((respo: any) =>{
+        });
+      });
     }
     else if(entityType == "BUYER"){
       this.buyeronboardingService.getLegalSubscription(entityId)
       .subscribe((response: Buyer) =>{
+      });
+      this.buyeronboardingService.getBuyerById(entityId)
+      .subscribe((response: Buyer) =>{
+        this.notificationService.legalSubEmail(response.firstName,response.emailAddresses[0].address)
+        .subscribe((respo: any) =>{
+        });
       });
     }
     else{

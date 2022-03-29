@@ -146,7 +146,7 @@ export class BuyerprofileComponent implements OnInit {
       QAId: this.qaId,
       userId: this.buyerId,
       question: this.question,
-      answer: null,
+      answer: "Awaiting Response",
       QAstatus: "UNANSWERED"
     }
     this.qaService.postQuestion(newQuestion)
