@@ -29,8 +29,31 @@
 input{
   font-size: medium;
 }
+.otpHeader{
+  font-size: 50px;
+}
 .card-header{
   background-color: #1976d2;
   color: white;
   padding-top: 10px;
+}
+.dialog-card{
+  display: flex;
+  flex-direction: column;
+  // background-color: aquamarine;
+  justify-content: center;
+  // align-items: center;
+}
+.inputField{
+  width: 90%;
+  margin-top: 15px;
+}
+
+.loading{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #3f51b5;
+  font-size: large;
+  margin-left: 10px;
 }

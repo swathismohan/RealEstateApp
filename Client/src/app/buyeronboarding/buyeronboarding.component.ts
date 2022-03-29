@@ -1,8 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { BuyeronboardingServiceService } from '../services/buyeronboarding-service.service';
 import { ApiServiceService } from '../services/api-service.service';
 import { DBBuyer ,Buyer, Address, PhoneNumber, EmailAddress } from '../models/buyer';
 import { Router, ActivatedRoute } from '@angular/router';
+import {
+  MatDialog,
+  MatDialogRef,
+  MAT_DIALOG_DATA,
+} from '@angular/material/dialog';
 import { v4 as uuid } from 'uuid';
 import * as moment from 'moment';
 import { NotificationService } from '../services/notification.service';
@@ -49,8 +54,30 @@ export class BuyeronboardingComponent implements OnInit {
   otpStatus!: string;
   idType: string;
 
-  constructor(private buyeronboardingService: BuyeronboardingServiceService, private apiService : ApiServiceService,
-    private router: Router, private activatedroute: ActivatedRoute, private notificationService: NotificationService) {  }
+  constructor(private buyeronboardingService: BuyeronboardingServiceService,
+    private apiService : ApiServiceService,
+    private router: Router,
+    private activatedroute: ActivatedRoute,
+    private notificationService: NotificationService,
+    public dialog: MatDialog) {  }
+
+    openDialog(): void {
+      const dialogRef = this.dialog.open(DialogOtpVerificationBuyer, {
+        width: '500px',
+        disableClose: true,
+        data: {
+          userId: this.buyerId,
+          phoneNumber: this.phoneNumber,
+          updateDetails: this.updateDetails,
+        },
+      });
+
+      dialogRef.afterClosed().subscribe((result) => {
+        this.addBuyer();
+        alert('Buyer Registered Successfully');
+        this.onCompletion();
+      });
+    }
 
   addBuyer(){
     this.phoneNumbers.push({
@@ -98,8 +125,6 @@ export class BuyeronboardingComponent implements OnInit {
         tin: this.tin
     }
     }
-
-    if(this.otpStatus == "approved"){
     this.apiService.postBuyer(newapiBuyer).subscribe((buyerid: any) =>{
       this.buyerId=buyerid;
       const newBuyer = {
@@ -129,7 +154,6 @@ export class BuyeronboardingComponent implements OnInit {
     this.notificationService.welcomeEmail(this.firstName, this.emailAddresses[0].address)
     .subscribe( (resp: any) =>{
     });
-  }
 }
 
   updateBuyer() {
@@ -184,27 +208,8 @@ export class BuyeronboardingComponent implements OnInit {
   }
 
   onCompletion() {
-    if(this.otpStatus == "approved"){
-      setTimeout(() =>
-      {
         const url = "/";
         this.router.navigateByUrl(url);
-      },2000);
-    }
-  }
-
-  sendOtp(){
-    this.apiService.sendOtp(this.phoneNumber)
-    .subscribe( (resp: any) =>{
-      this.otpId = resp;
-    });
-  }
-
-  verifyOtp() {
-    this.apiService.verifyOtp(this.phoneNumber, this.otpId, this.passcode)
-      .subscribe((resp: any) => {
-      this.otpStatus = resp;
-      });
   }
 
   ngOnInit() {
@@ -241,4 +246,50 @@ export class BuyeronboardingComponent implements OnInit {
   }
   }
 
+}
+
+@Component({
+  selector: 'dialog-otp-verification-buyer',
+  templateUrl: './dialog-otp-verification-buyer.html',
+  styleUrls: ['./buyeronboarding.component.scss'],
+  providers: [ApiServiceService],
+})
+export class DialogOtpVerificationBuyer {
+  otpId!: string;
+  otpStatus!: string;
+  passcode!: string;
+  loading!: boolean;
+
+  constructor(
+    private apiService: ApiServiceService,
+    public dialogRef: MatDialogRef<DialogOtpVerificationBuyer>,
+    @Inject(MAT_DIALOG_DATA) public data
+  ) {}
+
+  ngOnInit() {
+    this.sendOtp();
+  }
+  sendOtp() {
+    this.otpStatus = undefined;
+    this.passcode = '';
+    this.apiService.sendOtp(this.data.phoneNumber).subscribe((resp: any) => {
+      this.otpId = resp;
+    });
+  }
+  verifyOtp() {
+    this.loading = true;
+
+    this.apiService
+      .verifyOtp(this.data.phoneNumber, this.otpId, this.passcode)
+      .subscribe((resp: any) => {
+        this.otpStatus = resp;
+        this.loading = false;
+        if (this.otpStatus === 'approved') {
+          this.closeDialog();
+        }
+      });
+  }
+  closeDialog(): void {
+    this.dialogRef.close();
+  }
 }

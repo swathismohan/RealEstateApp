@@ -49,7 +49,7 @@ export class NotificationService {
     const url = "http://localhost:3000/sendmail";
     let body = {"to": email,
                 "subject": "Bid Status Changed",
-                "text": "Hi" + firstName + ", \n\nYou have subscribed for Legal Advisory feature. Swathi Mohan is your Legal Advisor.\n Contact:\nPh: 9654564764\nEmail: abcd@gmail.com. \n\nRegards, \nTeam Estate Aide" };
+                "text": "Hi " + firstName + ", \n\nYour subscription for Legal Advisory service is successful. Please login to avail the service.\nSwathi Mohan is your assigned Legal Advisor. \nContact:\nPh: 9654564764\nEmail: abcd@gmail.com. \n\nRegards, \nTeam Estate Aide" };
     return this.httpClient.post(
       url,
       body

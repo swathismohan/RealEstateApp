@@ -1,0 +1,42 @@
+<mat-card class="dialog-card">
+<mat-card-header *ngIf="!data.updateDetails">
+  <mat-card-subtitle class="top-margin bottom-margin otpHeader"
+    ><h2>OTP Verification:</h2></mat-card-subtitle
+  >
+</mat-card-header>
+<mat-form-field *ngIf="loading" class="loading">
+  Verifying...
+</mat-form-field>
+<mat-form-field class="inputField left-margin right-margin" *ngIf="!data.updateDetails && !loading">
+  <input
+    matInput
+    placeholder="Enter OTP"
+    [(ngModel)]="passcode"
+    type="text"
+    name="passcode"
+    class="top-margin"
+  />
+</mat-form-field>
+<p *ngIf="otpStatus === 'pending'" class="left-margin" style="color:red;">OTP is wrong!</p>
+<br>
+<br>
+<button
+  *ngIf="otpStatus === 'pending'"
+  mat-raised-button
+  color="primary"
+  class="top-margin left-margin"
+  (click)="sendOtp()"
+>
+  Resend OTP
+</button>
+<button
+  *ngIf="otpStatus != 'approved'"
+  mat-raised-button
+  color="primary"
+  class="top-margin left-margin"
+  [disabled]="loading"
+  (click)="verifyOtp()"
+>
+  Verify OTP
+</button>
+</mat-card>
