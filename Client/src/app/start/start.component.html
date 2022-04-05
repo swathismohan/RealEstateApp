@@ -2,17 +2,17 @@
 
 <div class="bg-text">
 
-  <mat-card>
+  <mat-card class="bg-warm">
     <div class="mat-title"> USER LOGIN</div>
 
-    <mat-tab-group mat-align-tabs="center">
-      <mat-tab label="Seller" class="tab-format">
+    <mat-tab-group mat-align-tabs="center" color="black">
+      <mat-tab text-color="white" label="Seller" class="tab-format" >
         <form>
-          <mat-form-field class="field" appearance="outline">
+          <mat-form-field class="field" appearance="outline" >
             <mat-label>
               <mat-icon style="margin-right:3px">people</mat-icon> Username
             </mat-label>
-            <input type="text" [(ngModel)]="userName" name="userName" matInput placeholder="Username">
+            <input type="text"  [(ngModel)]="userName" name="userName" matInput placeholder="Username">
           </mat-form-field>
           <br>
           <mat-form-field class="field" appearance="outline">
@@ -22,8 +22,8 @@
             <input type="password" [(ngModel)]="password" name="password" matInput placeholder="Password" mat-icon>
           </mat-form-field>
           <br>
-          <button mat-raised-button class="btn btn btn-success"
-            (click)="getCustomerByUserName()" type="submit" color="primary">Seller Login</button>
+          <button mat-raised-button class="btn btn btn-success yellow-button"
+            (click)="getCustomerByUserName()" type="submit">Seller Login</button>
 
           <br>
           <br> New to Estate Aide?<a [routerLink]="['/customeronboarding']"> Register</a>
@@ -33,7 +33,7 @@
 
       <mat-tab label="Buyer" class="tab-format">
         <form>
-          <mat-form-field class="field" appearance="outline">
+          <mat-form-field class="field" appearance="outline" color="white">
           <mat-label>
             <mat-icon style="margin-right:3px">people</mat-icon> Username
           </mat-label>
@@ -47,7 +47,7 @@
             <input type="password" [(ngModel)]="password" name="password" matInput placeholder="Password">
           </mat-form-field>
           <br>
-          <button mat-raised-button class="btn btn btn-success" (click)="getBuyerByUserName()" type="submit" color="primary">Buyer Login</button>
+          <button mat-raised-button class="btn btn btn-success" (click)="getBuyerByUserName()" type="submit" class="yellow-button">Buyer Login</button>
           <br>
           <br> New to Estate Aide?<a [routerLink]="['/buyeronboarding']"> Register</a>
           <br><br>

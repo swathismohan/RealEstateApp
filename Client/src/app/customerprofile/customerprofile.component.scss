@@ -9,14 +9,16 @@ h1{
   font-weight: 500;
 }
 .card-header{
-  background-color: #1976d2;
-  color: white;
+  background-color: #FFCB74;
+  color: black;
   padding-top: 10px;
 }
 .card-contents{
   margin: 20px 2px;
 }
 .card-values{
+  
+  color: rgb(88, 87, 87) ;
   display: flex;
   flex-direction: row;
   margin-top: 1px;
@@ -24,6 +26,8 @@ h1{
 }
 .cards{
   display: flex;
+  margin-top: 1px;
+  margin-bottom: 1px;
 }
 p{
   margin-bottom: 19px;
@@ -142,7 +146,7 @@ button.legal{
 }
 .profile-details{
   float: right;
-  width: 57.92%;
+  width: 57.90%;
 }
 .profile-card{
   margin: 0;
@@ -152,7 +156,7 @@ button.legal{
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  color: #1976d2;
+  color:  #FFCB74;
 }
 .profile-card-content{
   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
@@ -173,3 +177,7 @@ button.legal{
 .disable-click{
   pointer-events: none;
 }
+
+.yellow-button{
+  background-color:  #FFCB74;
+  }

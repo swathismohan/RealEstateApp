@@ -12,8 +12,8 @@ h1{
   margin: 20px 500px;
 }
 .card-header{
-  background-color: #1976d2;
-  color: white;
+  background-color:  #FFCB74;
+  color: black;
   padding-top: 10px;
 }
 .card-contents{
@@ -58,3 +58,7 @@ input{
 .panel{
   flex-grow: 1;
 }
+
+.yellow-button{
+  background-color:  #FFCB74;
+  }

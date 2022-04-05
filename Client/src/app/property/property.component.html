@@ -20,9 +20,9 @@
             </mat-card-content>
           </mat-card>
           <br>
-          <button mat-raised-button [disabled]="bidResponded" (click)="updateBid(bid, 'ACCEPTED')" color="primary">Accept</button>
+          <button mat-raised-button [disabled]="bidResponded" class="yellow-button" (click)="updateBid(bid, 'ACCEPTED')" >Accept</button>
           &nbsp;
-          <button mat-raised-button [disabled]="bidResponded" (click)="updateBid(bid, 'DECLINED')" color="primary">Decline</button>
+          <button mat-raised-button [disabled]="bidResponded" class="yellow-button" (click)="updateBid(bid, 'DECLINED')" >Decline</button>
         </mat-expansion-panel>
       </mat-card-content>
     </mat-card>
@@ -41,9 +41,9 @@
           </mat-card-content>
         </mat-card>
         <br>
-        <button mat-raised-button [disabled]="bidResponded" (click)="[updateBid(bid, 'DECLINED')]" color="primary">Decline</button>
+        <button mat-raised-button [disabled]="bidResponded" (click)="[updateBid(bid, 'DECLINED')]" class="yellow-button" >Decline</button>
         &nbsp;
-        <button mat-raised-button class="btn btn btn-success" (click) = "getBuyerDetails(bid.buyerId)" color="primary">Get Buyer Details</button>   
+        <button mat-raised-button class="btn btn btn-success" (click) = "getBuyerDetails(bid.buyerId)" class="yellow-button">Get Buyer Details</button>   
       </mat-expansion-panel>
     </mat-card>
   </mat-tab>
@@ -62,7 +62,7 @@
           </mat-card-content>
         </mat-card>
         <br>
-        <button mat-raised-button [disabled]="bidResponded" (click)="[updateBid(bid, 'ACCEPTED')]" color="primary">Accept</button>
+        <button mat-raised-button [disabled]="bidResponded" (click)="[updateBid(bid, 'ACCEPTED')]" class="yellow-button">Accept</button>
         </mat-expansion-panel>
     </mat-card>
   </mat-tab>

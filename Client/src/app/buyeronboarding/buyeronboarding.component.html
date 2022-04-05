@@ -91,8 +91,8 @@
     <input type="password" matInput placeholder="Password" [(ngModel)] = "password" name= "password" required/>
   </mat-form-field>
   <a routerLink = "/buyer/{{this.buyerId}}">
-    <button mat-raised-button *ngIf="updateDetails" color="primary" class="top-margin left-margin" (click)="updateBuyer()" type="submit">Update Buyer Details</button>
+    <button mat-raised-button *ngIf="updateDetails"  class="top-margin left-margin yellow-button" (click)="updateBuyer()" type="submit">Update Buyer Details</button>
   </a>
-  <button mat-raised-button *ngIf="!updateDetails" [disabled]="buyerAdded" color="primary" class="top-margin left-margin" (click)="[openDialog()]" type="submit">Register Buyer</button>
+  <button mat-raised-button *ngIf="!updateDetails" [disabled]="buyerAdded"  class="top-margin left-margin yellow-button" (click)="[openDialog()]" type="submit">Register Buyer</button>
   </form>
 </mat-card>

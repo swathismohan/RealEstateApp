@@ -101,7 +101,7 @@ export class BuyerprofileComponent implements OnInit {
   }
 
   getAllBidsByBuyer(e=null) {
-    if (e && e.index === 2) {
+    if (e && e.index === 1) {
       this.bidService.getBidByBuyer(this.buyerId)
       .subscribe((response:Bid[]) => {
         this.bids = response;

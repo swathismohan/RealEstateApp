@@ -137,7 +137,7 @@
       </mat-form-field>
         <input type="file" class="field" onchange="console.log(event.target.files)">
       <br>
-      <button mat-raised-button [disabled]="propertyAdded" color="primary" class="left-margin" (click)="addProperty()" type="submit">Add Property <mat-icon *ngIf="propertyAdded">check_box</mat-icon></button>
+      <button mat-raised-button [disabled]="propertyAdded"  class="left-margin yellow-button" (click)="addProperty()" type="submit">Add Property <mat-icon *ngIf="propertyAdded">check_box</mat-icon></button>
       </form>
     </mat-card>
   </mat-tab>
@@ -178,23 +178,22 @@
         <button
         mat-button
         (click)="gotoPropertyBids(prop.propertyId)"
-        class="top-margin left-margin"
-        color="primary">
+        class="top-margin left-margin yellow-button"
+      >
         Bids
       </button>
       <button
       mat-button
         (click)="requestVerification(prop.propertyId,'VERIFICATION REQUESTED')"
-        class="top-margin left-margin"
-        color="primary"
+        class="top-margin left-margin yellow-button"
+        
         *ngIf="prop.verification === 'PENDING VERIFICATION'">
         Verify
       </button>
       <button
       mat-button
         (click)="requestVerification(prop.propertyId,'VERIFICATION REQUESTED')"
-        class="top-margin left-margin"
-        color="primary"
+        class="top-margin left-margin yellow-button"        
         *ngIf="prop.verification === 'REJECTED'">
         Re-verify
       </button>
@@ -208,16 +207,15 @@
       <button
       mat-button
       (click)="updateProperty(prop.propertyId,'NOT AVAILABLE')"
-      class="top-margin left-margin"
-      color="primary"
+      class="top-margin left-margin yellow-button"
+    
       *ngIf="prop.status === 'AVAILABLE'">
       Make it Unavailable
       </button>
       <button
       mat-button
       (click)="updateProperty(prop.propertyId,'AVAILABLE')"
-      class="top-margin left-margin"
-      color="primary"
+      class="top-margin left-margin yellow-button"
       *ngIf="prop.status === 'NOT AVAILABLE'">
       Make it Available
       </button>
@@ -237,7 +235,7 @@
       </mat-form-field>
       &nbsp;
       <br>
-      <button mat-raised-button class="btn btn btn-success" (click)="postQuestion()" type="submit" color="primary">Post Question</button>
+      <button mat-raised-button class="btn btn btn-success yellow-button" (click)="postQuestion()" type="submit" >Post Question</button>
      </form>
 
      <div *ngIf=questions.length class="panel">

@@ -25,9 +25,9 @@
             <textarea matInput [(ngModel)] = "comment" name= "comment"></textarea>
           </mat-form-field>
           &nbsp;
-          <button mat-raised-button class="btn btn btn-success" (click)="propertyVerified(prop,'VERIFIED')" type="submit" color="primary">Verify Property</button>
+          <button mat-raised-button class="btn btn btn-success yellow-button" (click)="propertyVerified(prop,'VERIFIED')" type="submit">Verify Property</button>
           &nbsp;
-          <button mat-raised-button class="btn btn btn-success" (click)="propertyVerified(prop,'REJECTED')" type="submit" color="primary">Reject Verification</button>
+          <button mat-raised-button class="btn btn btn-success yellow-button" (click)="propertyVerified(prop,'REJECTED')" type="submit">Reject Verification</button>
         </form>
       </mat-expansion-panel>
   </mat-tab>
@@ -45,7 +45,7 @@
           <li>Transaction Time: {{pay.transactionTime}}</li>
         </ul>
           &nbsp;
-          <button mat-raised-button class="btn btn btn-success" (click)= "paymentVerified(pay.transactionId, pay.entityId, pay.entityType)" type="submit" color="primary">Verify Payment</button>
+          <button mat-raised-button class="btn btn btn-success yellow-button" (click)= "paymentVerified(pay.transactionId, pay.entityId, pay.entityType)" type="submit">Verify Payment</button>
           &nbsp;
       </mat-expansion-panel>
   </mat-tab>
@@ -62,7 +62,7 @@
             <textarea matInput [(ngModel)] = "answer" name= "answer"></textarea>
           </mat-form-field>
           &nbsp;
-          <button mat-raised-button class="btn btn btn-success" (click)="questionAnswered(que.QAId)" type="submit" color="primary">Post Response</button>
+          <button mat-raised-button class="btn btn btn-success yellow-button" (click)="questionAnswered(que.QAId)" type="submit">Post Response</button>
         </form>
       </mat-expansion-panel>
   </mat-tab>

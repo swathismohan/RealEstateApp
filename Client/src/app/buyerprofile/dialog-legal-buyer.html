@@ -3,7 +3,7 @@
 </div>
 <div mat-dialog-actions *ngIf = "!data.requestPayment">
   <button mat-button (click)="onNoClick()">No Thanks</button>
-  <button mat-raised-button color="primary" (click)="showPaymentDetails()"> Pay and Proceed</button>
+  <button mat-raised-button class="yellow-button" (click)="showPaymentDetails()"> Pay and Proceed</button>
 </div>
 <div mat-dialog-content *ngIf="data.requestPayment">
   <p>Enter Payment details</p>
@@ -23,6 +23,6 @@
     </mat-form-field>
     <br>
     <button mat-button (click)="onNoClick()">No Thanks</button>
-    <button mat-button color="primary" (click)="makePayment()">Make Payment</button>
+    <button mat-button class="yellow-button" (click)="makePayment()">Make Payment</button>
   </form>
 </div>

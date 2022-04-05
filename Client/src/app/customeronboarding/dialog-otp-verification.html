@@ -22,18 +22,16 @@
 <br>
 <button
   *ngIf="otpStatus === 'pending'"
-  mat-raised-button
-  color="primary"
-  class="top-margin left-margin"
+  mat-raised-button  
+  class="top-margin left-margin yellow-button"
   (click)="sendOtp()"
 >
   Resend OTP
 </button>
 <button
   *ngIf="otpStatus != 'approved'"
-  mat-raised-button
-  color="primary"
-  class="top-margin left-margin"
+  mat-raised-button  
+  class="top-margin left-margin yellow-button"
   [disabled]="loading"
   (click)="verifyOtp()"
 >
