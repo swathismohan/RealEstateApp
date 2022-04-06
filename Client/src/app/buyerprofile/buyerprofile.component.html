@@ -50,72 +50,108 @@
 
 
 <mat-tab-group mat-align-tabs="start" (selectedTabChange)="getAllBidsByBuyer($event)">
-
+  <mat-tab label="Home" class="profile-page">
+    <mat-card class="image1-half" *ngIf="content === 'addProperty'">
+    </mat-card>
+    <mat-card class="image2-half" *ngIf="content === 'legalVerification'">
+    </mat-card>
+    <mat-card class="image3-half" *ngIf="content === 'sellProperty'">
+    </mat-card>
+    <mat-card class="image4-half" *ngIf="content === 'price'">
+    </mat-card>
+    <div class="profile-details">
+      <mat-card class="profile-card">
+        <mat-card-content class="profile-card-content">Buy your dream home</mat-card-content>
+        <div>
+          <br>
+          <mat-card-content *ngIf="content === 'addProperty'" class="adv">See all available properties at one place</mat-card-content>
+          <mat-card-content *ngIf="content === 'legalVerification'" class="adv">Get legal help from experts</mat-card-content>
+          <mat-card-content *ngIf="content === 'sellProperty'" class="adv">Properties at best market prices</mat-card-content>
+          <mat-card-content *ngIf="content === 'price'" class="adv">Let your family sleep safe and calm</mat-card-content>
+        </div>
+      </mat-card>
+    </div>
+  </mat-tab>
   <mat-tab label="Available properties">
     <br>
-    <button mat-raised-button style="margin-left:.5cm;" class="btn btn btn-success yellow-button" (click)="filterProperty()" type="submit"  *ngIf="allproperty">Show Verified Properties</button>
-    <button mat-raised-button style="margin-left:.5cm;" class="btn btn btn-success yellow-button" (click)="filterProperty()" type="submit"  *ngIf="!allproperty">Show All Properties</button>
-      <mat-expansion-panel  class="panel" *ngFor="let prop of properties">
-        <mat-expansion-panel-header>
-          <mat-panel-title>
-            <b>{{ prop.propertyName }}</b>
-          </mat-panel-title>
-          <mat-panel-description *ngIf="prop.verification === 'VERIFIED'" style="color:rgb(60, 145, 60);">
-           VERIFIED
-          <mat-icon style="color:rgb(60, 145, 60);">  verified</mat-icon>
-          </mat-panel-description>
-          <mat-panel-description *ngIf="prop.verification != 'VERIFIED'">
-            {{prop.verification}}
-          </mat-panel-description>
-
-        </mat-expansion-panel-header>
-        <mat-card>
-          <mat-card-content class="card-contents">
-            <div class="property-contents">
-              <h4>Address:</h4>
-              <h4>Postal code:</h4>
-              <h4>Expected Amount:</h4>
-              <h4>GreenBelt:</h4>
-              <h4 *ngIf="prop.verification === 'VERIFIED'">Verification comment:</h4>
+    <button mat-raised-button style="margin-left:.5cm;float: right" class="btn btn btn-success yellow-button" (click)="filterProperty()" type="submit" color="primary" *ngIf="allproperty">Show Verified Properties</button>
+    <button mat-raised-button style="margin-left:.5cm;" class="btn btn btn-success yellow-button" (click)="filterProperty()" type="submit" color="primary" *ngIf="!allproperty">Show All Properties</button>
+    <br>
+    <div class="cards" *ngIf=properties.length>
+      <mat-card class="card-style" *ngFor="let prop of properties; let index = index">
+        <mat-card-title class="bottom-margin">{{ prop.propertyName }}
+        </mat-card-title>
+        <mat-card-subtitle>{{prop.verification}}</mat-card-subtitle>
+        <mat-card-content>
+          <div>
+            <div class="card-values">
+              <h3 class="right-margin">Address:</h3><h3>{{prop.addline1}}, {{prop.addline2}}</h3>
             </div>
-            <div class="property-contents">
-              <p>{{prop.addline1}}</p>
-              <p>{{prop.postalCode}}</p>
-              <p>{{prop.marketValue}}</p>
-              <p>{{prop.greenBelt}}</p>
-              <p *ngIf="prop.verification === 'VERIFIED'">{{prop.comment}}</p>
+            <div class="card-values">
+              <h3 class="right-margin">Postal code:</h3><h3>{{prop.postalCode}}</h3>
             </div>
-          </mat-card-content>
-        </mat-card>
-        <br>
-        <form>
-          <label>Proposed Amount : </label>
-          <input type="text" [(ngModel)] = "proposedAmount" name= "proposedAmount">&nbsp;
-          <button mat-raised-button class="btn btn btn-success yellow-button" (click)="createBid(prop.propertyId, prop.customerId, prop.propertyName)" type="submit" >Submit bid</button>
-        </form>
-      </mat-expansion-panel>
+            <div class="card-values">
+              <h3 class="right-margin">Area:</h3><h3>{{prop.area}} {{prop.areaUnit}}</h3>
+            </div>
+            <div class="card-values">
+              <h3 class="right-margin">Expected Amount:</h3><h3>{{prop.marketValue}}</h3>
+            </div>
+            <div class="card-values">
+              <h3 class="right-margin">GreenBelt:</h3><h3>{{prop.greenBelt}}</h3>
+            </div>
+            <div class="card-values">
+              <h3 class="right-margin" *ngIf="prop.verification === 'VERIFIED' || prop.verification === 'REJECTED'">Verification comment:</h3><h3 *ngIf="prop.verification === 'VERIFIED' || prop.verification === 'REJECTED'">{{prop.comment}}</h3>
+            </div>
+          </div>
+          <br>
+          <br>
+          <form>
+            <label>Amount : </label>
+            <input type="text" [(ngModel)] = "proposedAmount" name= "proposedAmount">&nbsp;
+            <button mat-button class="btn btn btn-success yellow-text-button" (click)="createBid(prop.propertyId, prop.customerId, prop.propertyName)" type="submit" color="primary">Submit bid</button>
+          </form>
+        </mat-card-content>
+      </mat-card>
+    </div>
   </mat-tab>
 
   <mat-tab label="My bids">
     <br>
     <div *ngIf=bids.length>
-      <mat-expansion-panel class="panel" *ngFor="let bid of bids">
-        <mat-expansion-panel-header>
-          <mat-panel-title>
-            <b>Bid for {{ bid.propertyName }}</b>
-          </mat-panel-title>
-        </mat-expansion-panel-header>
+      <table mat-table [dataSource]="bids" class="mat-elevation-z8">
+        <ng-container matColumnDef="index">
+          <th mat-header-cell *matHeaderCellDef> No. </th>
+          <td mat-cell *matCellDef="let element; let i = index;">{{i}}</td>
+        </ng-container>
 
-        <mat-card>
-        <mat-card-content class="card-contents">
-          <div class="property-contents">
-            <h4>Bid value: {{ bid.proposedAmount }}</h4>
-            <h4>Bid status: {{ bid.status }}</h4>
-            <button *ngIf="bid.status === 'ACCEPTED'" mat-raised-button class="btn btn btn-success yellow-button" (click) = "getCustomerDetails(bid.customerId)" >Get Seller Details</button>
-          </div>
-        </mat-card-content>
-      </mat-card>
-      </mat-expansion-panel>
+        <!-- Position Column -->
+        <ng-container matColumnDef="propertyName">
+          <th mat-header-cell *matHeaderCellDef> Name </th>
+          <td mat-cell *matCellDef="let element"> {{element.propertyName}} </td>
+        </ng-container>
+
+        <!-- Name Column -->
+        <ng-container matColumnDef="proposedAmount">
+          <th mat-header-cell *matHeaderCellDef> Bid amount </th>
+          <td mat-cell *matCellDef="let element"> {{element.proposedAmount}} </td>
+        </ng-container>
+
+        <!-- Weight Column -->
+        <ng-container matColumnDef="status">
+          <th mat-header-cell *matHeaderCellDef> Status </th>
+          <td mat-cell *matCellDef="let element"> {{element.status}} </td>
+        </ng-container>
+
+        <!-- Symbol Column -->
+        <ng-container matColumnDef="button">
+          <th mat-header-cell *matHeaderCellDef> Actions </th>
+          <td mat-cell *matCellDef="let element"><button [disabled]="element.status !== 'ACCEPTED'" mat-raised-button class="btn btn btn-success yellow-button" (click) = "getCustomerDetails(element.customerId)" >Seller Details</button>  </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+
     </div>
   </mat-tab>
 

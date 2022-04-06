@@ -146,7 +146,7 @@
     <br />
     <div class="cards" *ngIf=properties.length>
     <mat-card class="card-style" *ngFor="let prop of properties">
-      <mat-card-title>{{ prop.propertyName }}
+      <mat-card-title [ngClass]="{'bottom-margin' : prop.verification == 'VERIFIED', 'bottom-margin-zero': prop.verification != 'VERIFIED'}">{{ prop.propertyName }}
         <button mat-icon-button aria-label="edit button" *ngIf="prop.verification != 'VERIFIED'" style="margin-right: 1cm;" (click)="gotoEditProperty(prop.propertyId)">
           <mat-icon>create</mat-icon>
         </button>
@@ -178,22 +178,22 @@
         <button
         mat-button
         (click)="gotoPropertyBids(prop.propertyId)"
-        class="top-margin left-margin yellow-button"
+        class="top-margin left-margin yellow-text-button"
       >
         Bids
       </button>
       <button
       mat-button
         (click)="requestVerification(prop.propertyId,'VERIFICATION REQUESTED')"
-        class="top-margin left-margin yellow-button"
-        
+        class="top-margin left-margin yellow-text-button"
+
         *ngIf="prop.verification === 'PENDING VERIFICATION'">
         Verify
       </button>
       <button
       mat-button
         (click)="requestVerification(prop.propertyId,'VERIFICATION REQUESTED')"
-        class="top-margin left-margin yellow-button"        
+        class="top-margin left-margin yellow-text-button"
         *ngIf="prop.verification === 'REJECTED'">
         Re-verify
       </button>
@@ -206,18 +206,25 @@
       </button>
       <button
       mat-button
+        class="top-margin left-margin disable-click"
+        style="color: rgb(18, 194, 18);"
+        *ngIf=" prop.verification === 'VERIFIED'">
+        Verified
+      </button>
+      <button
+      mat-button
       (click)="updateProperty(prop.propertyId,'NOT AVAILABLE')"
-      class="top-margin left-margin yellow-button"
-    
+      class="top-margin left-margin yellow-text-button"
+
       *ngIf="prop.status === 'AVAILABLE'">
-      Make it Unavailable
+      Hide
       </button>
       <button
       mat-button
       (click)="updateProperty(prop.propertyId,'AVAILABLE')"
-      class="top-margin left-margin yellow-button"
+      class="top-margin left-margin yellow-text-button"
       *ngIf="prop.status === 'NOT AVAILABLE'">
-      Make it Available
+      Show
       </button>
 
     </mat-card-actions>
@@ -227,7 +234,7 @@
   </mat-tab>
 
   <mat-tab *ngIf = "customer.legalSubscription" label="Legal Advisory">
-    <div class="legalContainer">
+    <div [ngClass]="{'legalContainer' : questions.length>0, 'legalContainerWithoutQuestions': questions.length==0}">
     <form>
       <mat-form-field appearance="outline" class="quesArea">
         <mat-label>Post a question</mat-label>
@@ -238,10 +245,10 @@
       <button mat-raised-button class="btn btn btn-success yellow-button" (click)="postQuestion()" type="submit" >Post Question</button>
      </form>
 
-     <div *ngIf=questions.length class="panel">
+     <div *ngIf=questions.length class="panel" style="margin-top: 20px;">
       <mat-expansion-panel class="panel" *ngFor="let ques of questions">
         <mat-expansion-panel-header>
-            <b>{{ ques.question }}</b>
+            <h3>{{ ques.question }}</h3>
         </mat-expansion-panel-header>
 
         <mat-card>

@@ -90,6 +90,7 @@
   <mat-form-field class="field" *ngIf="!updateDetails">
     <input type="password" matInput placeholder="Password" [(ngModel)] = "password" name= "password" required/>
   </mat-form-field>
+  <br>
   <a routerLink = "/buyer/{{this.buyerId}}">
     <button mat-raised-button *ngIf="updateDetails"  class="top-margin left-margin yellow-button" (click)="updateBuyer()" type="submit">Update Buyer Details</button>
   </a>

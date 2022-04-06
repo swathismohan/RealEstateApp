@@ -57,6 +57,8 @@ export class BuyerprofileComponent implements OnInit {
   requestPayment!: Boolean;
   customer: Customer;
   profile!: Boolean;
+  content: string;
+  displayedColumns: string[] = ['index', 'propertyName', 'proposedAmount', 'status', 'button'];
 
   constructor(
     private buyerOnboardingService:BuyeronboardingServiceService,
@@ -181,9 +183,25 @@ export class BuyerprofileComponent implements OnInit {
       this.propertyService.getAvailableProperty()
       .subscribe((response:Property[]) => {
         this.properties = response;
-    });
+      });
     this.allproperty=true;
     }
+  }
+
+  changeContent() {
+    this.content = 'addProperty';
+    setTimeout(() => {
+      this.content = 'legalVerification'
+    }, 2000);
+    setTimeout(() => {
+      this.content = 'sellProperty'
+    }, 4000);
+    setTimeout(() => {
+      this.content = 'price'
+    }, 6000);
+    setTimeout(() => {
+      this.changeContent()
+    }, 8000);
   }
 
   ngOnInit(): void {
@@ -191,9 +209,9 @@ export class BuyerprofileComponent implements OnInit {
     this.buyerOnboardingService.getBuyerByUserIdFromFFDC(this.buyerId)
     .subscribe((response: Buyer) =>{
       this.apibuyer = response;
-  });
+    });
 
-  this.allproperty=true;
+    this.allproperty=true;
 
     this.buyerOnboardingService.getBuyerById(this.buyerId)
       .subscribe((response: DBBuyer) =>{
@@ -211,6 +229,7 @@ export class BuyerprofileComponent implements OnInit {
     .subscribe((resp: QuestionAnswer[]) =>{
       this.questions = resp;
     });
+    this.changeContent();
 
   }
 
