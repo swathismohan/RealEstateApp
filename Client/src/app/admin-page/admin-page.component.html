@@ -52,16 +52,17 @@
 
   <mat-tab label="Legal Queries">
     <br>
-      <mat-expansion-panel *ngFor="let que of questions">
+      <mat-expansion-panel class="panel" *ngFor="let que of questions">
         <mat-expansion-panel-header>
           <b>{{que.question}}</b>
         </mat-expansion-panel-header>
         <form>
-          <mat-form-field appearance="fill">
+          <mat-form-field appearance="fill" class="quesArea">
             <mat-label>Enter response</mat-label>
-            <textarea matInput [(ngModel)] = "answer" name= "answer"></textarea>
+            <textarea matInput rows="6" name= "answer"></textarea>
           </mat-form-field>
           &nbsp;
+          <br>
           <button mat-raised-button class="btn btn btn-success yellow-button" (click)="questionAnswered(que.QAId)" type="submit">Post Response</button>
         </form>
       </mat-expansion-panel>
