@@ -59,7 +59,7 @@
         <form>
           <mat-form-field appearance="fill" class="quesArea">
             <mat-label>Enter response</mat-label>
-            <textarea matInput rows="6" name= "answer"></textarea>
+            <textarea matInput [(ngModel)] = "answer" rows="6" name= "answer"></textarea>
           </mat-form-field>
           &nbsp;
           <br>
