@@ -2,7 +2,7 @@
   <h1>
     <i>Welcome {{ apibuyer.firstName }},</i>
     <button mat-icon-button class="legal" [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
-      <mat-icon>more_vert</mat-icon>
+      <mat-icon>menu</mat-icon>
     </button>
     <mat-menu #menu="matMenu">
       <button mat-menu-item [matMenuTriggerFor]="profile">
@@ -50,7 +50,7 @@
 
 
 <mat-tab-group mat-align-tabs="start" (selectedTabChange)="getAllBidsByBuyer($event)">
-  <mat-tab label="Home" class="profile-page">
+  <mat-tab label="Home" class="profile-page">    
     <mat-card class="image1-half" *ngIf="content === 'addProperty'">
     </mat-card>
     <mat-card class="image2-half" *ngIf="content === 'legalVerification'">
@@ -72,8 +72,11 @@
       </mat-card>
     </div>
   </mat-tab>
-  <mat-tab label="Available properties">
-    <br>
+  <mat-tab label="Available properties">       
+    <img src="https://wearehpi.org/wp-content/themes/wearehpi/res/img/hpi-404.v3.gif" alt="text" style="width:500px;height:298px;">
+    <img src="https://wearehpi.org/wp-content/themes/wearehpi/res/img/hpi-404.v3.gif" alt="text" style="width:500px;height:298px;">
+    <img src="https://wearehpi.org/wp-content/themes/wearehpi/res/img/hpi-404.v3.gif" alt="text" style="width:500px;height:298px;">
+     <br>
     <button mat-raised-button style="margin-left:.5cm;float: right" class="btn btn btn-success yellow-button" (click)="filterProperty()" type="submit" color="primary" *ngIf="allproperty">Show Verified Properties</button>
     <button mat-raised-button style="margin-left:.5cm;" class="btn btn btn-success yellow-button" (click)="filterProperty()" type="submit" color="primary" *ngIf="!allproperty">Show All Properties</button>
     <br>
@@ -115,8 +118,11 @@
     </div>
   </mat-tab>
 
-  <mat-tab label="My bids">
-    <br>
+  <mat-tab label="My bids">       
+    <img src="https://i0.wp.com/shedblog.co.uk/wp-content/uploads/2014/10/FAIL_blc.gif?fit=500%2C384&ssl=1" alt="text" style="width:500px;height:298px;">
+    <img src="https://i.gifer.com/1fEy.gif" alt="text" style="width:400px;height:298px;">
+    <img src="https://31.media.tumblr.com/a36b58731b539708e90a99635248c1c2/tumblr_n0oo9mmjpg1rn9vmdo1_500.gif" alt="text" style="width:500px;height:298px;">
+     <br>
     <div *ngIf=bids.length>
       <table mat-table [dataSource]="bids" class="mat-elevation-z8">
         <ng-container matColumnDef="index">
