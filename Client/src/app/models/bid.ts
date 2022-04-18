@@ -3,7 +3,7 @@ export interface Bid{
     propertyId: string;
     customerId: string;
     buyerId: string;
-    proposedAmount: number;
+    proposedAmount: string;
     status: string;
     buyerName: string;
     buyerEmail: string;

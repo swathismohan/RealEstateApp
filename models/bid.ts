@@ -5,7 +5,7 @@ const BidSchema = mongoose.Schema({
     propertyId: "string",
     customerId: "string",
     buyerId: "string",
-    proposedAmount: "number",
+    proposedAmount: "string",
     status: "string",
     buyerName: "string",
     buyerEmail: "string",

@@ -82,14 +82,14 @@ export class BuyerprofileComponent implements OnInit {
       });
     }
 
-  createBid(propertyId: any, customerId: any, propertyName: string){
+  createBid(propertyId: any, customerId: any, propertyName: string, proposedAmount: string){
     this.bidId = uuid();
     const newBid = {
       propertyId: propertyId,
       customerId: customerId,
       bidId: this.bidId,
       buyerId: this.buyerId,
-      proposedAmount: this.proposedAmount,
+      proposedAmount: proposedAmount,
       status: this.status,
       buyerName: this.buyer.firstName,
       buyerEmail: this.buyer.emailAddresses[0].address,

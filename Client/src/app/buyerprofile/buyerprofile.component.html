@@ -77,8 +77,8 @@
     <img src="https://wearehpi.org/wp-content/themes/wearehpi/res/img/hpi-404.v3.gif" alt="text" style="width:500px;height:298px;">
     <img src="https://wearehpi.org/wp-content/themes/wearehpi/res/img/hpi-404.v3.gif" alt="text" style="width:500px;height:298px;">
      <br>
-    <button mat-raised-button style="margin-left:.5cm;float: right" class="btn btn btn-success yellow-button" (click)="filterProperty()" type="submit" color="primary" *ngIf="allproperty">Show Verified Properties</button>
-    <button mat-raised-button style="margin-left:.5cm;" class="btn btn btn-success yellow-button" (click)="filterProperty()" type="submit" color="primary" *ngIf="!allproperty">Show All Properties</button>
+    <button mat-raised-button style="margin-right:.5cm;float: right" class="btn btn btn-success yellow-button" (click)="filterProperty()" type="submit" color="primary" *ngIf="allproperty">Show Verified Properties</button>
+    <button mat-raised-button style="margin-right:.5cm;float: right" class="btn btn btn-success yellow-button" (click)="filterProperty()" type="submit" color="primary" *ngIf="!allproperty">Show All Properties</button>
     <br>
     <div class="cards" *ngIf=properties.length>
       <mat-card class="card-style" *ngFor="let prop of properties; let index = index">
@@ -110,8 +110,8 @@
           <br>
           <form>
             <label>Amount : </label>
-            <input type="text" [(ngModel)] = "proposedAmount" name= "proposedAmount">&nbsp;
-            <button mat-button class="btn btn btn-success yellow-text-button" (click)="createBid(prop.propertyId, prop.customerId, prop.propertyName)" type="submit" color="primary">Submit bid</button>
+            <input type="text" name= "proposedAmount" #proposedAmount>&nbsp;
+            <button mat-button class="btn btn btn-success yellow-text-button" (click)="createBid(prop.propertyId, prop.customerId, prop.propertyName, proposedAmount.value)" type="submit" color="primary">Submit bid</button>
           </form>
         </mat-card-content>
       </mat-card>
