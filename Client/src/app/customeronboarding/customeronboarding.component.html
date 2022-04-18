@@ -93,6 +93,7 @@
   <br>
   <a routerLink = "/customer/{{this.customerId}}">
     <button mat-raised-button *ngIf="updateDetails" class="yellow-button top-margin left-margin" (click)="updateCustomer()" type="submit">Update Seller Details</button>
+    <button mat-raised-button *ngIf="updateDetails" class="yellow-button top-margin left-margin" type="submit">Cancel</button>
   </a>
   <button mat-raised-button *ngIf="!updateDetails" [disabled] = "customerAdded"  class="top-margin left-margin yellow-button" (click)="[openDialog()]" type="submit">Register Seller</button>
 
